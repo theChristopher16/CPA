@@ -16,6 +16,9 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
 
+ // var cnv = createCanvas(100, 100);
+//cnv.parent('myContainer');
+
     this.createCanvas();
   }
 
@@ -25,13 +28,14 @@ export class MapComponent implements OnInit {
 
   private sketch(p: any){
     p.setup = () => {
-      p.createCanvas(window.innerWidth, window.innerHeight);
+      var cnv = p.createCanvas(window.innerWidth, window.innerHeight);
+      cnv.parent('myContainer');
     };
 
     p.draw = () => {
       p.background(255);
       p.fill(0);
-      p.rect(p.width / 2, p.height / 2, 50, 50);
+      p.ellipse(p.width / 2, p.height / 2, 50, 50);
     };
   }
 }
