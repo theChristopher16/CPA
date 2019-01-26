@@ -10,15 +10,9 @@ export class MapComponent implements OnInit {
 
   private p5;
 
-  constructor(
-  //  private p5: p5 
-) { }
+  constructor() { }
 
   ngOnInit() {
-
- // var cnv = createCanvas(100, 100);
-//cnv.parent('myContainer');
-
     this.createCanvas();
   }
 
@@ -28,14 +22,17 @@ export class MapComponent implements OnInit {
 
   private sketch(p: any){
     p.setup = () => {
-      var cnv = p.createCanvas(window.innerWidth, window.innerHeight);
+      var cnv = p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
       cnv.parent('myContainer');
     };
 
     p.draw = () => {
-      p.background(255);
-      p.fill(0);
-      p.ellipse(p.width / 2, p.height / 2, 50, 50);
-    };
+      p.background(0);
+      p.translate(0, 0, 0)
+      p.fill(50);
+      p.box(p.width / 2, p.height / 2, 50, 50);
+  };
+
+
   }
 }
