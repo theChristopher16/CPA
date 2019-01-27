@@ -1,24 +1,28 @@
 nav {
-    background: #2D2E2E;
+    background: linear-gradient(
+    #E61AFF,
+    #B24CFF,
+    #8C73FF,
+    #6688FF,
+    #4DB2FF,
+    #33CCFF,
+    #19E6FF,
+    #00FFFF
+    );
     height: 100%;
-
     ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-
-        li {
-
-            a {
-                color: #fff;
-                padding: 20px;
-                display: block;
-            }
-
-            .activated {
-                background-color: #00a8ff;
-            }
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      li {
+        a {
+          color: #495466;
+          padding: 20px;
+          display: block;
         }
+        .activated {
+          background-color: #00a8ff;
+        }
+      }
     }
-    
-}
+  }
