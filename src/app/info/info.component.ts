@@ -6,10 +6,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./info.component.scss']
 })
 export class InfoComponent implements OnInit {
+  items: Array<any> = [];
 
-  constructor() { }
 
-  ngOnInit() {
-  }
+  constructor() {
+  this.items = [
+    { name: '../../assets/Info/Images/img1.png' },
+    { name: '../../assets/Info/Images/img3.png' },
+    { name: '../../assets/Info/Images/img1.png' },
+    { name: '../../assets/Info/Images/img3.png' },
+    { name: '../../assets/Info/Images/img1.png' },
+    { name: '../../assets/Info/Images/img3.png' },
+    { name: '../../assets/Info/Images/img1.png' },
+    { name: '../../assets/Info/Images/img3.png' }
+  ];
+}
 
+ngOnInit() {
+}
 }
