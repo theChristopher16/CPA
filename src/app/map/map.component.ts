@@ -25,25 +25,34 @@ export class MapComponent implements OnInit {
   private sketch(p: any){
 
     let angle = 0;
+    let green;
+    let blue;
+    let red;
+
+   p.preload = () => {
+      green = p.loadImage('../../assets/Map/green.jpg');
+      blue = p.loadImage('../../assets/Map/blue.jpg');
+      red = p.loadImage('../../assets/Map/red.jpg');
+    };
 
     p.setup = () => {
-      var cnv = p.createCanvas(400, 300, p.WEBGL);
+      var cnv = p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
       cnv.parent('myContainer');
     };
 
     p.draw = () => {
       p.background(175);
-      //p.rectMode(p.CENTER);
-      //p.noStroke(0);
-      // p.fill(0, 0, 255);
-
+      p.noStroke(0);
       p.rotateX(angle);
       p.rotateY(angle * 0.3);
       p.rotateZ(angle * 0.7);
       p.noStroke();
+
       // Normal material is for debugging
-      p.normalMaterial();
-      p.torus(90, 30);
+      //p.normalMaterial();
+
+      p.texture(green);
+      p.box(400, 300, 10);
 
       angle += 0.007;
     };
