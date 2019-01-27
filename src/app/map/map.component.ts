@@ -37,13 +37,17 @@ export class MapComponent implements OnInit {
 
     p.draw = () => {
       p.background(175);
-      p.rectMode(p.CENTER);
-      p.noStroke();
-      p.fill(0, 0, 255);
+      //p.rectMode(p.CENTER);
+      //p.noStroke(0);
+      // p.fill(0, 0, 255);
+
       p.rotateX(angle);
       p.rotateY(angle * 0.3);
       p.rotateZ(angle * 0.7);
-      p.box();
+      p.noStroke();
+      // Normal material is for debugging
+      p.normalMaterial();
+      p.torus(90, 30);
 
       angle += 0.007;
     };
