@@ -27,15 +27,25 @@ export class MapComponent implements OnInit {
   }
 
   private sketch(p: any){
+
+    let angle = 0;
+
     p.setup = () => {
-      var cnv = p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
+      var cnv = p.createCanvas(400, 300, p.WEBGL);
       cnv.parent('myContainer');
     };
 
     p.draw = () => {
-      p.background(255);
-      p.fill(0);
-      p.ellipse(p.width / 4, p.height / 4, 50, 50);
+      p.background(175);
+      p.rectMode(p.CENTER);
+      p.noStroke();
+      p.fill(0, 0, 255);
+      p.rotateX(angle);
+      p.rotateY(angle * 0.3);
+      p.rotateZ(angle * 0.7);
+      p.box();
+
+      angle += 0.007;
     };
   }
 }
