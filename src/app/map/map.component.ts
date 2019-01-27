@@ -10,7 +10,9 @@ export class MapComponent implements OnInit {
 
   private p5;
 
-  constructor() { }
+  constructor(
+  //  private p5: p5
+) { }
 
   ngOnInit() {
     this.createCanvas();
@@ -21,18 +23,29 @@ export class MapComponent implements OnInit {
   }
 
   private sketch(p: any){
+
+    let angle = 0;
+
     p.setup = () => {
-      var cnv = p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
+      var cnv = p.createCanvas(400, 300, p.WEBGL);
       cnv.parent('myContainer');
     };
 
     p.draw = () => {
-      p.background(0);
-      p.translate(0, 0, 0)
-      p.fill(50);
-      p.box(p.width / 2, p.height / 2, 50, 50);
-  };
+      p.background(175);
+      //p.rectMode(p.CENTER);
+      //p.noStroke(0);
+      // p.fill(0, 0, 255);
 
+      p.rotateX(angle);
+      p.rotateY(angle * 0.3);
+      p.rotateZ(angle * 0.7);
+      p.noStroke();
+      // Normal material is for debugging
+      p.normalMaterial();
+      p.torus(90, 30);
 
+      angle += 0.007;
+    };
   }
 }
