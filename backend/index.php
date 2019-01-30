@@ -8,6 +8,8 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: PUT, GET, POST");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
+//create test database with sql script using this:sudo mysql < createTestDB.sql
+//make sure you have a user "database" with privileges to access the DB
 //credentials for connecting to test database
 //may need to sanitize
 $localhost = "127.0.0.1";
