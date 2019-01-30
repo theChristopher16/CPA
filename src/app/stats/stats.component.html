@@ -4,8 +4,23 @@
 -->
 
 <div style="text-align:center">
+  <h1>Scores</h1>
+  <table align="center">
+    <tr>
+      <th>User</th>
+      <th>Score</th>
+    </tr>
+    <tr *ngFor="let score of scores$">
+      <td>{{ score.name }}</td>
+      <td>{{ score.score }}</td>
+    </tr>
+  </table>
+</div>
+
+<div style="text-align:center">
 
   <canvas id="lineChart" ></canvas>
   <canvas id="barChart"></canvas>
   <canvas id="pieChart"></canvas>
+
 </div>

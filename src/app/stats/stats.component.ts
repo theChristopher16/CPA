@@ -1,6 +1,8 @@
 import { Chart } from 'chart.js';
 import { ChartsModule } from 'ng2-charts';
 import { Component, OnInit } from '@angular/core';
+import { ScoresService } from '../scores.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-stats',
@@ -13,9 +15,17 @@ export class StatsComponent implements OnInit {
   BarChart=[];
   PieChart=[];
 
+  scores$: object;
 
-  constructor() { }
+  constructor(private score: ScoresService) { }
+
   ngOnInit() {
+    
+    //Subscribe to service to get scores from database
+    this.score.getScores().subscribe(
+      score => this.scores$ = score
+    );
+
     // Line chart:
     this.LineChart = new Chart('lineChart', {
       type: 'line',
