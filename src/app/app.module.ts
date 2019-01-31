@@ -8,6 +8,7 @@ import { MapComponent } from './map/map.component';
 import { UsersComponent } from './users/users.component';
 import { StatsComponent } from './stats/stats.component';
 import { InfoComponent } from './info/info.component';
+import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { InfoComponent } from './info/info.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    Ng2CarouselamosModule
   ],
   providers: [],
   bootstrap: [AppComponent]

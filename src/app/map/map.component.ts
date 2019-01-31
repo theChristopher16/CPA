@@ -38,14 +38,15 @@ export class MapComponent implements OnInit {
     let lastLoop = performance.now();
 
    p.preload = () => {
-      /*green = p.loadImage('../../assets/Map/green.jpg');
+      green = p.loadImage('../../assets/Map/green.jpg');
       blue = p.loadImage('../../assets/Map/blue.png');
       red = p.loadImage('../../assets/Map/red.png');
       floor = p.loadImage('../../assets/Map/floor.png');
       orange = p.loadImage('../../assets/Map/orange.png');
-      yellow = p.loadImage('../../assets/Map/yellow.png');*/
+      yellow = p.loadImage('../../assets/Map/yellow.png');
       floor = p.loadImage('../../assets/Map/map.png');
       building = p.loadModel('../../assets/Map/cone.obj')
+      yellow = p.loadImage('../../assets/Map/yellow.png');
     };
 
     p.setup = () => {
@@ -55,6 +56,7 @@ export class MapComponent implements OnInit {
 
     p.draw = () => {
       p.background(134 * p.cos(angle), 218 * p.cos(angle), 112.5 * p.cos(angle));
+      p.background(112.5 * p.cos(angle));
       p.noStroke(0);
       p.rotateX(1);
       p.rotateY(0);
@@ -68,22 +70,23 @@ export class MapComponent implements OnInit {
 
       p.noStroke();
       p.translate(300, -190);
-      p.texture(floor);
+      p.texture(red);
       p.box(150, 150, 200);
 
       p.noStroke();
       p.translate(-700, 190);
-      p.texture(floor);
+      p.texture(blue);
       p.box(150, 150, 900);
+
 
       p.noStroke();
       p.translate(350, 280);
-      p.texture(floor);
+      p.texture(blue);
       p.box(150, 150, 450);
 
       p.noStroke();
       p.translate(10, -800);
-      p.texture(floor);
+      p.texture(green);
       p.box(150, 150, 450);
 
       
@@ -107,6 +110,10 @@ export class MapComponent implements OnInit {
       var fps = Math.round(1000 / (thisLoop - lastLoop));
       lastLoop = thisLoop;
       console.log(fps);
+      p.texture(red);
+      p.box(150, 150, 450);
+
+      angle += 0.0027;
     };
   }
 }
