@@ -9,6 +9,7 @@ import { UsersComponent } from './users/users.component';
 import { StatsComponent } from './stats/stats.component';
 import { InfoComponent } from './info/info.component';
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { Ng2CarouselamosModule } from 'ng2-carouselamos';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    Ng2CarouselamosModule
+    Ng2CarouselamosModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
