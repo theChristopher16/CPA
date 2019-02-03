@@ -73,7 +73,7 @@ export class MapComponent implements OnInit {
       p.rotateX(-90 * Math.PI/180); // Fixes the 90 degree flip problem from Blender
       p.ambientMaterial(0);
       p.scale(14);
-      p.stroke(255, 255, 1); // Colors lines of shape
+      p.stroke(255, 255, 255); // Colors lines of shape
       p.model(nethkin);
       p.pop();
 
@@ -84,7 +84,7 @@ export class MapComponent implements OnInit {
       p.rotateY(163 * Math.PI/180);
       p.ambientMaterial(0);
       p.scale(15);
-      p.stroke(255, 255, 1); // Colors lines of shape
+      p.stroke(255, 255, 255); // Colors lines of shape
       p.model(tolliver);
       p.pop();
 
