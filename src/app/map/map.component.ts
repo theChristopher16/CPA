@@ -33,6 +33,7 @@ export class MapComponent implements OnInit {
     let yellow;
     let nethkin;
     let tolliver;
+    let wyly;
 
     // Josh: Added to track fps
     let lastLoop = performance.now();
@@ -48,6 +49,7 @@ export class MapComponent implements OnInit {
       floor = p.loadImage('../../assets/Map/map.png');
       nethkin = p.loadModel('../../assets/Map/nethkin.obj')
       tolliver = p.loadModel('../../assets/Map/tolliver.obj')
+      wyly = p.loadModel('../../assets/Map/wyly.obj')
     };
 
     p.setup = () => {
@@ -66,6 +68,17 @@ export class MapComponent implements OnInit {
 
       p.texture(floor);
       p.box(1152, 1152, 2);
+
+      // Gabrielle: Wyly
+      p.push();
+      p.translate(125, -290, 0);
+      p.rotateX(90 * Math.PI / 180);
+      p.rotateY(15 * Math.PI/ 180);
+      p.ambientMaterial(0);
+      p.scale(18);
+      p.stroke(255, 255, 1);
+      p.model(wyly);
+      p.pop();
 
       // Josh: Nethkin
       p.push();
