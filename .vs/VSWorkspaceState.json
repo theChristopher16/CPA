@@ -3,9 +3,13 @@
     "",
     "\\e2e",
     "\\e2e\\src",
+    "\\src",
     "\\src\\app",
-    "\\src\\app\\info"
+    "\\src\\app\\info",
+    "\\src\\app\\map",
+    "\\src\\assets",
+    "\\src\\assets\\Map"
   ],
-  "SelectedNode": "\\e2e\\src\\app.e2e-spec.ts",
+  "SelectedNode": "\\src\\assets",
   "PreviewInSolutionExplorer": false
 }
