@@ -43,6 +43,7 @@ export class MapComponent implements OnInit {
     let studentCenterT;
     let gtm;
     let cobb;
+    let keeny;
 
     // Josh: Added to track fps
     let lastLoop = performance.now();
@@ -63,6 +64,7 @@ export class MapComponent implements OnInit {
       studentCenter = p.loadModel('../../assets/Map/studentCenter.obj')
       gtm = p.loadModel('../../assets/Map/gtm.obj')
       cobb = p.loadModel('../../assets/Map/cobb.obj')
+      keeny = p.loadModel('../../assets/Map/keeny.obj')
 
      // Josh: Initialize 3D text labels here
       nethkinT = p.createGraphics(150, 150);
@@ -204,6 +206,22 @@ export class MapComponent implements OnInit {
       p.texture(studentCenterT);
       p.rotateY(angle); // Keeps text facing screen
       p.plane(10);
+      p.pop();
+
+      // Gabrielle: Keeny
+      p.push();
+      p.translate(265, -150, 0);
+      p.rotateX(90 * Math.PI / 180);
+      p.rotateY(90 * Math.PI / 180);
+      p.ambientMaterial(0);
+      p.scale(13);
+      p.stroke(255, 255, 255);
+      p.model(keeny);
+      //p.rotateX(180 * Math.PI / 180);
+      //p.translate(0, -10, 0);
+      //p.rotateY(angle); // Keeps text facing screen
+      //p.texture(keenyT);
+      //p.plane(10);
       p.pop();
 
       // Josh: Nethkin
