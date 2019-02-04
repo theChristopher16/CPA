@@ -41,6 +41,7 @@ export class MapComponent implements OnInit {
     let southHallT;
     let studentCenter;
     let studentCenterT;
+    let gtm;
 
     // Josh: Added to track fps
     let lastLoop = performance.now();
@@ -59,13 +60,14 @@ export class MapComponent implements OnInit {
       wyly = p.loadModel('../../assets/Map/wyly.obj')
       southHall = p.loadModel('../../assets/Map/southHall.obj')
       studentCenter = p.loadModel('../../assets/Map/studentCenter.obj')
-    
+      gtm = p.loadModel('../../assets/Map/gtm.obj')
+
       // Josh: Initialize 3D text labels here
       nethkinT = p.createGraphics(150, 150);
-      nethkinT.fill(255);
+      nethkinT.fill(255); 
       nethkinT.textAlign(p.CENTER);
       nethkinT.textSize(20)
-      nethkinT.text("Nethkin", 80, 60);
+      nethkinT.text("Nethken", 80, 60);
 
       tolliverT = p.createGraphics(150, 150);
       tolliverT.fill(255);
@@ -129,7 +131,7 @@ export class MapComponent implements OnInit {
       p.rotateY(15 * Math.PI/180);
       p.ambientMaterial(0);
       p.scale(18);
-      p.stroke(255, 255, 1);
+      p.stroke(255, 255, 255);
       p.model(wyly);
       p.rotateX(180 * Math. PI / 180);
       p.translate(0, -10, 0);
@@ -138,12 +140,28 @@ export class MapComponent implements OnInit {
       p.plane(10);
       p.pop();
 
+      // Gabrielle: GTM
+      p.push();
+      p.translate(-50, -325, 0);
+      p.rotateX(90 * Math.PI / 180);
+      p.rotateY(-174 * Math.PI / 180);
+      p.ambientMaterial(0);
+      p.scale(25);
+      p.stroke(255, 255, 255);
+      p.model(gtm);
+      //p.rotateX(180 * Math.PI / 180);
+      //p.translate(0, -10, 0);
+      //p.rotateY(angle); // Keeps text facing screen
+      //p.texture(gtmT);
+      //p.plane(10);
+      p.pop();
+
       // Gabrielle: South Hall
       p.push();
       p.translate(-500, 200, 23); 
       p.ambientMaterial(0);
       p.scale(13);
-      p.stroke(255, 255, 1); 
+      p.stroke(255, 255, 255); 
       p.model(southHall);
       p.rotateX(180 * Math. PI / 180);
       p.translate(0, -3, 0);
@@ -160,7 +178,7 @@ export class MapComponent implements OnInit {
       p.rotateY(195 * Math.PI / 180); 
       p.ambientMaterial(0);
       p.scale(14);
-      p.stroke(255, 255, 1);
+      p.stroke(255, 255, 255);
       p.model(studentCenter);
       p.rotateX(180 * Math. PI / 180);
       p.rotateY(180 * Math. PI / 180);
