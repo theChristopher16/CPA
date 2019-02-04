@@ -42,6 +42,7 @@ export class MapComponent implements OnInit {
     let studentCenter;
     let studentCenterT;
     let gtm;
+    let cobb;
 
     // Josh: Added to track fps
     let lastLoop = performance.now();
@@ -61,8 +62,9 @@ export class MapComponent implements OnInit {
       southHall = p.loadModel('../../assets/Map/southHall.obj')
       studentCenter = p.loadModel('../../assets/Map/studentCenter.obj')
       gtm = p.loadModel('../../assets/Map/gtm.obj')
+      cobb = p.loadModel('../../assets/Map/cobb.obj')
 
-      // Josh: Initialize 3D text labels here
+     // Josh: Initialize 3D text labels here
       nethkinT = p.createGraphics(150, 150);
       nethkinT.fill(255); 
       nethkinT.textAlign(p.CENTER);
@@ -156,6 +158,22 @@ export class MapComponent implements OnInit {
       //p.plane(10);
       p.pop();
 
+      // Gabrielle: COBB
+      p.push();
+      p.translate(535, -200, 0);
+      p.rotateX(90 * Math.PI / 180);
+      p.rotateY(270 * Math.PI / 180);
+      p.ambientMaterial(0);
+      p.scale(26);
+      p.stroke(255, 255, 255);
+      p.model(cobb);
+      //p.rotateX(180 * Math.PI / 180);
+      //p.translate(0, -10, 0);
+      //p.rotateY(angle); // Keeps text facing screen
+      //p.texture(cobbT);
+      //p.plane(10);
+      p.pop();
+
       // Gabrielle: South Hall
       p.push();
       p.translate(-500, 200, 23); 
@@ -221,7 +239,7 @@ export class MapComponent implements OnInit {
       p.plane(10);
       p.pop();
 
-      angle += 0.0027;
+      angle += 0.0027; 
 
       // Josh: Calculates fps and writes it to console
       var thisLoop = performance.now();
