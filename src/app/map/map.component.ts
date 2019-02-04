@@ -99,8 +99,13 @@ export class MapComponent implements OnInit {
 
     p.draw = () => {
       // Draw background color
-      p.background(134 * p.cos(angle), 218 * p.cos(angle), 112.5 * p.cos(angle));
-     
+      // Josh: Changed background color to fluctuate between our color scheme
+      var r = 242 - Math.abs(242 * p.cos(angle));
+      var g = 13 + Math.abs(242 * p.cos(angle));
+      var b = 255;
+      //p.background(134 * p.cos(angle), 218 * p.cos(angle), 112.5 * p.cos(angle));
+      p.background(r, g, b);
+
       // Move camera
       p.noStroke(0);
       p.rotateX(1);
@@ -116,8 +121,6 @@ export class MapComponent implements OnInit {
       // Draw ground
       p.texture(floor);
       p.box(1152, 1152, 2);
-
-      
 
       // Gabrielle: Wyly
       p.push();
