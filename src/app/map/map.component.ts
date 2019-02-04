@@ -42,8 +42,11 @@ export class MapComponent implements OnInit {
     let studentCenter;
     let studentCenterT;
     let gtm;
+    let gtmT;
     let cobb;
+    let cobbT;
     let keeny;
+    let keenyT;
 
     // Josh: Added to track fps
     let lastLoop = performance.now();
@@ -67,35 +70,54 @@ export class MapComponent implements OnInit {
       keeny = p.loadModel('../../assets/Map/keeny.obj')
 
      // Josh: Initialize 3D text labels here
-      nethkinT = p.createGraphics(150, 150);
+      nethkinT = p.createGraphics(150, 150); // Nethken text
       nethkinT.fill(255); 
       nethkinT.textAlign(p.CENTER);
       nethkinT.textSize(20)
       nethkinT.text("Nethken", 80, 60);
 
-      tolliverT = p.createGraphics(150, 150);
+      tolliverT = p.createGraphics(150, 150); // Tolliver text
       tolliverT.fill(255);
       tolliverT.textAlign(p.CENTER);
       tolliverT.textSize(20)
       tolliverT.text("Tolliver", 75, 60);
       
-      wylyT = p.createGraphics(150, 150);
+      wylyT = p.createGraphics(150, 150); // Wyly text
       wylyT.fill(255);
       wylyT.textAlign(p.CENTER);
       wylyT.textSize(20);
       wylyT.text("Wyly", 80, 60);
 
-      southHallT = p.createGraphics(150, 150);
+      southHallT = p.createGraphics(150, 150); // South Hall text
       southHallT.fill(255);
       southHallT.textAlign(p.CENTER);
       southHallT.textSize(20);
       southHallT.text("South Hall", 80, 60);
 
-      studentCenterT = p.createGraphics(150, 150);
+      studentCenterT = p.createGraphics(150, 150); // Student Center text
       studentCenterT.fill(255);
       studentCenterT.textAlign(p.CENTER);
       studentCenterT.textSize(20);
       studentCenterT.text("Student Center", 80, 60);
+
+      gtmT = p.createGraphics(150, 150); // GTM text
+      gtmT.fill(255);
+      gtmT.textAlign(p.CENTER);
+      gtmT.textSize(15);
+      gtmT.text("GTM", 80, 60);
+
+      cobbT = p.createGraphics(150, 150); // COBB text
+      cobbT.fill(255);
+      cobbT.textAlign(p.CENTER);
+      cobbT.textSize(20);
+      cobbT.text("COBB", 80, 60);
+
+      keenyT = p.createGraphics(150, 150); // Keeny text
+      keenyT.fill(255);
+      keenyT.textAlign(p.CENTER);
+      keenyT.textSize(20);
+      keenyT.text("Keeny Hall", 80, 60);
+
     };
 
     p.setup = () => {
@@ -128,100 +150,109 @@ export class MapComponent implements OnInit {
       p.texture(floor);
       p.box(1152, 1152, 2);
 
-      // Gabrielle: Wyly
+      // Gabrielle: Wyly ------
       p.push();
       p.translate(125, -290, 0);
-      p.rotateX(90 * Math.PI/180);
+      p.rotateX(90 * Math.PI/180); // Rotating building to appropriate place
       p.rotateY(15 * Math.PI/180);
       p.ambientMaterial(0);
       p.scale(18);
-      p.stroke(255, 255, 255);
+      p.stroke(255, 255, 255); // Coloring the building
       p.model(wyly);
-      p.rotateX(180 * Math. PI / 180);
-      p.translate(0, -10, 0);
+      // Text
+      p.rotateX(180 * Math. PI / 180); // Gets the text facing the camera
+      p.translate(0, -10, 0); // How high the text flies
       p.rotateY(angle); // Keeps text facing screen
       p.texture(wylyT);
       p.plane(10);
       p.pop();
 
-      // Gabrielle: GTM
+      // Gabrielle: GTM ------
       p.push();
       p.translate(-50, -325, 0);
-      p.rotateX(90 * Math.PI / 180);
+      p.rotateX(90 * Math.PI / 180); // Rotating the building to appropriate place
       p.rotateY(-174 * Math.PI / 180);
       p.ambientMaterial(0);
       p.scale(25);
-      p.stroke(255, 255, 255);
+      p.stroke(255, 255, 255); // Coloring the building
       p.model(gtm);
-      //p.rotateX(180 * Math.PI / 180);
-      //p.translate(0, -10, 0);
-      //p.rotateY(angle); // Keeps text facing screen
-      //p.texture(gtmT);
-      //p.plane(10);
+      // Text
+      p.rotateX(180 * Math.PI / 180); // Gets the text facing the screen
+      p.rotateY(180 * Math.PI / 180);
+      p.translate(0, -2, 0); // How high the text flies
+      p.rotateY(angle); // Keeps text facing screen
+      p.texture(gtmT);
+      p.plane(10);
       p.pop();
 
-      // Gabrielle: COBB
+      // Gabrielle: COBB ------
       p.push();
       p.translate(535, -200, 0);
-      p.rotateX(90 * Math.PI / 180);
+      p.rotateX(90 * Math.PI / 180); // Rotating the building to appropriate place
       p.rotateY(270 * Math.PI / 180);
       p.ambientMaterial(0);
       p.scale(26);
-      p.stroke(255, 255, 255);
+      p.stroke(255, 255, 255); // Coloring the building
       p.model(cobb);
-      //p.rotateX(180 * Math.PI / 180);
-      //p.translate(0, -10, 0);
-      //p.rotateY(angle); // Keeps text facing screen
-      //p.texture(cobbT);
-      //p.plane(10);
+      // Text
+      p.rotateX(180 * Math.PI / 180);
+      p.rotateY(270 * Math.PI / 180);
+      p.translate(0, -2, 0); // How high the text flies
+      p.rotateY(angle); // Keeps text facing screen
+      p.texture(cobbT);
+      p.plane(10);
       p.pop();
 
-      // Gabrielle: South Hall
+      // Gabrielle: South Hall ------
       p.push();
       p.translate(-500, 200, 23); 
       p.ambientMaterial(0);
       p.scale(13);
-      p.stroke(255, 255, 255); 
+      p.stroke(255, 255, 255); // Coloring the building
       p.model(southHall);
+      // Text
       p.rotateX(180 * Math. PI / 180);
-      p.translate(0, -3, 0);
+      p.translate(0, -3, 0); // How high the text flies
       p.rotateX(90 * Math.PI / 180);
       p.rotateY(angle); // Keeps text facing screen
       p.texture(southHallT);
       p.plane(10);
       p.pop();
 
-      // Gabrielle: Student Center
+      // Gabrielle: Student Center ------
       p.push();
       p.translate(-20, -75, 0);
-      p.rotateX(90 * Math.PI / 180);
+      p.rotateX(90 * Math.PI / 180); // Rotating the building to appropriate place
       p.rotateY(195 * Math.PI / 180); 
       p.ambientMaterial(0);
       p.scale(14);
-      p.stroke(255, 255, 255);
+      p.stroke(255, 255, 255); // Coloring the building
       p.model(studentCenter);
+      // Text
       p.rotateX(180 * Math. PI / 180);
       p.rotateY(180 * Math. PI / 180);
-      p.translate(0, -2, 0);
+      p.translate(0, -2, 0); // How high the text flies
       p.texture(studentCenterT);
       p.rotateY(angle); // Keeps text facing screen
       p.plane(10);
       p.pop();
 
-      // Gabrielle: Keeny
+      // Gabrielle: Keeny ------
       p.push();
       p.translate(265, -150, 0);
-      p.rotateX(90 * Math.PI / 180);
+      p.rotateX(90 * Math.PI / 180); // Rotating the building to appropriate place
       p.rotateY(90 * Math.PI / 180);
       p.ambientMaterial(0);
       p.scale(13);
-      p.stroke(255, 255, 255);
+      p.stroke(255, 255, 255); // Coloring the building
       p.model(keeny);
-      //p.rotateX(180 * Math.PI / 180);
-      //p.translate(0, -10, 0);
-      //p.rotateY(angle); // Keeps text facing screen
-      //p.texture(keenyT);
-      //p.plane(10);
+      // Text
+      p.rotateX(180 * Math.PI / 180);
+      p.rotateY(90 * Math.PI / 180);
+      p.translate(0, -2, 0); // How high text flies
+      p.rotateY(angle); // Keeps text facing screen
+      p.texture(keenyT);
+      p.plane(10);
       p.pop();
 
       // Josh: Nethkin
