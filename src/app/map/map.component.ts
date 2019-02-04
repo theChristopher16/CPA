@@ -35,6 +35,7 @@ export class MapComponent implements OnInit {
     let tolliver;
     let wyly;
     let southHall;
+    let studentCenter;
 
     // Josh: Added to track fps
     let lastLoop = performance.now();
@@ -52,7 +53,7 @@ export class MapComponent implements OnInit {
       tolliver = p.loadModel('../../assets/Map/tolliver.obj')
       wyly = p.loadModel('../../assets/Map/wyly.obj')
       southHall = p.loadModel('../../assets/Map/southHall.obj')
-
+      studentCenter = p.loadModel('../../assets/Map/studentCenter.obj')
     };
 
     p.setup = () => {
@@ -90,6 +91,17 @@ export class MapComponent implements OnInit {
       p.scale(13);
       p.stroke(255, 255, 1); 
       p.model(southHall);
+      p.pop();
+
+      // Gabrielle: Student Center
+      p.push();
+      p.translate(-20, -75, 0);
+      p.rotateX(90 * Math.PI / 180);
+      p.rotateY(195 * Math.PI / 180); 
+      p.ambientMaterial(0);
+      p.scale(14);
+      p.stroke(255, 255, 1);
+      p.model(studentCenter);
       p.pop();
 
       // Josh: Nethkin
