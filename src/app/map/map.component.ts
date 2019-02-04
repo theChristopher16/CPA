@@ -48,6 +48,10 @@ export class MapComponent implements OnInit {
     let keeny;
     let keenyT;
 
+    let ping;
+    let url;
+    let didPing;
+
     // Josh: Added to track fps
     let lastLoop = performance.now();
 
@@ -174,7 +178,32 @@ export class MapComponent implements OnInit {
       p.rotateY(-174 * Math.PI / 180);
       p.ambientMaterial(0);
       p.scale(25);
-      p.stroke(255, 255, 255); // Coloring the building
+
+      if(didPing){
+        p.stroke(1, 255, 1)
+      }
+      else{
+        p.stroke(255, 255, 255); // Coloring the building
+      }
+      
+      url = "http://192.168.1.7:80/"
+      ping = new XMLHttpRequest();
+      ping.open("GET", url, true);
+      ping.onreadystatechange = function(){
+        if(ping.readyState != 1){
+          console.log(ping.status, ping.readyState)
+        }
+        if(ping.status == 200){
+          didPing = true;
+          console.log("test statement");
+        }
+        ping.onerror = function(e){
+          didPing = false;
+        };
+      };
+
+      ping.send();
+
       p.model(gtm);
       // Text
       p.rotateX(180 * Math.PI / 180); // Gets the text facing the screen
@@ -294,7 +323,7 @@ export class MapComponent implements OnInit {
       var thisLoop = performance.now();
       var fps = Math.round(1000 / (thisLoop - lastLoop));
       lastLoop = thisLoop;
-      console.log(fps);
+      //console.log(fps);
     };
   }
 }
