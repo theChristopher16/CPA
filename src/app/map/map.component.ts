@@ -37,6 +37,10 @@ export class MapComponent implements OnInit {
     let tolliverT;
     let wyly;
     let wylyT;
+    let southHall;
+    let southHallT;
+    let studentCenter;
+    let studentCenterT;
 
     // Josh: Added to track fps
     let lastLoop = performance.now();
@@ -53,25 +57,39 @@ export class MapComponent implements OnInit {
       nethkin = p.loadModel('../../assets/Map/nethkin.obj')
       tolliver = p.loadModel('../../assets/Map/tolliver.obj')
       wyly = p.loadModel('../../assets/Map/wyly.obj')
+      southHall = p.loadModel('../../assets/Map/southHall.obj')
+      studentCenter = p.loadModel('../../assets/Map/studentCenter.obj')
     
       // Josh: Initialize 3D text labels here
       nethkinT = p.createGraphics(150, 150);
       nethkinT.fill(255);
       nethkinT.textAlign(p.CENTER);
-      nethkinT.textSize(35)
+      nethkinT.textSize(20)
       nethkinT.text("Nethkin", 80, 60);
 
       tolliverT = p.createGraphics(150, 150);
       tolliverT.fill(255);
       tolliverT.textAlign(p.CENTER);
-      tolliverT.textSize(50)
+      tolliverT.textSize(20)
       tolliverT.text("Tolliver", 75, 60);
       
       wylyT = p.createGraphics(150, 150);
       wylyT.fill(255);
       wylyT.textAlign(p.CENTER);
-      wylyT.textSize(35);
+      wylyT.textSize(20);
       wylyT.text("Wyly", 80, 60);
+
+      southHallT = p.createGraphics(150, 150);
+      southHallT.fill(255);
+      southHallT.textAlign(p.CENTER);
+      southHallT.textSize(20);
+      southHallT.text("South Hall", 80, 60);
+
+      studentCenterT = p.createGraphics(150, 150);
+      studentCenterT.fill(255);
+      studentCenterT.textAlign(p.CENTER);
+      studentCenterT.textSize(20);
+      studentCenterT.text("Student Center", 80, 60);
     };
 
     p.setup = () => {
@@ -88,8 +106,9 @@ export class MapComponent implements OnInit {
       p.rotateX(1);
       p.rotateY(0);
 
-      // Before rotation draw building labels
-
+      // Note to future:
+      // Draw text first to fix transparency bug?
+      // Before rotation draw building labels so text is always facing camera
       p.rotateZ(angle);
       p.noStroke();
 
@@ -97,7 +116,7 @@ export class MapComponent implements OnInit {
       p.texture(floor);
       p.box(1152, 1152, 2);
 
-      // Note, draw text first to fix transparency bug?
+      
 
       // Gabrielle: Wyly
       p.push();
@@ -111,6 +130,35 @@ export class MapComponent implements OnInit {
       p.rotateX(180 * Math. PI / 180);
       p.translate(0, -10, 0);
       p.texture(wylyT);
+      p.plane(10);
+      p.pop();
+
+      // Gabrielle: South Hall
+      p.push();
+      p.translate(-500, 200, 23); 
+      p.ambientMaterial(0);
+      p.scale(13);
+      p.stroke(255, 255, 1); 
+      p.model(southHall);
+      p.rotateX(180 * Math. PI / 180);
+      p.translate(0, -2, 0);
+      p.rotateX(90 * Math.PI / 180);
+      p.texture(southHallT);
+      p.plane(10);
+      p.pop();
+
+      // Gabrielle: Student Center
+      p.push();
+      p.translate(-20, -75, 0);
+      p.rotateX(90 * Math.PI / 180);
+      p.rotateY(195 * Math.PI / 180); 
+      p.ambientMaterial(0);
+      p.scale(14);
+      p.stroke(255, 255, 1);
+      p.model(studentCenter);
+      p.rotateX(180 * Math. PI / 180);
+      p.translate(0, -2, 0);
+      p.texture(studentCenterT);
       p.plane(10);
       p.pop();
 
@@ -140,7 +188,6 @@ export class MapComponent implements OnInit {
       p.model(tolliver);
       p.rotateX(180 * Math.PI / 180);
       p.rotateZ(180 * Math.PI / 180);
-      p.translate(0, -1, 0);
       p.texture(tolliverT);
       p.plane(10);
       p.pop();
