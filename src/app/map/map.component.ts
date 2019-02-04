@@ -109,6 +109,7 @@ export class MapComponent implements OnInit {
       // Note to future:
       // Draw text first to fix transparency bug?
       // Before rotation draw building labels so text is always facing camera
+      
       p.rotateZ(angle);
       p.noStroke();
 
@@ -129,6 +130,7 @@ export class MapComponent implements OnInit {
       p.model(wyly);
       p.rotateX(180 * Math. PI / 180);
       p.translate(0, -10, 0);
+      p.rotateY(angle); // Keeps text facing screen
       p.texture(wylyT);
       p.plane(10);
       p.pop();
@@ -141,8 +143,9 @@ export class MapComponent implements OnInit {
       p.stroke(255, 255, 1); 
       p.model(southHall);
       p.rotateX(180 * Math. PI / 180);
-      p.translate(0, -2, 0);
+      p.translate(0, -3, 0);
       p.rotateX(90 * Math.PI / 180);
+      p.rotateY(angle); // Keeps text facing screen
       p.texture(southHallT);
       p.plane(10);
       p.pop();
@@ -157,8 +160,10 @@ export class MapComponent implements OnInit {
       p.stroke(255, 255, 1);
       p.model(studentCenter);
       p.rotateX(180 * Math. PI / 180);
+      p.rotateY(180 * Math. PI / 180);
       p.translate(0, -2, 0);
       p.texture(studentCenterT);
+      p.rotateY(angle); // Keeps text facing screen
       p.plane(10);
       p.pop();
 
@@ -172,7 +177,9 @@ export class MapComponent implements OnInit {
       p.stroke(255, 255, 255); // Colors lines of shape
       p.model(nethkin);
       p.rotateX(180 * Math. PI / 180);
+      p.rotateY(180 * Math. PI / 180);
       p.translate(0, -4, 0);
+      p.rotateY(angle); // Keeps text facing screen
       p.texture(nethkinT);
       p.plane(10);
       p.pop();
@@ -188,6 +195,7 @@ export class MapComponent implements OnInit {
       p.model(tolliver);
       p.rotateX(180 * Math.PI / 180);
       p.rotateZ(180 * Math.PI / 180);
+      p.rotateY(angle); // Keeps text facing screen
       p.texture(tolliverT);
       p.plane(10);
       p.pop();
