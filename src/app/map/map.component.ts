@@ -48,9 +48,13 @@ export class MapComponent implements OnInit {
     let keeny;
     let keenyT;
 
+    //PING STUFF
     let ping;
-    let url;
+    let ping2;
+    let GTMurl;
+    let Wylyurl;
     let didPing;
+    let didPing2;
 
     // Josh: Added to track fps
     let lastLoop = performance.now();
@@ -161,7 +165,32 @@ export class MapComponent implements OnInit {
       p.rotateY(15 * Math.PI/180);
       p.ambientMaterial(0);
       p.scale(18);
-      p.stroke(255, 255, 255); // Coloring the building
+
+      // Maddi: Wyly ping stuff
+      if(didPing2){
+        p.stroke(1, 255, 1)
+      }
+      else{
+        p.stroke(255, 255, 255); // Coloring the building
+      }
+      
+      Wylyurl = "http://192.168.1.9:80/"
+      ping2 = new XMLHttpRequest();
+      ping2.open("GET", Wylyurl, true);
+      ping2.onreadystatechange = function(){
+        if(ping2.readyState != 1){
+          console.log(ping2.status, ping2.readyState)
+        }
+        if(ping2.status == 200){
+          didPing2 = true;
+          console.log("test statement");
+        }
+        ping2.onerror = function(e){
+          didPing2 = false;
+        };
+      };
+
+      ping2.send();
       p.model(wyly);
       // Text
       p.rotateX(180 * Math. PI / 180); // Gets the text facing the camera
@@ -179,6 +208,7 @@ export class MapComponent implements OnInit {
       p.ambientMaterial(0);
       p.scale(25);
 
+      // Maddi: GTM ping stuff
       if(didPing){
         p.stroke(1, 255, 1)
       }
@@ -186,9 +216,9 @@ export class MapComponent implements OnInit {
         p.stroke(255, 255, 255); // Coloring the building
       }
       
-      url = "http://192.168.1.7:80/"
+      GTMurl = "http://192.168.1.7:80/"
       ping = new XMLHttpRequest();
-      ping.open("GET", url, true);
+      ping.open("GET", GTMurl, true);
       ping.onreadystatechange = function(){
         if(ping.readyState != 1){
           console.log(ping.status, ping.readyState)
