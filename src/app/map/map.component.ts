@@ -78,53 +78,61 @@ export class MapComponent implements OnInit {
       keeny = p.loadModel('../../assets/Map/keeny.obj')
 
      // Josh: Initialize 3D text labels here
-      nethkinT = p.createGraphics(150, 150); // Nethken text
+      nethkinT = p.createGraphics(90, 30); // Nethken text
       nethkinT.fill(255); 
+      nethkinT.background(30, 30, 30);
       nethkinT.textAlign(p.CENTER);
       nethkinT.textSize(20)
-      nethkinT.text("Nethken", 80, 60);
+      nethkinT.text("Nethken", 45, 20);
 
-      tolliverT = p.createGraphics(150, 150); // Tolliver text
+      tolliverT = p.createGraphics(100, 30); // Tolliver text
       tolliverT.fill(255);
+      tolliverT.background(30, 30, 30);
       tolliverT.textAlign(p.CENTER);
       tolliverT.textSize(20)
-      tolliverT.text("Tolliver", 75, 60);
+      tolliverT.text("Tolliver", 50, 20);
       
-      wylyT = p.createGraphics(150, 150); // Wyly text
+      wylyT = p.createGraphics(50, 30); // Wyly text
       wylyT.fill(255);
+      wylyT.background(30, 30, 30);
       wylyT.textAlign(p.CENTER);
       wylyT.textSize(20);
-      wylyT.text("Wyly", 80, 60);
+      wylyT.text("Wyly", 25, 20);
 
-      southHallT = p.createGraphics(150, 150); // South Hall text
+      southHallT = p.createGraphics(140, 30); // South Hall text
       southHallT.fill(255);
+      southHallT.background(30, 30, 30);
       southHallT.textAlign(p.CENTER);
       southHallT.textSize(20);
-      southHallT.text("South Hall", 80, 60);
+      southHallT.text("South Hall", 70, 20);
 
-      studentCenterT = p.createGraphics(150, 150); // Student Center text
+      studentCenterT = p.createGraphics(140, 30); // Student Center text
       studentCenterT.fill(255);
+      studentCenterT.background(30, 30, 30);
       studentCenterT.textAlign(p.CENTER);
       studentCenterT.textSize(20);
-      studentCenterT.text("Student Center", 80, 60);
+      studentCenterT.text("Student Center", 70, 20);
 
-      gtmT = p.createGraphics(150, 150); // GTM text
+      gtmT = p.createGraphics(50, 30); // GTM text
       gtmT.fill(255);
+      gtmT.background(30, 30, 30);
       gtmT.textAlign(p.CENTER);
-      gtmT.textSize(15);
-      gtmT.text("GTM", 80, 60);
+      gtmT.textSize(20);
+      gtmT.text("GTM", 25, 20);
 
-      cobbT = p.createGraphics(150, 150); // COBB text
+      cobbT = p.createGraphics(70, 30); // COBB text
       cobbT.fill(255);
+      cobbT.background(30, 30, 30);
       cobbT.textAlign(p.CENTER);
       cobbT.textSize(20);
-      cobbT.text("COBB", 80, 60);
+      cobbT.text("COBB", 35, 20);
 
-      keenyT = p.createGraphics(150, 150); // Keeny text
+      keenyT = p.createGraphics(130, 30); // Keeny text
       keenyT.fill(255);
+      keenyT.background(30, 30, 30);
       keenyT.textAlign(p.CENTER);
       keenyT.textSize(20);
-      keenyT.text("Keeny Hall", 80, 60);
+      keenyT.text("Keeny Hall", 65, 20);
 
     };
 
@@ -194,10 +202,10 @@ export class MapComponent implements OnInit {
       p.model(wyly);
       // Text
       p.rotateX(180 * Math. PI / 180); // Gets the text facing the camera
-      p.translate(0, -10, 0); // How high the text flies
+      p.translate(0, -11.5, 0); // How high the text flies
       p.rotateY(angle); // Keeps text facing screen
       p.texture(wylyT);
-      p.plane(10);
+      p.plane(3, 2);
       p.pop();
 
       // Gabrielle: GTM ------
@@ -238,10 +246,10 @@ export class MapComponent implements OnInit {
       // Text
       p.rotateX(180 * Math.PI / 180); // Gets the text facing the screen
       p.rotateY(180 * Math.PI / 180);
-      p.translate(0, -2, 0); // How high the text flies
+      p.translate(0, -3, 0); // How high the text flies
       p.rotateY(angle); // Keeps text facing screen
       p.texture(gtmT);
-      p.plane(10);
+      p.plane(2, 1);
       p.pop();
 
       // Gabrielle: COBB ------
@@ -256,10 +264,10 @@ export class MapComponent implements OnInit {
       // Text
       p.rotateX(180 * Math.PI / 180);
       p.rotateY(270 * Math.PI / 180);
-      p.translate(0, -2, 0); // How high the text flies
+      p.translate(0, -3, 0); // How high the text flies
       p.rotateY(angle); // Keeps text facing screen
       p.texture(cobbT);
-      p.plane(10);
+      p.plane(2, 1);
       p.pop();
 
       // Gabrielle: South Hall ------
@@ -271,11 +279,11 @@ export class MapComponent implements OnInit {
       p.model(southHall);
       // Text
       p.rotateX(180 * Math. PI / 180);
-      p.translate(0, -3, 0); // How high the text flies
+      p.translate(0, -1, -3); // How high the text flies
       p.rotateX(90 * Math.PI / 180);
       p.rotateY(angle); // Keeps text facing screen
       p.texture(southHallT);
-      p.plane(10);
+      p.plane(4, 2);
       p.pop();
 
       // Gabrielle: Student Center ------
@@ -290,10 +298,10 @@ export class MapComponent implements OnInit {
       // Text
       p.rotateX(180 * Math. PI / 180);
       p.rotateY(180 * Math. PI / 180);
-      p.translate(0, -2, 0); // How high the text flies
+      p.translate(0, -3, 0); // How high the text flies
       p.texture(studentCenterT);
       p.rotateY(angle); // Keeps text facing screen
-      p.plane(10);
+      p.plane(5, 2);
       p.pop();
 
       // Gabrielle: Keeny ------
@@ -308,10 +316,10 @@ export class MapComponent implements OnInit {
       // Text
       p.rotateX(180 * Math.PI / 180);
       p.rotateY(90 * Math.PI / 180);
-      p.translate(0, -2, 0); // How high text flies
+      p.translate(0, -4, 0); // How high text flies
       p.rotateY(angle); // Keeps text facing screen
       p.texture(keenyT);
-      p.plane(10);
+      p.plane(5, 2);
       p.pop();
 
       // Josh: Nethkin
@@ -328,7 +336,7 @@ export class MapComponent implements OnInit {
       p.translate(0, -4, 0);
       p.rotateY(angle); // Keeps text facing screen
       p.texture(nethkinT);
-      p.plane(10);
+      p.plane(3, 2);
       p.pop();
 
       // Josh: Tolliver
@@ -342,9 +350,10 @@ export class MapComponent implements OnInit {
       p.model(tolliver);
       p.rotateX(180 * Math.PI / 180);
       p.rotateZ(180 * Math.PI / 180);
+      p.translate(0, -2, 0);
       p.rotateY(angle); // Keeps text facing screen
       p.texture(tolliverT);
-      p.plane(10);
+      p.plane(3, 2);
       p.pop();
 
       angle += 0.0027; 
