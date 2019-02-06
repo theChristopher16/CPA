@@ -47,6 +47,10 @@ export class MapComponent implements OnInit {
     let cobbT;
     let keeny;
     let keenyT;
+    let woodard;
+    let woodardT;
+    let bogard;
+    let bogardT;
 
     //PING STUFF
     let ping;
@@ -76,6 +80,8 @@ export class MapComponent implements OnInit {
       gtm = p.loadModel('../../assets/Map/gtm.obj')
       cobb = p.loadModel('../../assets/Map/cobb.obj')
       keeny = p.loadModel('../../assets/Map/keeny.obj')
+      woodard = p.loadModel('../../assets/Map/woodard3.obj')
+      bogard = p.loadModel('../../assets/Map/bogard2.obj')
 
      // Josh: Initialize 3D text labels here
       nethkinT = p.createGraphics(90, 30); // Nethken text
@@ -133,6 +139,20 @@ export class MapComponent implements OnInit {
       keenyT.textAlign(p.CENTER);
       keenyT.textSize(20);
       keenyT.text("Keeny Hall", 65, 20);
+
+      woodardT = p.createGraphics(90, 30); // Woodard text
+      woodardT.fill(255);
+      woodardT.background(30, 30, 30);
+      woodardT.textAlign(p.CENTER);
+      woodardT.textSize(20);
+      woodardT.text("Woodard", 45, 20);
+
+      bogardT= p.createGraphics(90, 30); // Bogard text
+      bogardT.fill(255);
+      bogardT.background(30, 30, 30);
+      bogardT.textAlign(p.CENTER);
+      bogardT.textSize(20);
+      bogardT.text("Bogard", 45, 20);
 
     };
 
@@ -320,6 +340,43 @@ export class MapComponent implements OnInit {
       p.rotateY(angle); // Keeps text facing screen
       p.texture(keenyT);
       p.plane(5, 2);
+      p.pop();
+
+      // Gabrielle: Woodard ------
+      p.push();
+      p.translate(-325, -100, 20);
+      p.rotateX(270 * Math.PI / 180); // Rotating the building to appropriate place
+      p.rotateY(90 * Math.PI / 180);
+      p.ambientMaterial(0);
+      p.scale(13);
+      p.stroke(255, 255, 255); // Coloring the building
+      p.model(woodard);
+      // Text
+      p.rotateX(0 * Math.PI / 180);
+      p.rotateY(280 * Math.PI / 180);
+      p.translate(0, -3, 0); // How high the text flies
+      p.rotateY(angle); // Keeps text facing screen
+      p.texture(woodardT);
+      p.plane(7, 2);
+      p.pop();
+
+      // Gabrielle: Bogard ------
+      p.push();
+      p.translate(380, -20, 20);
+      p.rotateX(270 * Math.PI / 180); // Rotating the building to appropriate place
+      p.rotateY(90 * Math.PI / 180);
+      p.rotateZ(0 * Math.PI / 180);
+      p.ambientMaterial(0);
+      p.scale(18);
+      p.stroke(255, 255, 255); // Coloring the building
+      p.model(bogard);
+      // Text
+      p.rotateX(0 * Math.PI / 180);
+      p.rotateY(270 * Math.PI / 180);
+      p.translate(0, -3, 0); // How high the text flies
+      p.rotateY(angle); // Keeps text facing screen
+      p.texture(bogardT);
+      p.plane(2, 1);
       p.pop();
 
       // Josh: Nethkin
