@@ -86,8 +86,8 @@ export class MapComponent implements OnInit {
       floor = p.loadImage('../../assets/Map/floor.png');
       orange = p.loadImage('../../assets/Map/orange.png');
       yellow = p.loadImage('../../assets/Map/yellow.png');
-      
-      floor = p.loadImage('../../assets/Map/map.png');
+
+      //floor = p.loadImage('../../assets/Map/map.png');
       nethkin = p.loadModel('../../assets/Map/nethkin.obj')
       tolliver = p.loadModel('../../assets/Map/tolliver.obj')
       wyly = p.loadModel('../../assets/Map/wyly.obj')
@@ -109,7 +109,7 @@ export class MapComponent implements OnInit {
 
      // Josh: Initialize 3D text labels here
       nethkinT = p.createGraphics(90, 30); // Nethken text
-      nethkinT.fill(255); 
+      nethkinT.fill(255);
       nethkinT.background(30, 30, 30);
       nethkinT.textAlign(p.CENTER);
       nethkinT.textSize(20);
@@ -121,7 +121,7 @@ export class MapComponent implements OnInit {
       tolliverT.textAlign(p.CENTER);
       tolliverT.textSize(20)
       tolliverT.text("Tolliver", 50, 20);
-      
+
       wylyT = p.createGraphics(50, 30); // Wyly text
       wylyT.fill(255);
       wylyT.background(30, 30, 30);
@@ -177,7 +177,7 @@ export class MapComponent implements OnInit {
       bogardT.textAlign(p.CENTER);
       bogardT.textSize(20);
       bogardT.text("Bogard", 45, 20);
-     
+
       carsonTaylorT = p.createGraphics(130, 30); // Carson Taylor text
       carsonTaylorT.fill(255);
       carsonTaylorT.background(30, 30, 30);
@@ -214,21 +214,21 @@ export class MapComponent implements OnInit {
       haleT.text("Hale", 25, 20);
 
       universityT = p.createGraphics(140, 30); // University Hall text
-      universityT.fill(255); 
+      universityT.fill(255);
       universityT.background(30, 30, 30);
       universityT.textAlign(p.CENTER);
       universityT.textSize(20);
       universityT.text("University Hall", 70, 20);
 
       ifmT = p.createGraphics(50, 30); // IFM text
-      ifmT.fill(255); 
+      ifmT.fill(255);
       ifmT.background(30, 30, 30);
       ifmT.textAlign(p.CENTER);
       ifmT.textSize(20);
       ifmT.text("IFM", 25, 20);
 
       howardT = p.createGraphics(140, 30); // Howard text
-      howardT.fill(255); 
+      howardT.fill(255);
       howardT.background(30, 30, 30);
       howardT.textAlign(p.CENTER);
       howardT.textSize(20);
@@ -253,7 +253,7 @@ export class MapComponent implements OnInit {
       p.noStroke(0);
       p.rotateX(1);
       p.rotateY(0);
-      
+
       p.rotateZ(angle);
       p.noStroke();
 
@@ -276,7 +276,7 @@ export class MapComponent implements OnInit {
       else{
         p.stroke(255, 255, 255); // Coloring the building
       }
-      
+
       Wylyurl = "http://192.168.1.9:80/"
       ping2 = new XMLHttpRequest();
       ping2.open("GET", Wylyurl, true);
@@ -318,7 +318,7 @@ export class MapComponent implements OnInit {
       else{
         p.stroke(255, 255, 255); // Coloring the building
       }
-      
+
       GTMurl = "http://192.168.1.7:80/"
       ping = new XMLHttpRequest();
       ping.open("GET", GTMurl, true);
@@ -367,7 +367,7 @@ export class MapComponent implements OnInit {
 
       // Gabrielle: South Hall ------
       p.push();
-      p.translate(-500, 200, 23); 
+      p.translate(-500, 200, 23);
       p.ambientMaterial(0);
       p.scale(13);
       p.stroke(255, 255, 255); // Coloring the building
@@ -385,7 +385,7 @@ export class MapComponent implements OnInit {
       p.push();
       p.translate(-20, -75, 0);
       p.rotateX(90 * Math.PI / 180); // Rotating the building to appropriate place
-      p.rotateY(195 * Math.PI / 180); 
+      p.rotateY(195 * Math.PI / 180);
       p.ambientMaterial(0);
       p.scale(14);
       p.stroke(255, 255, 255); // Coloring the building
@@ -629,7 +629,7 @@ export class MapComponent implements OnInit {
       p.plane(2, 1);
       p.pop();
 
-      angle += 0.0027; 
+      angle += 0.0027;
 
       // Josh: Calculates fps and writes it to console
       var thisLoop = performance.now();
