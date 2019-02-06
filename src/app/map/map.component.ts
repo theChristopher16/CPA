@@ -61,6 +61,10 @@ export class MapComponent implements OnInit {
     let bandBuildingT;
     let powerPlant;
     let powerPlantT;
+    let ifm;
+    let ifmT;
+    let university;
+    let universityT;
 
     //PING STUFF
     let ping;
@@ -97,6 +101,8 @@ export class MapComponent implements OnInit {
       bandBuilding = p.loadModel('../../assets/Map/bandBuilding.obj');
       powerPlant = p.loadModel('../../assets/Map/powerPlant.obj');
       hale = p.loadModel('../../assets/Map/hale.obj');
+      university = p.loadModel('../../assets/Map/cobb.obj')
+      ifm = p.loadModel('../../assets/Map/ifm.obj')
 
      // Josh: Initialize 3D text labels here
       nethkinT = p.createGraphics(90, 30); // Nethken text
@@ -203,6 +209,20 @@ export class MapComponent implements OnInit {
       haleT.textAlign(p.CENTER);
       haleT.textSize(20);
       haleT.text("Hale", 25, 20);
+
+      universityT = p.createGraphics(140, 30); // University Hall text
+      universityT.fill(255); 
+      universityT.background(30, 30, 30);
+      universityT.textAlign(p.CENTER);
+      universityT.textSize(20);
+      universityT.text("University Hall", 70, 20);
+
+      ifmT = p.createGraphics(140, 30); // University Hall text
+      ifmT.fill(255); 
+      ifmT.background(30, 30, 30);
+      ifmT.textAlign(p.CENTER);
+      ifmT.textSize(20);
+      ifmT.text("IFM", 70, 20);
     };
 
     p.setup = () => {
@@ -409,7 +429,7 @@ export class MapComponent implements OnInit {
       p.push();
       p.translate(380, -20, 20);
       p.rotateX(270 * Math.PI / 180); // Rotating the building to appropriate place
-      p.rotateY(90 * Math.PI / 180);
+      p.rotateY(270 * Math.PI / 180);
       p.rotateZ(0 * Math.PI / 180);
       p.ambientMaterial(0);
       p.scale(18);
@@ -417,7 +437,7 @@ export class MapComponent implements OnInit {
       p.model(bogard);
       // Text
       p.rotateX(0 * Math.PI / 180);
-      p.rotateY(270 * Math.PI / 180);
+      p.rotateY(90 * Math.PI / 180);
       p.translate(0, -3, 0); // How high the text flies
       p.rotateY(angle); // Keeps text facing screen
       p.texture(bogardT);
@@ -544,6 +564,42 @@ export class MapComponent implements OnInit {
       p.rotateY(angle); // Keeps text facing screen
       p.texture(haleT);
       p.plane(5, 3);
+      p.pop();
+
+      // Maddi: University Hall
+      p.push();
+      p.translate(300, -290, 0);
+      p.rotateX(90 * Math.PI / 180); // Rotating the building to appropriate place
+      p.rotateY(195 * Math.PI / 180);
+      p.ambientMaterial(0);
+      p.scale(23);
+      p.stroke(255, 255, 255); // Coloring the building
+      p.model(university);
+      // Text
+      p.rotateX(180 * Math.PI / 180);
+      p.rotateY(180 * Math.PI / 180);
+      p.translate(0, -3, 0); // How high the text flies
+      p.rotateY(angle); // Keeps text facing screen
+      p.texture(universityT);
+      p.plane(2, 1);
+      p.pop();
+
+      // Maddi: IFM
+      p.push();
+      p.translate(-380, 360, 30);
+      p.rotateX(90 * Math.PI / 180); // Rotating the building to appropriate place
+      p.rotateZ(-180 * Math.PI / 180); // Somehow made the model upside down lol
+      p.ambientMaterial(0);
+      p.scale(23);
+      p.stroke(255, 255, 255); // Coloring the building
+      p.model(ifm);
+      // Text
+      //p.rotateX(90 * Math.PI / 180);
+      p.rotateY(180 * Math.PI / 180);
+      p.translate(0, -1, 0); // How high the text flies
+      p.rotateY(angle); // Keeps text facing screen
+      p.texture(ifmT);
+      p.plane(2, 1);
       p.pop();
 
       angle += 0.0027; 
