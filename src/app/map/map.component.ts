@@ -65,6 +65,8 @@ export class MapComponent implements OnInit {
     let ifmT;
     let university;
     let universityT;
+    let howard;
+    let howardT;
 
     //PING STUFF
     let ping;
@@ -101,8 +103,9 @@ export class MapComponent implements OnInit {
       bandBuilding = p.loadModel('../../assets/Map/bandBuilding.obj');
       powerPlant = p.loadModel('../../assets/Map/powerPlant.obj');
       hale = p.loadModel('../../assets/Map/hale.obj');
-      university = p.loadModel('../../assets/Map/cobb.obj')
-      ifm = p.loadModel('../../assets/Map/ifm.obj')
+      university = p.loadModel('../../assets/Map/cobb.obj');
+      ifm = p.loadModel('../../assets/Map/ifm.obj');
+      howard = p.loadModel('../../assets/Map/howard.obj');
 
      // Josh: Initialize 3D text labels here
       nethkinT = p.createGraphics(90, 30); // Nethken text
@@ -217,12 +220,19 @@ export class MapComponent implements OnInit {
       universityT.textSize(20);
       universityT.text("University Hall", 70, 20);
 
-      ifmT = p.createGraphics(140, 30); // University Hall text
+      ifmT = p.createGraphics(50, 30); // IFM text
       ifmT.fill(255); 
       ifmT.background(30, 30, 30);
       ifmT.textAlign(p.CENTER);
       ifmT.textSize(20);
-      ifmT.text("IFM", 70, 20);
+      ifmT.text("IFM", 25, 20);
+
+      howardT = p.createGraphics(140, 30); // Howard text
+      howardT.fill(255); 
+      howardT.background(30, 30, 30);
+      howardT.textAlign(p.CENTER);
+      howardT.textSize(20);
+      howardT.text("Howard", 70, 20);
     };
 
     p.setup = () => {
@@ -563,6 +573,23 @@ export class MapComponent implements OnInit {
       p.translate(0, -9, 0);
       p.rotateY(angle); // Keeps text facing screen
       p.texture(haleT);
+      p.plane(5, 3);
+      p.pop();
+
+      // Josh: Howard
+      p.push();
+      p.translate(155, -40, 0);
+      p.rotateX(-90 * Math.PI/180); // Fixes the 90 degree flip problem from Blender
+      p.rotateZ(180 * Math.PI / 180);
+      p.ambientMaterial(0);
+      p.scale(12);
+      p.stroke(255, 255, 255); // Colors lines of shape
+      p.model(howard);
+      p.rotateX(180 * Math.PI / 180);
+      p.rotateY(180 * Math.PI / 180);
+      p.translate(0, -5, 0);
+      p.rotateY(angle); // Keeps text facing screen
+      p.texture(howardT);
       p.plane(5, 3);
       p.pop();
 
