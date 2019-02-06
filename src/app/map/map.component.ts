@@ -51,6 +51,16 @@ export class MapComponent implements OnInit {
     let woodardT;
     let bogard;
     let bogardT;
+    let carsonTaylor;
+    let carsonTaylorT;
+    let hale;
+    let haleT;
+    let engineeringAnnex;
+    let engineeringAnnexT;
+    let bandBuilding;
+    let bandBuildingT;
+    let powerPlant;
+    let powerPlantT;
 
     //PING STUFF
     let ping;
@@ -82,13 +92,18 @@ export class MapComponent implements OnInit {
       keeny = p.loadModel('../../assets/Map/keeny.obj')
       woodard = p.loadModel('../../assets/Map/woodard3.obj')
       bogard = p.loadModel('../../assets/Map/bogard2.obj')
+      carsonTaylor = p.loadModel('../../assets/Map/carsonTaylor.obj');
+      engineeringAnnex = p.loadModel('../../assets/Map/engineeringAnnex.obj');
+      bandBuilding = p.loadModel('../../assets/Map/bandBuilding.obj');
+      powerPlant = p.loadModel('../../assets/Map/powerPlant.obj');
+      hale = p.loadModel('../../assets/Map/hale.obj');
 
      // Josh: Initialize 3D text labels here
       nethkinT = p.createGraphics(90, 30); // Nethken text
       nethkinT.fill(255); 
       nethkinT.background(30, 30, 30);
       nethkinT.textAlign(p.CENTER);
-      nethkinT.textSize(20)
+      nethkinT.textSize(20);
       nethkinT.text("Nethken", 45, 20);
 
       tolliverT = p.createGraphics(100, 30); // Tolliver text
@@ -153,7 +168,41 @@ export class MapComponent implements OnInit {
       bogardT.textAlign(p.CENTER);
       bogardT.textSize(20);
       bogardT.text("Bogard", 45, 20);
+     
+      carsonTaylorT = p.createGraphics(130, 30); // Carson Taylor text
+      carsonTaylorT.fill(255);
+      carsonTaylorT.background(30, 30, 30);
+      carsonTaylorT.textAlign(p.CENTER);
+      carsonTaylorT.textSize(20);
+      carsonTaylorT.text("Carson Taylor", 65, 20);
 
+      engineeringAnnexT = p.createGraphics(200, 30); // Engineering Annex text
+      engineeringAnnexT.fill(255);
+      engineeringAnnexT.background(30, 30, 30);
+      engineeringAnnexT.textAlign(p.CENTER);
+      engineeringAnnexT.textSize(20);
+      engineeringAnnexT.text("Engineering Annex", 100, 20);
+
+      bandBuildingT = p.createGraphics(170, 30); // Band Building text
+      bandBuildingT.fill(255);
+      bandBuildingT.background(30, 30, 30);
+      bandBuildingT.textAlign(p.CENTER);
+      bandBuildingT.textSize(20);
+      bandBuildingT.text("Band Building", 85, 20);
+
+      powerPlantT = p.createGraphics(170, 30); // Power Plant text
+      powerPlantT.fill(255);
+      powerPlantT.background(30, 30, 30);
+      powerPlantT.textAlign(p.CENTER);
+      powerPlantT.textSize(20);
+      powerPlantT.text("Power Plant", 85, 20);
+
+      haleT = p.createGraphics(50, 30); // Hale text
+      haleT.fill(255);
+      haleT.background(30, 30, 30);
+      haleT.textAlign(p.CENTER);
+      haleT.textSize(20);
+      haleT.text("Hale", 25, 20);
     };
 
     p.setup = () => {
@@ -174,10 +223,6 @@ export class MapComponent implements OnInit {
       p.noStroke(0);
       p.rotateX(1);
       p.rotateY(0);
-
-      // Note to future:
-      // Draw text first to fix transparency bug?
-      // Before rotation draw building labels so text is always facing camera
       
       p.rotateZ(angle);
       p.noStroke();
@@ -409,8 +454,96 @@ export class MapComponent implements OnInit {
       p.rotateZ(180 * Math.PI / 180);
       p.translate(0, -2, 0);
       p.rotateY(angle); // Keeps text facing screen
+      p.rotateY(17 * Math.PI/180);
       p.texture(tolliverT);
       p.plane(3, 2);
+      p.pop();
+
+      // Josh: Carson Taylor
+      p.push();
+      p.translate(315, 190, 23);
+      p.rotateX(-90 * Math.PI/180); // Fixes the 90 degree flip problem from Blender
+      p.ambientMaterial(0);
+      p.scale(16);
+      p.stroke(255, 255, 255); // Colors lines of shape
+      p.model(carsonTaylor);
+      p.rotateX(180 * Math.PI / 180);
+      p.rotateY(180 * Math.PI / 180);
+      p.rotateZ(180 * Math.PI / 180);
+      p.translate(0, -2, 0);
+      p.rotateY(angle); // Keeps text facing screen
+      p.texture(carsonTaylorT);
+      p.plane(3, 2);
+      p.pop();
+
+      // Josh: Engineering Annex
+      p.push();
+      p.translate(410, 150, 23);
+      p.rotateX(-90 * Math.PI/180); // Fixes the 90 degree flip problem from Blender
+      p.ambientMaterial(0);
+      p.scale(11);
+      p.stroke(255, 255, 255); // Colors lines of shape
+      p.model(engineeringAnnex);
+      p.rotateX(180 * Math.PI / 180);
+      p.rotateY(180 * Math.PI / 180);
+      p.rotateZ(180 * Math.PI / 180);
+      p.translate(0, -2, 0);
+      p.rotateY(angle); // Keeps text facing screen
+      p.texture(engineeringAnnexT);
+      p.plane(5, 3);
+      p.pop();
+
+      // Josh: Band Building
+      p.push();
+      p.translate(-320, 10, 23);
+      p.rotateX(-90 * Math.PI/180); // Fixes the 90 degree flip problem from Blender
+      p.ambientMaterial(0);
+      p.scale(11);
+      p.stroke(255, 255, 255); // Colors lines of shape
+      p.model(bandBuilding);
+      p.rotateX(180 * Math.PI / 180);
+      p.rotateY(180 * Math.PI / 180);
+      p.rotateZ(180 * Math.PI / 180);
+      p.translate(0, -2, 0);
+      p.rotateY(angle); // Keeps text facing screen
+      p.texture(bandBuildingT);
+      p.plane(5, 3);
+      p.pop();
+
+      // Josh: Power Plant
+      p.push();
+      p.translate(-240, 170, 23);
+      p.rotateX(-90 * Math.PI/180); // Fixes the 90 degree flip problem from Blender
+      p.rotateY(90 * Math.PI/180);
+      p.ambientMaterial(0);
+      p.scale(12);
+      p.stroke(255, 255, 255); // Colors lines of shape
+      p.model(powerPlant);
+      p.rotateX(180 * Math.PI / 180);
+      p.rotateY(180 * Math.PI / 180);
+      p.rotateZ(180 * Math.PI / 180);
+      p.translate(0, -2, 0);
+      p.rotateY(angle); // Keeps text facing screen
+      p.rotateY(-90 * Math.PI/180);
+      p.texture(powerPlantT);
+      p.plane(5, 3);
+      p.pop();
+
+      // Josh: Hale
+      p.push();
+      p.translate(-270, -290, 0);
+      p.rotateX(-90 * Math.PI/180); // Fixes the 90 degree flip problem from Blender
+      p.rotateZ(180 * Math.PI / 180);
+      p.ambientMaterial(0);
+      p.scale(10);
+      p.stroke(255, 255, 255); // Colors lines of shape
+      p.model(hale);
+      p.rotateX(180 * Math.PI / 180);
+      p.rotateY(180 * Math.PI / 180);
+      p.translate(0, -9, 0);
+      p.rotateY(angle); // Keeps text facing screen
+      p.texture(haleT);
+      p.plane(5, 3);
       p.pop();
 
       angle += 0.0027; 
