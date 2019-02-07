@@ -3,10 +3,16 @@
 //To start the PHP server run this in the terminal from outside the CPA directory
 //php -S 127.0.0.1:8080 -t ./CPA/backend
 
+//import Request and Router Classes
+include_once 'Request.php';
+include_once 'Router.php';
+
 //allows access from angular
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: PUT, GET, POST");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+
+$router = new Router(new Request);
 
 //create test database with sql script using this:sudo mysql < createTestDB.sql
 //make sure you have a user "database" with privileges to access the DB
@@ -17,64 +23,42 @@ $username = "database";
 $password = "dbpass";
 $dbname = "testDB";
 
-// get the HTTP method, path, and body of the request
-$method = $_SERVER['REQUEST_METHOD'];
-$request = explode('/', trim($_SERVER['PATH_INFO'],'/')); //this may through a notice
-//$input = json_decode(file_get_contents('php://input'),true); //might need for future testing
+//Base route
+$router->get('/', function() {
+  return <<<HTML
+  <h1>PHP SERVER</h1>
+HTML;
+});
 
-// create connection to mysql
-$conn = new mysqli($localhost, $username, $password, $dbname);
-mysqli_set_charset($conn ,'utf8');
+//Gets the scores from Database
+$router->get('/scores', function($request){
 
-//in case of connection errors
-if($conn->connect_error) {
-    die("Error : " . $conn->connect_error);
-}
+  global $localhost, $username, $password, $dbname; //gets db creds for this scope
 
-//Cases for types of HTTP actions
-switch ($method) {
-  case 'GET':
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM scoreTest";
-  case 'PUT':
-    //$id = $input["id"];
-    //$sql = //put sql logic goes here
-    break;
-  case 'POST':
-    //$sql = //POST sql logic goes here
-    break;
-  case 'DELETE':
-    //$id = $_GET['id'];
-    //$sql = //DELETE slq logic goes here
-    break;
-}
+  // create connection to mysql
+  $conn = new mysqli($localhost, $username, $password, $dbname);
+  mysqli_set_charset($conn ,'utf8');
 
-// run SQL statement
-$result = mysqli_query($conn,$sql);
+  //in case of connection errors
+  if($conn->connect_error) {
+      die("Error : " . $conn->connect_error);
+  }
 
-// die if SQL statement failed
-if (!$result) {
-  http_response_code(404);
-  die(mysqli_error($conn));
-}
+  $sql = "SELECT * FROM scoreTest"; //SQL Querry
 
-// print results, insert id or affected row count
-if ($method == 'GET') {
+  $result = mysqli_query($conn,$sql);
 
-  $outp = $result->fetch_all(MYSQLI_ASSOC);
-  echo json_encode($outp);
+  //if there is no result from db -> 404 error
+  if (!$result) {
+    http_response_code(404);
+    die(mysqli_error($conn));
+  }
 
-} 
+  $outp = $result->fetch_all(MYSQLI_ASSOC); //fetch results from DB
 
-elseif ($method == 'POST') {
-  echo mysqli_insert_id($conn);
-} 
+  $conn->close(); //close connection to DB
 
-else {
-  echo mysqli_affected_rows($conn);
-}
-
-//Close mysqli database connection
-$conn->close();
+  return json_encode($outp);
+});
 
 ?>
