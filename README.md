@@ -26,6 +26,10 @@ From outside the CPA directory run:
 `php -S 127.0.0.1:8080 -t ./CPA/backend`
 You can verify it's working by going to 127.0.0.1:8080 in your browser.
 
+## Connect to AWS Webserver
+SSH to aws instance with the key in the directory using:
+`ssh -i "testPhpServer.pem" ubuntu@ec2-34-222-160-131.us-west-2.compute.amazonaws.com`
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
