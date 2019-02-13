@@ -28,7 +28,8 @@ export class MapComponent implements OnInit {
     let green;
     let blue;
     let red;
-    let floor;
+    let map;
+    let buildingTexture;
     let orange;
     let yellow;
     let nethkin;
@@ -83,11 +84,15 @@ export class MapComponent implements OnInit {
       green = p.loadImage('../../assets/Map/green.jpg');
       blue = p.loadImage('../../assets/Map/blue.png');
       red = p.loadImage('../../assets/Map/red.png');
-      floor = p.loadImage('../../assets/Map/floor.png');
       orange = p.loadImage('../../assets/Map/orange.png');
       yellow = p.loadImage('../../assets/Map/yellow.png');
       
-      floor = p.loadImage('../../assets/Map/map.png');
+      //map = p.loadImage('../../assets/Map/map.png');
+      map = p.createVideo(['../../assets/Map/mapvid.mp4']);
+      map.elt.muted = true;
+      map.loop();
+      map.hide();
+      buildingTexture = p.loadImage('../../assets/Map/buildingtexture.png');
       nethkin = p.loadModel('../../assets/Map/nethkin.obj')
       tolliver = p.loadModel('../../assets/Map/tolliver.obj')
       wyly = p.loadModel('../../assets/Map/wyly.obj')
@@ -241,6 +246,7 @@ export class MapComponent implements OnInit {
     };
 
     p.draw = () => {
+
       // Draw background color
       // Josh: Changed background color to fluctuate between our color scheme
       var r = 242 - Math.abs(242 * p.cos(angle));
@@ -258,7 +264,7 @@ export class MapComponent implements OnInit {
       p.noStroke();
 
       // Draw ground
-      p.texture(floor);
+      p.texture(map);
       p.box(1152, 1152, 2);
 
       // Gabrielle: Wyly ------
@@ -476,9 +482,10 @@ export class MapComponent implements OnInit {
       p.translate(-130, 40, 23);
       p.rotateX(-90 * Math.PI/180); // Fixes the 90 degree flip problem from Blender
       p.rotateY(163 * Math.PI/180);
-      p.ambientMaterial(0);
+      //p.ambientMaterial(0);
       p.scale(15);
-      p.stroke(255, 255, 255); // Colors lines of shape
+      //p.stroke(255, 255, 255); // Colors lines of shape
+      p.texture(buildingTexture);
       p.model(tolliver);
       p.rotateX(180 * Math.PI / 180);
       p.rotateZ(180 * Math.PI / 180);
