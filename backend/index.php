@@ -61,4 +61,37 @@ $router->get('/scores', function($request){
   return json_encode($outp);
 });
 
+//POST method to add a new user to database
+$router->post('/addUser',function($request){
+
+  global $localhost, $username, $password, $dbname; //gets db creds for this scope
+
+  // create connection to mysql
+  $conn = new mysqli($localhost, $username, $password, $dbname);
+  mysqli_set_charset($conn ,'utf8');
+
+  //in case of connection errors
+  if($conn->connect_error) {
+      die("Error : " . $conn->connect_error);
+  }
+
+  $jsonData = json_encode($request->getBody());
+  $usertData = json_decode($jsonData,true); //creates Map to use for SQL
+  
+  $userName = $usertData['name'];
+  $score = 0;
+  
+  $sql = "INSERT INTO scoreTest (id,name,score) VALUES (null,'$userName',$score)";
+
+  $result = mysqli_query($conn,$sql);
+
+  //if there is an issue with POSTing
+  if (!$result) {
+    http_response_code(404);
+    die(mysqli_error($conn));
+  }
+
+  return json_encode($request->getBody());
+});
+
 ?>
