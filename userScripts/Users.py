@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import crypt
+import requests #must instal dependency
 
 '''
 Takes a username and password, and creates a new user if it does not exist
@@ -26,8 +27,24 @@ Deletes a user if it exists
 def deleteUser(userName):
     os.system("userdel "+userName)
 
+def addUserToDB(userName):
+
+    playerInfo = {'name' : userName}
+    try:
+        r = requests.post('http://127.0.0.1:8080/addUser',playerInfo)
+        print(r.text)
+    except:
+        print("Unable to connect to API")
+
+
 #quickTests
+
+#create/delete user
+'''
 createUser("testUser","password")
 print("USER CREATED")
 deleteUser("testUser")
 print("USER DELETED")
+'''
+#post to DB
+#addUserToDB('tom')
