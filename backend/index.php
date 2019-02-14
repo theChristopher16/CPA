@@ -92,7 +92,7 @@ $router->get('/userInfo', function($request){
   return json_encode($outp);
 });
 
-//Gets the Users' info from Database
+//Gets the achievements from Database
 $router->get('/achievements', function($request){
 
   global $localhost, $username, $password, $dbname; //gets db creds for this scope
