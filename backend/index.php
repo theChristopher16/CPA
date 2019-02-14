@@ -92,6 +92,37 @@ $router->get('/userInfo', function($request){
   return json_encode($outp);
 });
 
+//Gets the Users' info from Database
+$router->get('/achievements', function($request){
+
+  global $localhost, $username, $password, $dbname; //gets db creds for this scope
+
+  // create connection to mysql
+  $conn = new mysqli($localhost, $username, $password, $dbname);
+  mysqli_set_charset($conn ,'utf8');
+
+  //in case of connection errors
+  if($conn->connect_error) {
+      die("Error : " . $conn->connect_error);
+  }
+
+  $sql = "select * from Achievements"; //SQL Querry
+
+  $result = mysqli_query($conn,$sql);
+
+  //if there is no result from db -> 404 error
+  if (!$result) {
+    http_response_code(404);
+    die(mysqli_error($conn));
+  }
+
+  $outp = $result->fetch_all(MYSQLI_ASSOC); //fetch results from DB
+
+  $conn->close(); //close connection to DB
+
+  return json_encode($outp);
+});
+
 //POST method to add a new user to database
 $router->post('/addUser',function($request){
 
