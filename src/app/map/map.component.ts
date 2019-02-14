@@ -103,7 +103,7 @@ export class MapComponent implements OnInit {
       bandBuilding = p.loadModel('../../assets/Map/bandBuilding.obj');
       powerPlant = p.loadModel('../../assets/Map/powerPlant.obj');
       hale = p.loadModel('../../assets/Map/hale.obj');
-      university = p.loadModel('../../assets/Map/cobb.obj');
+      university = p.loadModel('../../assets/Map/university.obj');
       ifm = p.loadModel('../../assets/Map/ifm.obj');
       howard = p.loadModel('../../assets/Map/howard.obj');
 
