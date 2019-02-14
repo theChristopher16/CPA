@@ -140,16 +140,17 @@ $router->post('/addUser',function($request){
   $jsonData = json_encode($request->getBody());
   $usertData = json_decode($jsonData,true); //creates Map to use for SQL
   
-  $userName = $usertData['name'];
+  $userName = $usertData['Name'];
   $score = 0;
   
-  $sql = "INSERT INTO scoreTest (id,name,score) VALUES (null,'$userName',$score)";
+  $sql = "INSERT INTO usersTest ( Id, Name, Score, Online, Achievements, LastLocation)
+    VALUES ( null, '$userName', $score, TRUE, '1','Wyly')";
 
   $result = mysqli_query($conn,$sql);
 
   //if there is an issue with POSTing
   if (!$result) {
-    http_response_code(404);
+    http_response_code(500);
     die(mysqli_error($conn));
   }
 
