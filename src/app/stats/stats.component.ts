@@ -3,6 +3,8 @@ import { ChartsModule } from 'ng2-charts';
 import { Component, OnInit } from '@angular/core';
 import { ScoresService } from '../scores.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { TabScrollerService } from '../tabscroller.service';
 
 @Component({
   selector: 'app-stats',
@@ -18,13 +20,26 @@ export class StatsComponent implements OnInit {
   nameList=[];
   scoreList=[];
   tupleArray = [];
- 
+
+  // auto scrolling variable
+  TabScroller$:boolean
 
   scores$: object;
 
-  constructor(private score: ScoresService) { }
+  autoTabBool: boolean;
+
+  constructor(private score: ScoresService,
+    private router: Router, private tabscroller: TabScrollerService) { }
 
   ngOnInit() {
+
+    // auto scrolling functionality
+    this.TabScroller$ = this.tabscroller.getScrollBool();
+    setTimeout(() => {
+      if (this.TabScroller$) {
+        this.router.navigate(['info']);
+      }
+    }, 45000); // 2s
 
     //Subscribe to service to get scores from database
     this.score.getScores().subscribe(

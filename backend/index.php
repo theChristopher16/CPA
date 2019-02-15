@@ -44,7 +44,7 @@ $router->get('/scores', function($request){
       die("Error : " . $conn->connect_error);
   }
 
-  $sql = "SELECT * FROM scoreTest"; //SQL Querry
+  $sql = "SELECT Id,Name,Score FROM usersTest"; //SQL Querry
 
   $result = mysqli_query($conn,$sql);
 
@@ -59,6 +59,102 @@ $router->get('/scores', function($request){
   $conn->close(); //close connection to DB
 
   return json_encode($outp);
+});
+
+//Gets the Users' info from Database
+$router->get('/userInfo', function($request){
+
+  global $localhost, $username, $password, $dbname; //gets db creds for this scope
+
+  // create connection to mysql
+  $conn = new mysqli($localhost, $username, $password, $dbname);
+  mysqli_set_charset($conn ,'utf8');
+
+  //in case of connection errors
+  if($conn->connect_error) {
+      die("Error : " . $conn->connect_error);
+  }
+
+  $sql = "SELECT * FROM usersTest"; //SQL Querry
+
+  $result = mysqli_query($conn,$sql);
+
+  //if there is no result from db -> 404 error
+  if (!$result) {
+    http_response_code(404);
+    die(mysqli_error($conn));
+  }
+
+  $outp = $result->fetch_all(MYSQLI_ASSOC); //fetch results from DB
+
+  $conn->close(); //close connection to DB
+
+  return json_encode($outp);
+});
+
+//Gets the achievements from Database
+$router->get('/achievements', function($request){
+
+  global $localhost, $username, $password, $dbname; //gets db creds for this scope
+
+  // create connection to mysql
+  $conn = new mysqli($localhost, $username, $password, $dbname);
+  mysqli_set_charset($conn ,'utf8');
+
+  //in case of connection errors
+  if($conn->connect_error) {
+      die("Error : " . $conn->connect_error);
+  }
+
+  $sql = "select * from Achievements"; //SQL Querry
+
+  $result = mysqli_query($conn,$sql);
+
+  //if there is no result from db -> 404 error
+  if (!$result) {
+    http_response_code(404);
+    die(mysqli_error($conn));
+  }
+
+  $outp = $result->fetch_all(MYSQLI_ASSOC); //fetch results from DB
+
+  $conn->close(); //close connection to DB
+
+  return json_encode($outp);
+});
+
+//POST method to add a new user to database
+$router->post('/addUser',function($request){
+
+  global $localhost, $username, $password, $dbname; //gets db creds for this scope
+
+  // create connection to mysql
+  $conn = new mysqli($localhost, $username, $password, $dbname);
+  mysqli_set_charset($conn ,'utf8');
+
+  //in case of connection errors
+  if($conn->connect_error) {
+      die("Error : " . $conn->connect_error);
+  }
+
+  $jsonData = json_encode($request->getBody());
+  $usertData = json_decode($jsonData,true); //creates Map to use for SQL
+  
+  $userName = $usertData['Name'];
+  $score = 0;
+  
+  $sql = "INSERT INTO usersTest ( Id, Name, Score, Online, Achievements, LastLocation)
+    VALUES ( null, '$userName', $score, TRUE, '1','Wyly')";
+
+  $result = mysqli_query($conn,$sql);
+
+  //if there is an issue with POSTing
+  if (!$result) {
+    http_response_code(500);
+    die(mysqli_error($conn));
+  }
+
+  return json_encode($request->getBody());
 });
 
 ?>

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as p5 from '../../../node_modules/p5/';
+import { Router } from '@angular/router';
+import { TabScrollerService } from '../tabscroller.service';
 
 @Component({
   selector: 'app-map',
@@ -7,15 +9,27 @@ import * as p5 from '../../../node_modules/p5/';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
-
+  @Input() autoTabBool: boolean;
   private p5;
 
+  TabScroller$: boolean;
+
   constructor(
+    private router: Router,
+    private tabscroller: TabScrollerService
   //  private p5: p5
 ) { }
 
   ngOnInit() {
+    this.TabScroller$ = this.tabscroller.getScrollBool();
+
     this.createCanvas();
+
+    setTimeout(() => {
+      if (this.TabScroller$) {
+        this.router.navigate(['users']);
+      }      
+    }, 45000); // 2s
   }
 
   private createCanvas(){
@@ -105,7 +119,7 @@ export class MapComponent implements OnInit {
       bandBuilding = p.loadModel('../../assets/Map/bandBuilding.obj');
       powerPlant = p.loadModel('../../assets/Map/powerPlant.obj');
       hale = p.loadModel('../../assets/Map/hale.obj');
-      university = p.loadModel('../../assets/Map/cobb.obj');
+      university = p.loadModel('../../assets/Map/university.obj');
       ifm = p.loadModel('../../assets/Map/ifm.obj');
       howard = p.loadModel('../../assets/Map/howard.obj');
 
