@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TabScrollerService } from '../tabscroller.service';
 
 @Component({
   selector: 'app-info',
@@ -8,8 +10,10 @@ import { Component, OnInit } from '@angular/core';
 export class InfoComponent implements OnInit {
   items: Array<any> = [];
 
+  // auto scrolling variables
+  TabScroller$: boolean
 
-  constructor() {
+  constructor(private router: Router, private tabscroller: TabScrollerService) {
   this.items = [
     { name: '../../assets/Info/Images/img1.png' },
     { name: '../../assets/Info/Images/img3.png' },
@@ -20,8 +24,15 @@ export class InfoComponent implements OnInit {
     { name: '../../assets/Info/Images/img1.png' },
     { name: '../../assets/Info/Images/img3.png' }
   ];
-}
+  }
 
-ngOnInit() {
+  ngOnInit() {
+    // auto scrolling functionality
+    this.TabScroller$ = this.tabscroller.getScrollBool();
+    setTimeout(() => {
+      if (this.TabScroller$) {
+        this.router.navigate(['']);
+      }
+    }, 45000); // 45s
 }
 }
