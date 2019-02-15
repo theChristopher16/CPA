@@ -86,12 +86,7 @@ export class MapComponent implements OnInit {
       red = p.loadImage('../../assets/Map/red.png');
       orange = p.loadImage('../../assets/Map/orange.png');
       yellow = p.loadImage('../../assets/Map/yellow.png');
-      
-      //map = p.loadImage('../../assets/Map/map.png');
-      map = p.createVideo(['../../assets/Map/mapvid.mp4']);
-      map.elt.muted = true;
-      map.loop();
-      map.hide();
+      map = p.loadImage('../../assets/Map/map.png');
       buildingTexture = p.loadImage('../../assets/Map/buildingtexture.png');
       nethkin = p.loadModel('../../assets/Map/nethkin.obj')
       tolliver = p.loadModel('../../assets/Map/tolliver.obj')
