@@ -15,6 +15,7 @@ nav {
     #00FFFF
     );
     height: 100%;
+
     ul {
       list-style-type: none;
       padding: 0;
@@ -30,4 +31,13 @@ nav {
         }
       }
     }
+  }
+  
+  img {
+    width: 325%;
+    height: 15%;
+    position: relative;
+    padding: 0px;
+    top: -150px;
+    left: 1763px;
   }
