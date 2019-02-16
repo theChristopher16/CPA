@@ -25,12 +25,11 @@ export class MapComponent implements OnInit {
   private sketch(p: any){
 
     let angle = 0;
-    let green;
-    let blue;
-    let red;
+
+    let buildingOn;
+    let buildingOff;
     let floor;
-    let orange;
-    let yellow;
+
     let nethkin;
     let nethkinT;
     let tolliver;
@@ -80,14 +79,13 @@ export class MapComponent implements OnInit {
     let lastLoop = performance.now();
 
    p.preload = () => {
-      green = p.loadImage('../../assets/Map/green.jpg');
-      blue = p.loadImage('../../assets/Map/blue.png');
-      red = p.loadImage('../../assets/Map/red.png');
-      floor = p.loadImage('../../assets/Map/floor.png');
-      orange = p.loadImage('../../assets/Map/orange.png');
-      yellow = p.loadImage('../../assets/Map/yellow.png');
       
-      floor = p.loadImage('../../assets/Map/map.png');
+      // Building and floor textures
+      buildingOff = p.loadImage('../../assets/Map/buildingoff.png');
+      buildingOn = p.loadImage('../../assets/Map/buildingon.png');
+      floor = p.loadImage('../../assets/Map/mapglow.png');
+
+      // Building models
       nethkin = p.loadModel('../../assets/Map/nethkin.obj')
       tolliver = p.loadModel('../../assets/Map/tolliver.obj')
       wyly = p.loadModel('../../assets/Map/wyly.obj')
@@ -96,8 +94,8 @@ export class MapComponent implements OnInit {
       gtm = p.loadModel('../../assets/Map/gtm.obj')
       cobb = p.loadModel('../../assets/Map/cobb.obj')
       keeny = p.loadModel('../../assets/Map/keeny.obj')
-      woodard = p.loadModel('../../assets/Map/woodard3.obj')
-      bogard = p.loadModel('../../assets/Map/bogard2.obj')
+      woodard = p.loadModel('../../assets/Map/woodard.obj')
+      bogard = p.loadModel('../../assets/Map/bogard.obj')
       carsonTaylor = p.loadModel('../../assets/Map/carsonTaylor.obj');
       engineeringAnnex = p.loadModel('../../assets/Map/engineeringAnnex.obj');
       bandBuilding = p.loadModel('../../assets/Map/bandBuilding.obj');
@@ -107,7 +105,7 @@ export class MapComponent implements OnInit {
       ifm = p.loadModel('../../assets/Map/ifm.obj');
       howard = p.loadModel('../../assets/Map/howard.obj');
 
-     // Josh: Initialize 3D text labels here
+      // Josh: Initialize 3D text labels here
       nethkinT = p.createGraphics(90, 30); // Nethken text
       nethkinT.fill(255); 
       nethkinT.background(30, 30, 30);
@@ -266,7 +264,6 @@ export class MapComponent implements OnInit {
       p.translate(125, -290, 0);
       p.rotateX(90 * Math.PI/180); // Rotating building to appropriate place
       p.rotateY(15 * Math.PI/180);
-      p.ambientMaterial(0);
       p.scale(18);
 
       // Maddi: Wyly ping stuff
@@ -294,6 +291,16 @@ export class MapComponent implements OnInit {
       };
 
       ping2.send();
+
+      if(didPing){
+        p.stroke(1, 255, 1)
+        p.texture(buildingOn);
+      }
+      else{
+        p.stroke(255, 255, 255);
+        p.texture(buildingOff);
+      }
+
       p.model(wyly);
       // Text
       p.rotateX(180 * Math. PI / 180); // Gets the text facing the camera
@@ -308,16 +315,7 @@ export class MapComponent implements OnInit {
       p.translate(-50, -325, 0);
       p.rotateX(90 * Math.PI / 180); // Rotating the building to appropriate place
       p.rotateY(-174 * Math.PI / 180);
-      p.ambientMaterial(0);
       p.scale(25);
-
-      // Maddi: GTM ping stuff
-      if(didPing){
-        p.stroke(1, 255, 1)
-      }
-      else{
-        p.stroke(255, 255, 255); // Coloring the building
-      }
       
       GTMurl = "http://192.168.1.7:80/"
       ping = new XMLHttpRequest();
@@ -337,6 +335,16 @@ export class MapComponent implements OnInit {
 
       ping.send();
 
+      // Maddi: GTM ping stuff
+      if(didPing){
+        p.stroke(1, 255, 1)
+        p.texture(buildingOn);
+      }
+      else{
+        p.stroke(255, 255, 255);
+        p.texture(buildingOff);
+      }
+
       p.model(gtm);
       // Text
       p.rotateX(180 * Math.PI / 180); // Gets the text facing the screen
@@ -352,9 +360,9 @@ export class MapComponent implements OnInit {
       p.translate(535, -200, 0);
       p.rotateX(90 * Math.PI / 180); // Rotating the building to appropriate place
       p.rotateY(270 * Math.PI / 180);
-      p.ambientMaterial(0);
       p.scale(26);
       p.stroke(255, 255, 255); // Coloring the building
+      p.texture(buildingOn);
       p.model(cobb);
       // Text
       p.rotateX(180 * Math.PI / 180);
@@ -367,10 +375,10 @@ export class MapComponent implements OnInit {
 
       // Gabrielle: South Hall ------
       p.push();
-      p.translate(-500, 200, 23); 
-      p.ambientMaterial(0);
+      p.translate(-500, 200, 23);
       p.scale(13);
       p.stroke(255, 255, 255); // Coloring the building
+      p.texture(buildingOn);
       p.model(southHall);
       // Text
       p.rotateX(180 * Math. PI / 180);
@@ -386,9 +394,9 @@ export class MapComponent implements OnInit {
       p.translate(-20, -75, 0);
       p.rotateX(90 * Math.PI / 180); // Rotating the building to appropriate place
       p.rotateY(195 * Math.PI / 180); 
-      p.ambientMaterial(0);
       p.scale(14);
       p.stroke(255, 255, 255); // Coloring the building
+      p.texture(buildingOn);
       p.model(studentCenter);
       // Text
       p.rotateX(180 * Math. PI / 180);
@@ -404,9 +412,9 @@ export class MapComponent implements OnInit {
       p.translate(265, -150, 0);
       p.rotateX(90 * Math.PI / 180); // Rotating the building to appropriate place
       p.rotateY(90 * Math.PI / 180);
-      p.ambientMaterial(0);
       p.scale(13);
       p.stroke(255, 255, 255); // Coloring the building
+      p.texture(buildingOn);
       p.model(keeny);
       // Text
       p.rotateX(180 * Math.PI / 180);
@@ -422,9 +430,9 @@ export class MapComponent implements OnInit {
       p.translate(-325, -100, 20);
       p.rotateX(270 * Math.PI / 180); // Rotating the building to appropriate place
       p.rotateY(90 * Math.PI / 180);
-      p.ambientMaterial(0);
       p.scale(13);
       p.stroke(255, 255, 255); // Coloring the building
+      p.texture(buildingOn);
       p.model(woodard);
       // Text
       p.rotateX(0 * Math.PI / 180);
@@ -441,9 +449,9 @@ export class MapComponent implements OnInit {
       p.rotateX(270 * Math.PI / 180); // Rotating the building to appropriate place
       p.rotateY(270 * Math.PI / 180);
       p.rotateZ(0 * Math.PI / 180);
-      p.ambientMaterial(0);
       p.scale(18);
       p.stroke(255, 255, 255); // Coloring the building
+      p.texture(buildingOn);
       p.model(bogard);
       // Text
       p.rotateX(0 * Math.PI / 180);
@@ -459,9 +467,9 @@ export class MapComponent implements OnInit {
       p.translate(510, 130, 0);
       p.rotateX(90 * Math.PI/180); // Fixes the 90 degree flip problem from Blender
       p.rotateY(180 * Math.PI/180);
-      p.ambientMaterial(0);
       p.scale(14);
       p.stroke(255, 255, 255); // Colors lines of shape
+      p.texture(buildingOn);
       p.model(nethkin);
       p.rotateX(180 * Math. PI / 180);
       p.rotateY(180 * Math. PI / 180);
@@ -476,9 +484,9 @@ export class MapComponent implements OnInit {
       p.translate(-130, 40, 23);
       p.rotateX(-90 * Math.PI/180); // Fixes the 90 degree flip problem from Blender
       p.rotateY(163 * Math.PI/180);
-      p.ambientMaterial(0);
       p.scale(15);
-      p.stroke(255, 255, 255); // Colors lines of shape
+      p.texture(buildingOn);
+      //p.stroke(255, 255, 255); // Colors lines of shape
       p.model(tolliver);
       p.rotateX(180 * Math.PI / 180);
       p.rotateZ(180 * Math.PI / 180);
@@ -493,9 +501,9 @@ export class MapComponent implements OnInit {
       p.push();
       p.translate(315, 190, 23);
       p.rotateX(-90 * Math.PI/180); // Fixes the 90 degree flip problem from Blender
-      p.ambientMaterial(0);
       p.scale(16);
       p.stroke(255, 255, 255); // Colors lines of shape
+      p.texture(buildingOn);
       p.model(carsonTaylor);
       p.rotateX(180 * Math.PI / 180);
       p.rotateY(180 * Math.PI / 180);
@@ -510,9 +518,9 @@ export class MapComponent implements OnInit {
       p.push();
       p.translate(410, 150, 23);
       p.rotateX(-90 * Math.PI/180); // Fixes the 90 degree flip problem from Blender
-      p.ambientMaterial(0);
       p.scale(11);
       p.stroke(255, 255, 255); // Colors lines of shape
+      p.texture(buildingOn);
       p.model(engineeringAnnex);
       p.rotateX(180 * Math.PI / 180);
       p.rotateY(180 * Math.PI / 180);
@@ -527,9 +535,9 @@ export class MapComponent implements OnInit {
       p.push();
       p.translate(-320, 10, 23);
       p.rotateX(-90 * Math.PI/180); // Fixes the 90 degree flip problem from Blender
-      p.ambientMaterial(0);
       p.scale(11);
       p.stroke(255, 255, 255); // Colors lines of shape
+      p.texture(buildingOn);
       p.model(bandBuilding);
       p.rotateX(180 * Math.PI / 180);
       p.rotateY(180 * Math.PI / 180);
@@ -545,9 +553,9 @@ export class MapComponent implements OnInit {
       p.translate(-240, 170, 23);
       p.rotateX(-90 * Math.PI/180); // Fixes the 90 degree flip problem from Blender
       p.rotateY(90 * Math.PI/180);
-      p.ambientMaterial(0);
       p.scale(12);
       p.stroke(255, 255, 255); // Colors lines of shape
+      p.texture(buildingOff);
       p.model(powerPlant);
       p.rotateX(180 * Math.PI / 180);
       p.rotateY(180 * Math.PI / 180);
@@ -564,9 +572,9 @@ export class MapComponent implements OnInit {
       p.translate(-270, -290, 0);
       p.rotateX(-90 * Math.PI/180); // Fixes the 90 degree flip problem from Blender
       p.rotateZ(180 * Math.PI / 180);
-      p.ambientMaterial(0);
       p.scale(10);
       p.stroke(255, 255, 255); // Colors lines of shape
+      p.texture(buildingOn);
       p.model(hale);
       p.rotateX(180 * Math.PI / 180);
       p.rotateY(180 * Math.PI / 180);
@@ -581,9 +589,9 @@ export class MapComponent implements OnInit {
       p.translate(155, -40, 0);
       p.rotateX(-90 * Math.PI/180); // Fixes the 90 degree flip problem from Blender
       p.rotateZ(180 * Math.PI / 180);
-      p.ambientMaterial(0);
       p.scale(12);
       p.stroke(255, 255, 255); // Colors lines of shape
+      p.texture(buildingOn);
       p.model(howard);
       p.rotateX(180 * Math.PI / 180);
       p.rotateY(180 * Math.PI / 180);
@@ -598,9 +606,9 @@ export class MapComponent implements OnInit {
       p.translate(300, -290, 0);
       p.rotateX(90 * Math.PI / 180); // Rotating the building to appropriate place
       p.rotateY(195 * Math.PI / 180);
-      p.ambientMaterial(0);
       p.scale(23);
       p.stroke(255, 255, 255); // Coloring the building
+      p.texture(buildingOn);
       p.model(university);
       // Text
       p.rotateX(180 * Math.PI / 180);
@@ -616,9 +624,9 @@ export class MapComponent implements OnInit {
       p.translate(-380, 360, 30);
       p.rotateX(90 * Math.PI / 180); // Rotating the building to appropriate place
       p.rotateZ(-180 * Math.PI / 180); // Somehow made the model upside down lol
-      p.ambientMaterial(0);
       p.scale(23);
       p.stroke(255, 255, 255); // Coloring the building
+      p.texture(buildingOn);
       p.model(ifm);
       // Text
       //p.rotateX(90 * Math.PI / 180);
