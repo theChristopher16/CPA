@@ -24,6 +24,8 @@ export class MapComponent implements OnInit {
 
   private sketch(p: any){
 
+    let s;
+
     let angle = 0;
 
     let buildingOn;
@@ -80,30 +82,32 @@ export class MapComponent implements OnInit {
 
    p.preload = () => {
       
+      s = p.loadShader('../../assets/Map/Shaders/colorfrag.glsl', '../../assets/Map/Shaders/colorvert.glsl');
+
       // Building and floor textures
-      buildingOff = p.loadImage('../../assets/Map/buildingoff.png');
-      buildingOn = p.loadImage('../../assets/Map/buildingon.png');
-      floor = p.loadImage('../../assets/Map/mapglow.png');
+      buildingOff = p.loadImage('../../assets/Map/Textures/buildingoff.png');
+      buildingOn = p.loadImage('../../assets/Map/Textures/buildingon.png');
+      floor = p.loadImage('../../assets/Map/Textures/mapglow.png');
 
       // Building models
-      nethkin = p.loadModel('../../assets/Map/nethkin.obj')
-      tolliver = p.loadModel('../../assets/Map/tolliver.obj')
-      wyly = p.loadModel('../../assets/Map/wyly.obj')
-      southHall = p.loadModel('../../assets/Map/southHall.obj')
-      studentCenter = p.loadModel('../../assets/Map/studentCenter.obj')
-      gtm = p.loadModel('../../assets/Map/gtm.obj')
-      cobb = p.loadModel('../../assets/Map/cobb.obj')
-      keeny = p.loadModel('../../assets/Map/keeny.obj')
-      woodard = p.loadModel('../../assets/Map/woodard.obj')
-      bogard = p.loadModel('../../assets/Map/bogard.obj')
-      carsonTaylor = p.loadModel('../../assets/Map/carsonTaylor.obj');
-      engineeringAnnex = p.loadModel('../../assets/Map/engineeringAnnex.obj');
-      bandBuilding = p.loadModel('../../assets/Map/bandBuilding.obj');
-      powerPlant = p.loadModel('../../assets/Map/powerPlant.obj');
-      hale = p.loadModel('../../assets/Map/hale.obj');
-      university = p.loadModel('../../assets/Map/cobb.obj');
-      ifm = p.loadModel('../../assets/Map/ifm.obj');
-      howard = p.loadModel('../../assets/Map/howard.obj');
+      nethkin = p.loadModel('../../assets/Map/Models/nethkin.obj')
+      tolliver = p.loadModel('../../assets/Map/Models/tolliver.obj')
+      wyly = p.loadModel('../../assets/Map/Models/wyly.obj')
+      southHall = p.loadModel('../../assets/Map/Models/southHall.obj')
+      studentCenter = p.loadModel('../../assets/Map/Models/studentCenter.obj')
+      gtm = p.loadModel('../../assets/Map/Models/gtm.obj')
+      cobb = p.loadModel('../../assets/Map/Models/cobb.obj')
+      keeny = p.loadModel('../../assets/Map/Models/keeny.obj')
+      woodard = p.loadModel('../../assets/Map/Models/woodard.obj')
+      bogard = p.loadModel('../../assets/Map/Models/bogard.obj')
+      carsonTaylor = p.loadModel('../../assets/Map/Models/carsonTaylor.obj');
+      engineeringAnnex = p.loadModel('../../assets/Map/Models/engineeringAnnex.obj');
+      bandBuilding = p.loadModel('../../assets/Map/Models/bandBuilding.obj');
+      powerPlant = p.loadModel('../../assets/Map/Models/powerPlant.obj');
+      hale = p.loadModel('../../assets/Map/Models/hale.obj');
+      university = p.loadModel('../../assets/Map/Models/cobb.obj');
+      ifm = p.loadModel('../../assets/Map/Models/ifm.obj');
+      howard = p.loadModel('../../assets/Map/Models/howard.obj');
 
       // Josh: Initialize 3D text labels here
       nethkinT = p.createGraphics(90, 30); // Nethken text
@@ -244,7 +248,6 @@ export class MapComponent implements OnInit {
       var r = 242 - Math.abs(242 * p.cos(angle));
       var g = 13 + Math.abs(242 * p.cos(angle));
       var b = 255;
-      //p.background(134 * p.cos(angle), 218 * p.cos(angle), 112.5 * p.cos(angle));
       p.background(r, g, b);
 
       // Move camera
@@ -256,9 +259,10 @@ export class MapComponent implements OnInit {
       p.noStroke();
 
       // Draw ground
+      //p.shader(s);
       p.texture(floor);
       p.box(1152, 1152, 2);
-
+      //p.resetShader();
       // Gabrielle: Wyly ------
       p.push();
       p.translate(125, -290, 0);
@@ -592,6 +596,7 @@ export class MapComponent implements OnInit {
       p.scale(12);
       p.stroke(255, 255, 255); // Colors lines of shape
       p.texture(buildingOn);
+      p.stroke(255, 255, 255); // Colors lines of shape
       p.model(howard);
       p.rotateX(180 * Math.PI / 180);
       p.rotateY(180 * Math.PI / 180);
