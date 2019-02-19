@@ -7,9 +7,10 @@
     "\\src\\app",
     "\\src\\app\\info",
     "\\src\\app\\map",
-    "\\src\\assets",
-    "\\src\\assets\\Map"
+    "\\src\\app\\sidebar",
+    "\\src\\app\\stats",
+    "\\src\\app\\users"
   ],
-  "SelectedNode": "\\src\\assets\\Map",
+  "SelectedNode": "\\src\\app\\app.component.ts",
   "PreviewInSolutionExplorer": false
 }
