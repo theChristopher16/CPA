@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import * as p5 from '../../../node_modules/p5/';
 import { Router } from '@angular/router';
 import { TabScrollerService } from '../tabscroller.service';
+import { HamburgerMenuComponent } from '../hamburger-menu/hamburger-menu.component';
 
 @Component({
   selector: 'app-map',

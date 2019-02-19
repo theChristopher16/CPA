@@ -10,6 +10,13 @@ import { StatsComponent } from './stats/stats.component';
 import { InfoComponent } from './info/info.component';
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 import { HttpClientModule } from '@angular/common/http';
+import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { BottomSheetMenu } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +25,23 @@ import { HttpClientModule } from '@angular/common/http';
     MapComponent,
     UsersComponent,
     StatsComponent,
-    InfoComponent
+    InfoComponent,
+    HamburgerMenuComponent,
+    BottomSheetMenu,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     Ng2CarouselamosModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatBottomSheetModule,
+    MatButtonModule,
+    MatSlideToggleModule
+  ],
+  entryComponents: [
+    BottomSheetMenu
   ],
   providers: [],
   bootstrap: [AppComponent]
