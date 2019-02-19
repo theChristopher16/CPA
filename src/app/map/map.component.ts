@@ -77,7 +77,7 @@ export class MapComponent implements OnInit {
         new Building("Keeny", 265, -150, 0, 90, 90, 0, 13, p.loadModel('../../assets/Map/Models/keeny.obj'), "http://192.168.1.9:80/"),
         new Building("Nethkin", 510, 130, 0, 90, 180, 0, 14, p.loadModel('../../assets/Map/Models/nethkin.obj'), "http://192.168.1.9:80/"),
         new Building("Power Plant", -240, 170, 23, -90, 90, 0, 12, p.loadModel('../../assets/Map/Models/powerPlant.obj'), "http://192.168.1.9:80/"),
-        new Building("South Hall", -500, 200, 23, 0, 0, 0, 13, p.loadModel('../../assets/Map/Models/southHall.obj'), "http://192.168.1.9:80/"),
+        new Building("South Hall", -500, 200, 37, 270, 0, 0, 11, p.loadModel('../../assets/Map/Models/southHallWTexture.obj'), "http://192.168.1.9:80/"),
         new Building("Student Center", -20, -75, 0, 90, 195, 0, 14, p.loadModel('../../assets/Map/Models/studentCenter.obj'), "http://192.168.1.9:80/"),
         new Building("Tolliver", -130, 40, 23, -90, 163, 0, 15, p.loadModel('../../assets/Map/Models/tolliver.obj'), "http://192.168.1.9:80/"),
         new Building("University Hall", 300, -290, 0, 90, 195, 0, 23, p.loadModel('../../assets/Map/Models/cobb.obj'), "http://192.168.1.9:80/"),
