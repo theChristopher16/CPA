@@ -67,7 +67,7 @@ export class MapComponent implements OnInit {
         // Building parameters are: NAME, X, Y, Z, rotX, rotY, rotZ, SCALE, MODEL, URL
         new Building("Wyly", 125, -290, 0, 90, 15, 0, 18, p.loadModel('../../assets/Map/Models/wyly.obj'), "http://192.168.1.2:80/"),
         new Building("Nethkin", 510, 130, 0, 90, 180, 0, 14, p.loadModel('../../assets/Map/Models/nethkin.obj'), "http://192.168.1.3:80/"),
-        new Building("Bogard", 380, -20, 20, 270, 270, 0, 18, p.loadModel('../../assets/Map/Models/bogard.obj'), "http://192.168.1.4:80/"),
+        new Building("Bogard", 380, -20, 30, 270, 270, 0, 18, p.loadModel('../../assets/Map/Models/bogard.obj'), "http://192.168.1.4:80/"),
         new Building("Keeny", 265, -150, 0, 90, 90, 0, 13, p.loadModel('../../assets/Map/Models/keeny.obj'), "http://192.168.1.5:80/"),
         new Building("Carson Taylor", 315, 190, 23, -90, 0, 0, 16, p.loadModel('../../assets/Map/Models/carsonTaylor.obj'), "http://192.168.1.6:80/"),
         new Building("Hale", -270, -290, 0, -90, 0, 180, 10, p.loadModel('../../assets/Map/Models/hale.obj'), "http://192.168.1.7:80/"),
@@ -80,7 +80,7 @@ export class MapComponent implements OnInit {
         new Building("COBB", 535, -200, 0, 90, 270, 0, 26, p.loadModel('../../assets/Map/Models/cobb.obj'), "http://192.168.1.14:80/"),
         new Building("Band Building", -320, 10, 23, -90, 0, 0, 11, p.loadModel('../../assets/Map/Models/bandBuilding.obj'), "http://192.168.1.15:80/"),
         new Building("IFM", -430, 320, 0, -90, 0, -180, 13, p.loadModel('../../assets/Map/Models/ifm.obj'), "http://192.168.1.16:80/"),
-        new Building("South Hall", -500, 200, 23, 0, 0, 0, 13, p.loadModel('../../assets/Map/Models/southHall.obj'), "http://192.168.1.17:80/"),
+        new Building("South Hall", -500, 200, 39, 270, 0, 0, 12, p.loadModel('../../assets/Map/Models/southHall.obj'), "http://192.168.1.17:80/"),
         new Building("Power Plant", -240, 170, 23, -90, 90, 0, 12, p.loadModel('../../assets/Map/Models/powerPlant.obj'), "http://192.168.1.18:80/"),
         new Building("University Hall", 300, -290, 0, 90, 195, 0, 23, p.loadModel('../../assets/Map/Models/cobb.obj'), "http://192.168.1.19:80/"), // Same model as COBB
       ]; 
