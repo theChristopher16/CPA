@@ -14,7 +14,8 @@ nav {
     #19E6FF,
     #00FFFF
     );
-    height: 100%;
+    height: 969px;
+
     ul {
       list-style-type: none;
       padding: 0;
@@ -34,4 +35,13 @@ nav {
       padding: 20px;
       color: #0DF2FF;
     }
+  }
+  
+  img {
+    width: 18%;
+    height: 18%;
+    padding: 0px;
+    bottom: 0%;
+    right: 0%;
+    position: fixed;
   }
