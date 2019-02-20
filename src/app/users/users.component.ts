@@ -18,10 +18,8 @@ export class UsersComponent implements OnInit, OnDestroy {
   Achievements$: object;
   TabScroller$: boolean;
 
-  /*sortedScore: object[] = [];
-  onlineUsers: object[] = [];
-  offlineUsers: object[] = [];
-  finalSort: object[] = [];*/
+  onlineSorted: object;
+  offlineSorted: object;
 
   constructor(private user: UserInfoService, private achievement: AchievementsService,
   private router: Router, private tabscroller: TabScrollerService) { }
@@ -93,9 +91,6 @@ export class UsersComponent implements OnInit, OnDestroy {
           alreadySorted.push(biggest);
         }
 
-        console.log("SORTED BY SCORE");
-        console.log(sortedScore);
-
         // Sort the users by online status
         let onlineSort = [];
         let offlineSort = [];
@@ -108,11 +103,8 @@ export class UsersComponent implements OnInit, OnDestroy {
           }
         }
 
-        console.log("Sorted Online Users:");
-        console.log(onlineSort);
-
-        console.log("Sorted Offline Users:");
-        console.log(offlineSort);
+        this.onlineSorted = onlineSort;
+        this.offlineSorted = offlineSort;
       }
     );
 
