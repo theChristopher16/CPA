@@ -17,6 +17,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BottomSheetMenu } from './sidebar/sidebar.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { BottomSheetMenu } from './sidebar/sidebar.component';
     MatCardModule,
     MatBottomSheetModule,
     MatButtonModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    FormsModule
   ],
   entryComponents: [
     BottomSheetMenu

@@ -2,13 +2,14 @@ import { Component, OnInit, Input } from '@angular/core';
 import * as p5 from '../../../node_modules/p5/';
 import { Router } from '@angular/router';
 import { TabScrollerService } from '../tabscroller.service';
-import { HamburgerMenuComponent } from '../hamburger-menu/hamburger-menu.component';
+import { NavigateRoutes } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
+
 export class MapComponent implements OnInit {
   @Input() autoTabBool: boolean;
   private p5;
@@ -26,8 +27,10 @@ export class MapComponent implements OnInit {
 
     this.createCanvas();
 
+    NavigateRoutes.getInstance().setCurrentRoute(''); //used to tell sidebar the current route
+
     setTimeout(() => {
-      if (this.TabScroller$) {
+      if (this.tabscroller.getScrollBool()) {
         this.router.navigate(['users']);
       }      
     }, 45000); // 2s

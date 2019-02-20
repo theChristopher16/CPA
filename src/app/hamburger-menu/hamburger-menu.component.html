@@ -1,4 +1,7 @@
 <mat-card>
-  AutoScroll:
-  <mat-slide-toggle>On/Off</mat-slide-toggle>
+  AutoScroll
+  <div class="floatRight">
+    <mat-slide-toggle (click)="toggle()" ngDefaultControl [(ngModel)]="device">
+    </mat-slide-toggle>
+  </div>
 </mat-card>

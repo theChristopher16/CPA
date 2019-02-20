@@ -5,6 +5,7 @@ import { ScoresService } from '../scores.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { TabScrollerService } from '../tabscroller.service';
+import { NavigateRoutes } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-stats',
@@ -22,7 +23,7 @@ export class StatsComponent implements OnInit {
   tupleArray = [];
 
   // auto scrolling variable
-  TabScroller$:boolean
+  TabScroller$:boolean;
 
   scores$: object;
 
@@ -33,10 +34,12 @@ export class StatsComponent implements OnInit {
 
   ngOnInit() {
 
+    NavigateRoutes.getInstance().setCurrentRoute('stats'); //used to tell sidebar the current route
+
     // auto scrolling functionality
     this.TabScroller$ = this.tabscroller.getScrollBool();
     setTimeout(() => {
-      if (this.TabScroller$) {
+      if (this.tabscroller.getScrollBool()) {
         this.router.navigate(['info']);
       }
     }, 45000); // 2s

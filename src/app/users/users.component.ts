@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AchievementsService } from '../achievements.service';
 import { TabScrollerService } from '../tabscroller.service';
 import { Router } from '@angular/router';
+import { NavigateRoutes } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-users',
@@ -28,11 +29,12 @@ export class UsersComponent implements OnInit, OnDestroy {
         console.log(this.TabScroller$);
       }
     );*/
-    this.TabScroller$ = this.tabscroller.getScrollBool();
+    NavigateRoutes.getInstance().setCurrentRoute('users'); //used to tell sidebar the current route
 
+    this.TabScroller$ = this.tabscroller.getScrollBool();
     // auto scrolling
     setTimeout(() => {
-      if (this.TabScroller$) {
+      if (this.tabscroller.getScrollBool()) {
         this.router.navigate(['stats']);
       }
     }, 45000); // 2s

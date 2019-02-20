@@ -9,7 +9,6 @@ export class HamburgerMenuComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

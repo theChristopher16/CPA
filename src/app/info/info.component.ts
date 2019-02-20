@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TabScrollerService } from '../tabscroller.service';
+import { NavigateRoutes } from '../sidebar/sidebar.component';
+
 
 @Component({
   selector: 'app-info',
@@ -27,10 +29,13 @@ export class InfoComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    NavigateRoutes.getInstance().setCurrentRoute('info'); //used to tell sidebar the current route
+
     // auto scrolling functionality
     this.TabScroller$ = this.tabscroller.getScrollBool();
     setTimeout(() => {
-      if (this.TabScroller$) {
+      if (this.tabscroller.getScrollBool()) {
         this.router.navigate(['']);
       }
     }, 45000); // 45s
