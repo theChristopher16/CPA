@@ -1,11 +1,29 @@
-<h1>Users</h1>
+<div layout="column" layout-xs="row">
 
-<div id="userList">
+  <h1>Users</h1>
+  <div flex = 50 id="userList" layout="column">
 
-  <ul>
-    <li *ngFor="let user of users$">
-      {{user.Name}}
-    </li>
-  </ul>
-
+    <ul>
+      <li *ngFor="let user of users$">
+        {{user.Name + ": " + user.Score}}
+      </li>
+    </ul>
+  </div>
+  
+  <h1>Achievements</h1>
+  <div flex = 50 id="achievement">
+  
+    <ul>
+      <li *ngFor="let a of Achievements$">
+        {{a.Title + ": " + a.Description}}
+      </li>
+    </ul>
+  </div>
 </div>
+
+  <h2>Find a Player</h2>
+  <div flex = 50 id="search">
+
+  </div>
+
+
