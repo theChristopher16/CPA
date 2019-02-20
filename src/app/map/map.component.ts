@@ -30,7 +30,8 @@ export class MapComponent implements OnInit {
     NavigateRoutes.getInstance().setCurrentRoute(''); //used to tell sidebar the current route
 
     setTimeout(() => {
-      if (this.tabscroller.getScrollBool()) {
+      //autoscroll only if it is true and on this route
+      if (this.tabscroller.getScrollBool() && NavigateRoutes.getInstance().getCurrentRoute()=='') {
         this.router.navigate(['users']);
       }      
     }, 45000); // 2s

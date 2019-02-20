@@ -34,7 +34,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.TabScroller$ = this.tabscroller.getScrollBool();
     // auto scrolling
     setTimeout(() => {
-      if (this.tabscroller.getScrollBool()) {
+      if (this.tabscroller.getScrollBool() && NavigateRoutes.getInstance().getCurrentRoute()=='users') {
         this.router.navigate(['stats']);
       }
     }, 45000); // 2s

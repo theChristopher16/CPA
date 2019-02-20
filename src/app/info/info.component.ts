@@ -35,7 +35,7 @@ export class InfoComponent implements OnInit {
     // auto scrolling functionality
     this.TabScroller$ = this.tabscroller.getScrollBool();
     setTimeout(() => {
-      if (this.tabscroller.getScrollBool()) {
+      if (this.tabscroller.getScrollBool() && NavigateRoutes.getInstance().getCurrentRoute()=='info') {
         this.router.navigate(['']);
       }
     }, 45000); // 45s

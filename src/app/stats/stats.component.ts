@@ -39,7 +39,7 @@ export class StatsComponent implements OnInit {
     // auto scrolling functionality
     this.TabScroller$ = this.tabscroller.getScrollBool();
     setTimeout(() => {
-      if (this.tabscroller.getScrollBool()) {
+      if (this.tabscroller.getScrollBool() && NavigateRoutes.getInstance().getCurrentRoute()=='stats') {
         this.router.navigate(['info']);
       }
     }, 45000); // 2s
