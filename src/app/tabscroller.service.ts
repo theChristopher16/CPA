@@ -10,7 +10,7 @@ export class TabScrollerService {
 
   private scrollTabBoolSource = new Subject<boolean>();
   //public scrollTabBool$ = this.scrollTabBoolSource.asObservable();
-  public scrollTabBool$ = false; // CHANGE TO TRUE TO ENABLE AUTO SCROLLING
+  public scrollTabBool$ = true; // CHANGE TO TRUE TO ENABLE AUTO SCROLLING
 
   constructor(private router: Router) { }
 
