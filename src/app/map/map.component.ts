@@ -4,12 +4,14 @@ import { Router } from '@angular/router';
 import { TabScrollerService } from '../tabscroller.service';
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { uptime } from 'os';
+import { NavigateRoutes } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
+
 export class MapComponent implements OnInit {
   @Input() autoTabBool: boolean;
   private p5;
@@ -27,10 +29,13 @@ export class MapComponent implements OnInit {
 
     this.createCanvas();
 
+    NavigateRoutes.getInstance().setCurrentRoute(''); //used to tell sidebar the current route
+
     setTimeout(() => {
-      if (this.TabScroller$) {
+      //autoscroll only if it is true and on this route
+      if (this.tabscroller.getScrollBool() && NavigateRoutes.getInstance().getCurrentRoute()=='') {
         this.router.navigate(['users']);
-      }      
+      }
     }, 45000); // 2s
   }
 
@@ -48,13 +53,13 @@ export class MapComponent implements OnInit {
     let buildingOff;
     let floor;
 
-    let buildings:Building[];  
+    let buildings:Building[];
 
     // Josh: Added to track fps
     let lastLoop = performance.now();
 
    p.preload = () => {
-      
+
       s = p.loadShader('../../assets/Map/Shaders/colorfrag.glsl', '../../assets/Map/Shaders/colorvert.glsl');
 
       // Building and floor textures
@@ -83,7 +88,7 @@ export class MapComponent implements OnInit {
         new Building("South Hall", -500, 200, 39, 270, 0, 0, 12, p.loadModel('../../assets/Map/Models/southHall.obj'), "http://192.168.1.17:80/"),
         new Building("Power Plant", -240, 170, 23, -90, 90, 0, 12, p.loadModel('../../assets/Map/Models/powerPlant.obj'), "http://192.168.1.18:80/"),
         new Building("University Hall", 300, -290, 30, 90, 195, 180, 23, p.loadModel('../../assets/Map/Models/cobb.obj'), "http://192.168.1.19:80/"), // Same model as COBB
-      ]; 
+      ];
     };
 
     p.setup = () => {
@@ -131,7 +136,7 @@ export class MapComponent implements OnInit {
         p.model(b.getModel());
         p.pop();
       }
-      
+
       angle += 0.004;
 
       // Josh: Calculates fps and writes it to console

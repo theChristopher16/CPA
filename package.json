@@ -11,8 +11,13 @@
   },
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@angular/animations": "~7.2.0",
     "@angular/cdk": "~7.3.2",
+=======
+    "@angular/animations": "^7.2.5",
+    "@angular/cdk": "^7.3.2",
+>>>>>>> hamburgerButton
     "@angular/common": "~7.2.0",
     "@angular/compiler": "~7.2.0",
     "@angular/core": "~7.2.0",
@@ -36,7 +41,11 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.12.4",
+<<<<<<< HEAD
     "@angular/cli": "^7.3.2",
+=======
+    "@angular/cli": "~7.2.3",
+>>>>>>> hamburgerButton
     "@angular/compiler-cli": "^7.2.5",
     "@angular/language-service": "~7.2.0",
     "@types/jasmine": "~2.8.8",

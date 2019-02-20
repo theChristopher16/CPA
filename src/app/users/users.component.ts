@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AchievementsService } from '../achievements.service';
 import { TabScrollerService } from '../tabscroller.service';
 import { Router } from '@angular/router';
+import { NavigateRoutes } from '../sidebar/sidebar.component';
 import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 
 @Component({
@@ -33,11 +34,12 @@ export class UsersComponent implements OnInit, OnDestroy {
         console.log(this.TabScroller$);
       }
     );*/
-    this.TabScroller$ = this.tabscroller.getScrollBool();
+    NavigateRoutes.getInstance().setCurrentRoute('users'); //used to tell sidebar the current route
 
+    this.TabScroller$ = this.tabscroller.getScrollBool();
     // auto scrolling
     setTimeout(() => {
-      if (this.TabScroller$) {
+      if (this.tabscroller.getScrollBool() && NavigateRoutes.getInstance().getCurrentRoute()=='users') {
         this.router.navigate(['stats']);
       }
     }, 45000); // 2s
@@ -50,9 +52,9 @@ export class UsersComponent implements OnInit, OnDestroy {
 
         // Find size of user list
         let findingSize = true;
-        let size = 0;  
+        let size = 0;
         while(findingSize){
-        
+
           console.log(this.users$[size]);
           size++;
           if(this.users$[size] == undefined){
@@ -93,7 +95,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
         console.log("SORTED BY SCORE");
         console.log(sortedScore);
-        
+
         // Sort the users by online status
         let onlineSort = [];
         let offlineSort = [];
@@ -113,7 +115,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         console.log(offlineSort);
       }
     );
-    
+
     //subscribe to service to get achievement info
     this.achievement.getAchievements().subscribe(
       achievement => {
@@ -121,7 +123,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         console.log(this.Achievements$)
       }
     );
-  
+
   }
   ngOnDestroy() {
     //this.tabscroller.destroy();

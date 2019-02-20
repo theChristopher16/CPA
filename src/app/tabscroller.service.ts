@@ -19,4 +19,9 @@ export class TabScrollerService {
     //this.scrollTabBoolSource.next();
     return this.scrollTabBool$;
   }
+
+  //used to turn auto scroll on/off
+  setScrollBool(scroll: boolean) {
+    this.scrollTabBool$ = scroll;
+  }
 }
