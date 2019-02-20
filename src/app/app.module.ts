@@ -10,6 +10,7 @@ import { StatsComponent } from './stats/stats.component';
 import { InfoComponent } from './info/info.component';
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     Ng2CarouselamosModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
