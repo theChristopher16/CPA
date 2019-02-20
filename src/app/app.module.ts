@@ -9,19 +9,13 @@ import { UsersComponent } from './users/users.component';
 import { StatsComponent } from './stats/stats.component';
 import { InfoComponent } from './info/info.component';
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
-import { HttpClientModule } from '@angular/common/http';
-<<<<<<< HEAD
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-=======
-import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.component';
+import { HttpClientModule } from '@angular/common/http'; import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { BottomSheetMenu } from './sidebar/sidebar.component';
-import { FormsModule } from '@angular/forms';
->>>>>>> hamburgerButton
+import { BottomSheetMenu } from './sidebar/sidebar.component'; import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -39,10 +33,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     Ng2CarouselamosModule,
     HttpClientModule,
-<<<<<<< HEAD
-    BrowserAnimationsModule
-=======
-    BrowserAnimationsModule,
+  BrowserAnimationsModule,
     MatCardModule,
     MatBottomSheetModule,
     MatButtonModule,
@@ -51,8 +42,7 @@ import { FormsModule } from '@angular/forms';
   ],
   entryComponents: [
     BottomSheetMenu
->>>>>>> hamburgerButton
-  ],
+],
   providers: [],
   bootstrap: [AppComponent]
 })
