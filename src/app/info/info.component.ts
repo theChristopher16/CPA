@@ -10,19 +10,13 @@ import { NavigateRoutes } from '../sidebar/sidebar.component';
   styleUrls: ['./info.component.scss']
 })
 export class InfoComponent implements OnInit {
-  items: Array<any> = [];
+  items: Array<any> = []
 
   // auto scrolling variables
   TabScroller$: boolean
 
   constructor(private router: Router, private tabscroller: TabScrollerService) {
   this.items = [
-    { name: '../../assets/Info/Images/img1.png' },
-    { name: '../../assets/Info/Images/img3.png' },
-    { name: '../../assets/Info/Images/img1.png' },
-    { name: '../../assets/Info/Images/img3.png' },
-    { name: '../../assets/Info/Images/img1.png' },
-    { name: '../../assets/Info/Images/img3.png' },
     { name: '../../assets/Info/Images/img1.png' },
     { name: '../../assets/Info/Images/img3.png' }
   ];
@@ -39,5 +33,5 @@ export class InfoComponent implements OnInit {
         this.router.navigate(['']);
       }
     }, 45000); // 45s
-}
+  }
 }

@@ -58,9 +58,11 @@ export class MapComponent implements OnInit {
     // Josh: Added to track fps
     let lastLoop = performance.now();
 
+    var drops = [];
+
    p.preload = () => {
 
-      s = p.loadShader('../../assets/Map/Shaders/colorfrag.glsl', '../../assets/Map/Shaders/colorvert.glsl');
+      //s = p.loadShader('../../assets/Map/Shaders/colorfrag.glsl', '../../assets/Map/Shaders/colorvert.glsl');
 
       // Building and floor textures
       buildingOff = p.loadImage('../../assets/Map/Textures/buildingoff.png');
@@ -94,6 +96,9 @@ export class MapComponent implements OnInit {
     p.setup = () => {
       var cnv = p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
       cnv.parent('myContainer');
+      for (var i = 0; i < 50; i++) {
+        drops[i] = new Drop();
+      }
     };
 
     p.draw = () => {
@@ -103,6 +108,9 @@ export class MapComponent implements OnInit {
       var g = 13 + Math.abs(242 * p.cos(angle));
       var b = 255;
       p.background(r, g, b);
+
+      
+
 
       // Move camera
       p.noStroke(0);
@@ -134,17 +142,62 @@ export class MapComponent implements OnInit {
         }
         // Model
         p.model(b.getModel());
+        
         p.pop();
       }
 
+      for (var i = 0; i < drops.length; i++) {
+        drops[i].fall();
+        drops[i].show();
+      }
       angle += 0.004;
 
       // Josh: Calculates fps and writes it to console
-      var thisLoop = performance.now();
-      var fps = Math.round(1000 / (thisLoop - lastLoop));
-      lastLoop = thisLoop;
+      //var thisLoop = performance.now();
+      //var fps = Math.round(1000 / (thisLoop - lastLoop));
+      //lastLoop = thisLoop;
       //console.log(fps);
     };
+
+    function Drop() {
+      this.x = outerWidth;
+      this.y = p.random(-500, -50);
+      this.z = p.random(0, 10);
+
+      this.len = p.map(this.z, 0, 20, 10, 20);
+      this.yspeed = p.map(this.z, 0, 20, 1, 20);
+    
+      this.fall = function() {
+        this.y = this.y + this.yspeed;
+        var grav = p.map(this.z, 0, 20, 0, 0.2);
+        this.yspeed = this.yspeed + grav;
+    
+        // if (this.y > -100) {
+        //   this.y = p.random(-200, -100);
+        //   this.yspeed = p.map(this.z, 0, 20, 4, 10);
+        // }
+      }
+    
+      this.show = function() {
+
+        // this.y = this.y + this.yspeed;
+        // var grav = p.map(this.z, 0, 20, 0, 0.2);
+        // this.yspeed = this.yspeed + grav;
+        var thick = p.map(this.z, 0, 20, 1, 3);
+
+        // if (this.y > -100) {
+        //   this.y = p.random(-200, -100);
+        //   this.yspeed = p.map(this.z, 0, 20, 4, 10);
+        // }
+
+        p.strokeWeight(thick);
+        p.stroke(138, 43, 226);
+        p.translate(10, this.yspeed, this.yspeed);
+        p.sphere(p.random(.05, .5));
+
+      }
+    }
+
   }
 }
 
@@ -233,3 +286,4 @@ class Building{
     ping.send();
   }
 }
+

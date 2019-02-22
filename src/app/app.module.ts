@@ -33,7 +33,7 @@ import { BottomSheetMenu } from './sidebar/sidebar.component'; import { FormsMod
     AppRoutingModule,
     Ng2CarouselamosModule,
     HttpClientModule,
-  BrowserAnimationsModule,
+    BrowserAnimationsModule,
     MatCardModule,
     MatBottomSheetModule,
     MatButtonModule,
