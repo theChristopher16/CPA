@@ -15,7 +15,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { BottomSheetMenu } from './sidebar/sidebar.component'; import { FormsModule } from '@angular/forms';
+import { BottomSheetMenu } from './sidebar/sidebar.component';
+import { FormsModule } from '@angular/forms';
+import { SlideshowModule } from 'ng-simple-slideshow'
 
 @NgModule({
   declarations: [
@@ -26,7 +28,7 @@ import { BottomSheetMenu } from './sidebar/sidebar.component'; import { FormsMod
     StatsComponent,
     InfoComponent,
     HamburgerMenuComponent,
-    BottomSheetMenu,
+    BottomSheetMenu
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,8 @@ import { BottomSheetMenu } from './sidebar/sidebar.component'; import { FormsMod
     MatBottomSheetModule,
     MatButtonModule,
     MatSlideToggleModule,
-    FormsModule
+    FormsModule,
+    SlideshowModule
   ],
   entryComponents: [
     BottomSheetMenu
