@@ -5,6 +5,8 @@ import { TabScrollerService } from '../tabscroller.service';
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { uptime } from 'os';
 import { NavigateRoutes } from '../sidebar/sidebar.component';
+import { zip } from 'rxjs';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
   selector: 'app-map',
@@ -47,25 +49,109 @@ export class MapComponent implements OnInit {
 
     let s;
 
+    // Variables controlling camera
     let angle = 0;
+    let cameraSpeed = 25;
+    let zoomAmount = 0;
+    let maxZoom = 150;
+    let minZoom = -950;
 
+    // Textures
     let buildingOn;
     let buildingOff;
     let floor;
+    let sunshine;
 
     let buildings:Building[];
+
+    let sun;
+
+    var vert=`
+#ifdef GL_ES
+      precision highp float;
+      precision highp int;
+    #endif
+		#extension GL_OES_standard_derivatives : enable
+
+    // attributes, in
+    attribute vec3 aPosition;
+    attribute vec3 aNormal;
+    attribute vec2 aTexCoord;
+    attribute vec4 aVertexColor;
+
+    // attributes, out
+    varying vec3 var_vertPos;
+    varying vec4 var_vertCol;
+    varying vec3 var_vertNormal;
+    varying vec2 var_vertTexCoord;
+
+    // matrices
+    uniform mat4 uModelViewMatrix;
+    uniform mat4 uProjectionMatrix;
+    //uniform mat3 uNormalMatrix;
+
+    void main() {
+      gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aPosition, 1.0);
+
+      // just passing things through
+      // var_vertPos      = aPosition;
+      // var_vertCol      = aVertexColor;
+      // var_vertNormal   = aNormal;
+      // var_vertTexCoord = aTexCoord;
+    }
+`;
+var frag=`
+
+#ifdef GL_ES
+precision highp float;
+#endif
+
+uniform vec2 resolution;
+uniform float time;
+
+void main(void)
+{
+    vec2 p = -1.0 + 4.0 * gl_FragCoord.xy / resolution.xy;
+    float a = time*1.0;
+    float d,e,f,g=1.0/40.0,h,i,r,q;
+    e=40.0*(p.x*0.5+0.5);
+    f=400.0*(p.y*0.5+0.5);
+    i=20.0+sin(e*g+a/150.0)*20.0;
+  //  d=200.0+sin(f*g/2.0)*18.0+cos(e*g)*7.0;
+    r=sqrt(pow(i-e,2.0)+pow(d-f,2.0));
+    q=f/r;
+    e=(r*sin(q))-a/2.0;f=(r*atan(q))-a/2.0;
+    d=cos(e*g)*1.0+cos(e*g)*1.0+r;
+    h=((f+d)+a/2.0)*g;
+    i=cos(h+r*p.x/1.3)*(e+e+a)+cos(q*g*6.0)*(r+h/3.0);
+    h=sin(f*g)*144.0-sin(e*g)*212.0*p.x;
+    h=(h+(f-e)*q+sin(r-(a+h)/7.0)*10.0+i/4.0)*g;
+    i+=cos(h*2.3*sin(a/350.0-q))*184.0*sin(q-(r*4.3+a/12.0)*g)+tan(r*g+h)*184.0*cos(r*g+h);
+    i=mod(i/5.6,256.0)/64.0;
+    if(i<0.0) i+=4.0;
+    if(i>=2.0) i=4.0-i;
+    d=r/850.0;
+    d+=sin(d*d*8.0)*0.52;
+    f=(sin(a*g)+1.0)/2.0;
+    gl_FragColor=vec4(vec3(f*i/1.6,i/2.0+d/13.0,i)*d*p.x+vec3(i/1.3+d/8.0,i/2.0+d/18.0,i)*d*(1.0-p.x),1.0);
+    //gl_FragColor=vec4(0.0, 0.0, 0.0, 0.0);
+}`;
+  var program;
 
     // Josh: Added to track fps
     let lastLoop = performance.now();
 
    p.preload = () => {
 
-      s = p.loadShader('../../assets/Map/Shaders/colorfrag.glsl', '../../assets/Map/Shaders/colorvert.glsl');
+      sun = new Sun(p.loadModel('../../assets/Map/Models/sun.obj'));
 
+      //s = p.loadShader('../../assets/Map/Shaders/colorfrag.glsl', '../../assets/Map/Shaders/colorvert.glsl');
+      program = p.loadShader('../../assets/Map/Shaders/color.vert', '../../assets/Map/Shaders/color.frag')
       // Building and floor textures
       buildingOff = p.loadImage('../../assets/Map/Textures/buildingoff.png');
       buildingOn = p.loadImage('../../assets/Map/Textures/buildingon.png');
       floor = p.loadImage('../../assets/Map/Textures/mapglow.png');
+      sunshine = p.loadImage('../../assets/Map/Textures/sun.png');
 
       // Initialize buildings
       buildings = [
@@ -76,7 +162,7 @@ export class MapComponent implements OnInit {
         new Building("Keeny", 265, -150, 30, 270, 90, 0, 13, p.loadModel('../../assets/Map/Models/keeny.obj'), "http://192.168.1.5:80/"),
         new Building("Carson Taylor", 315, 190, 23, -90, 0, 0, 16, p.loadModel('../../assets/Map/Models/carsonTaylor.obj'), "http://192.168.1.6:80/"),
         new Building("Hale", -270, -290, 0, -90, 0, 180, 10, p.loadModel('../../assets/Map/Models/hale.obj'), "http://192.168.1.7:80/"),
-        new Building("GTM", -50, -325, 50, 90, -174, 180, 25, p.loadModel('../../assets/Map/Models/gtm.obj'), "http://192.168.1.8:80/"),
+        new Building("GTM", -50, -325, 35, 90, -174, 180, 25, p.loadModel('../../assets/Map/Models/gtm.obj'), "http://192.168.1.8:80/"),
         new Building("Engineering Annex", 410, 150, 23, -90, 0, 0, 11, p.loadModel('../../assets/Map/Models/engineeringAnnex.obj'), "http://192.168.1.9:80/"),
         new Building("Howard", 155, -40, 0, -90, 0, 180, 12, p.loadModel('../../assets/Map/Models/howard.obj'), "http://192.168.1.10:80/"),
         new Building("Student Center", -20, -55, 30, 90, 15, 180, 12, p.loadModel('../../assets/Map/Models/studentCenter.obj'), "http://192.168.1.11:80/"),
@@ -94,21 +180,43 @@ export class MapComponent implements OnInit {
     p.setup = () => {
       var cnv = p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
       cnv.parent('myContainer');
+      cnv.mouseWheel(zoom);
+      //program = p.createShader(vert,frag);
+      
+      // Josh: Zoom in and out of the map using the scroll wheel
+      function zoom(event){
+        if (event.deltaY < 0) {
+          if(zoomAmount < maxZoom){
+            zoomAmount += 10;
+          }
+        }
+        else {
+          if(zoomAmount > minZoom){
+            zoomAmount -= 10;
+          }
+        }
+      }
     };
 
     p.draw = () => {
+
+      console.log(angle);
       // Draw background color
       // Josh: Changed background color to fluctuate between our color scheme
-      var r = 242 - Math.abs(242 * p.cos(angle));
-      var g = 13 + Math.abs(242 * p.cos(angle));
+      var r = 242 - Math.abs(242 * p.sin(angle * Math.PI / 180));
+      var g = 13 + Math.abs(242 * p.sin(angle * Math.PI / 180));
       var b = 255;
       p.background(r, g, b);
+      p.shader(program);
+      program.setUniform('resolution',[5000,5000]);
+      program.setUniform('time',100000/20);
 
       // Move camera
       p.noStroke(0);
-      p.rotateX(1);
+      p.rotateX(1 + zoomAmount / 1000); // Josh: Rotate the camera based on zoom. When zoomed all the way out, camera faces down, when zoomed all the way in, camera faces up.
       p.rotateY(0);
-      p.rotateZ(angle);
+      p.rotateZ(angle * cameraSpeed * Math.PI / 180);
+      p.translate(0, 0, zoomAmount); // Josh: Zoom!
       p.noStroke();
 
       p.texture(floor);
@@ -130,15 +238,35 @@ export class MapComponent implements OnInit {
           p.texture(buildingOn);
         }
         else{
-          p.texture(buildingOff);
+          p.texture(buildingOn);
         }
         // Model
         p.model(b.getModel());
         p.pop();
       }
+      
+      // Josh: Lighting
+      p.ambientLight(100);
+      //p.ambientLight(r, g, b);
+      //p.ambientLight(p.cos(angle * 10));
 
-      angle += 0.004;
+      // Josh: Sun stuff
+      p.push();
+      sun.update(angle);
+      p.pointLight(sun.getColor_R(), sun.getColor_G(), sun.getColor_B(), sun.getX(), sun.getY(), sun.getZ());
+      
+      p.translate(sun.getX(), sun.getY(), sun.getZ());
+      p.rotateX(-90 * Math.PI/180);
+      p.scale(250);
+      p.texture(sunshine);
+      p.model(sun.getModel());
+      p.pop();
 
+      angle += 0.005;
+      if(angle == 360){
+        angle = 0;
+      }
+      
       // Josh: Calculates fps and writes it to console
       var thisLoop = performance.now();
       var fps = Math.round(1000 / (thisLoop - lastLoop));
@@ -231,5 +359,92 @@ class Building{
 
     this.up = didPing;
     ping.send();
+  }
+}
+
+class Sun{
+
+  init_x: number;
+  init_y: number;
+  init_z: number;
+
+  x: number;
+  y: number;
+  z: number;
+  distance_x: number;
+  distance_y: number;
+  counter: number;
+  phase: number;
+
+  color_r: number;
+  color_g: number;
+  color_b: number;
+
+  model: any;
+
+  constructor(m: any){
+    this.distance_x = 0.06;
+    this.distance_y = 1000;
+    this.counter = 0;
+    this.phase = 1;
+    this.color_r = 255;
+    this.color_g = 0;
+    this.color_b = 0;
+
+    this.init_x = 1000;
+    this.init_y = 0;
+    this.init_z = 0;
+
+    this.x = this.init_x;
+    this.y = this.init_y;
+    this.z = this.init_z;
+
+    this.model = m;
+  }
+
+  update(angle: number){
+    if(angle % 90 == 0){
+      this.phase++;
+      if(this.phase == 5){
+        this.phase = 1;
+      }
+    }
+    angle = angle * Math.PI / 180;
+    if(this.phase == 3){
+      this.x -= this.distance_x;
+    }
+    else if(this.phase == 1){
+      this.x += this.distance_x;
+    }
+    else if(this.phase == 2){
+      this.x -= this.distance_x;
+    }
+    else if(this.phase == 4){
+      this.x += this.distance_x;
+    }
+    this.z = -Math.sin(angle - Math.PI/180);
+    this.z *= this.distance_y;
+  }
+
+  getX(){
+    return this.x;
+  }
+  getY(){
+    return this.y;
+  }
+  getZ(){
+    return this.z;
+  }
+  getColor_R(){
+    return this.color_r;
+  }
+  getColor_G(){
+    return this.color_g;
+  }
+  getColor_B(){
+    return this.color_b;
+  }
+  getModel(){
+    return this.model;
   }
 }
