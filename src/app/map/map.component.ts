@@ -59,8 +59,11 @@ export class MapComponent implements OnInit {
     // Textures
     let buildingOn;
     let buildingOff;
-    let floor;
+    let concrete;
     let sunshine;
+
+    // Models
+    let road;
 
     let buildings:Building[];
 
@@ -144,13 +147,12 @@ void main(void)
    p.preload = () => {
 
       sun = new Sun(p.loadModel('../../assets/Map/Models/sun.obj'));
-
-      //s = p.loadShader('../../assets/Map/Shaders/colorfrag.glsl', '../../assets/Map/Shaders/colorvert.glsl');
       program = p.loadShader('../../assets/Map/Shaders/color.vert', '../../assets/Map/Shaders/color.frag')
       // Building and floor textures
       buildingOff = p.loadImage('../../assets/Map/Textures/buildingoff.png');
       buildingOn = p.loadImage('../../assets/Map/Textures/buildingon.png');
-      floor = p.loadImage('../../assets/Map/Textures/mapglow.png');
+      concrete = p.loadImage('../../assets/Map/Textures/road.png');
+      road = p.loadModel('../../assets/Map/Models/road.obj');
       sunshine = p.loadImage('../../assets/Map/Textures/sun.png');
 
       // Initialize buildings
@@ -219,8 +221,16 @@ void main(void)
       p.translate(0, 0, zoomAmount); // Josh: Zoom!
       p.noStroke();
 
-      p.texture(floor);
+      //p.texture(floor);
       p.box(1152, 1152, 2);
+      p.push();
+      p.scale(115);
+      p.translate(0, 0, 0.02);
+      p.rotateX(90 * Math.PI/180);
+      //p.rotateY(180 * Math.PI/180);
+      p.texture(concrete);
+      p.model(road);
+      p.pop();
 
       // Draw buildings
       for(let b of buildings){
@@ -246,7 +256,7 @@ void main(void)
       }
       
       // Josh: Lighting
-      p.ambientLight(100);
+      p.ambientLight(255);
       //p.ambientLight(r, g, b);
       //p.ambientLight(p.cos(angle * 10));
 
