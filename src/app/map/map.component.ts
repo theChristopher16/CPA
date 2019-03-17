@@ -61,7 +61,6 @@ export class MapComponent implements OnInit {
     let buildingOff;
     let concrete;
     let sunshine;
-    let floor;
 
     // Models
     let road;
@@ -147,15 +146,18 @@ void main(void)
 
    p.preload = () => {
 
+      // Initialize shaders
+      program = p.loadShader('../../assets/Map/Shaders/color.vert', '../../assets/Map/Shaders/color.frag');
+
+      // Initialize models
       sun = new Sun(p.loadModel('../../assets/Map/Models/sun.obj'));
-      program = p.loadShader('../../assets/Map/Shaders/color.vert', '../../assets/Map/Shaders/color.frag')
-      // Building and floor textures
+      road = p.loadModel('../../assets/Map/Models/road.obj');
+
+      // Initialize textures
       buildingOff = p.loadImage('../../assets/Map/Textures/buildingoff.png');
       buildingOn = p.loadImage('../../assets/Map/Textures/buildingon.png');
-      concrete = p.loadImage('../../assets/Map/Textures/road.png');
-      floor = p.loadImage('../../assets/Map/Textures/map.png');
-      road = p.loadModel('../../assets/Map/Models/road.obj');
       sunshine = p.loadImage('../../assets/Map/Textures/sun.png');
+      concrete = p.loadImage('../../assets/Map/Textures/road.png');
 
       // Initialize buildings
       buildings = [
@@ -185,7 +187,6 @@ void main(void)
       var cnv = p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
       cnv.parent('myContainer');
       cnv.mouseWheel(zoom);
-      //program = p.createShader(vert,frag);
       
       // Josh: Zoom in and out of the map using the scroll wheel
       function zoom(event){
@@ -203,7 +204,7 @@ void main(void)
     };
 
     p.draw = () => {
-
+      
       console.log(angle);
       // Draw background color
       // Josh: Changed background color to fluctuate between our color scheme
@@ -212,8 +213,9 @@ void main(void)
       var b = 255;
       p.background(r, g, b);
       p.shader(program);
-      program.setUniform('resolution',[5000,5000]);
-      program.setUniform('time',100000/20);
+      program.setUniform('angle', angle * 3);
+      program.setUniform('time', angle * 10);
+      program.setUniform('resolution', [500, 500]);
 
       // Move camera
       p.noStroke(0);
@@ -224,16 +226,11 @@ void main(void)
       p.noStroke();
 
       // Draw ground & road
-      p.push();
-      //p.rotateZ(180 * Math.PI/180);
-      //p.texture(floor);
       p.box(1152, 1152, 2);
-      p.pop();
       p.push();
       p.scale(115);
       p.translate(0, 0, 0.02);
       p.rotateX(270 * Math.PI/180);
-      //p.rotateZ(180 * Math.PI/180);
       p.texture(concrete);
       p.model(road);
       p.pop();
