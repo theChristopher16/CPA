@@ -61,6 +61,7 @@ export class MapComponent implements OnInit {
     let buildingOff;
     let concrete;
     let sunshine;
+    let floor;
 
     // Models
     let road;
@@ -152,6 +153,7 @@ void main(void)
       buildingOff = p.loadImage('../../assets/Map/Textures/buildingoff.png');
       buildingOn = p.loadImage('../../assets/Map/Textures/buildingon.png');
       concrete = p.loadImage('../../assets/Map/Textures/road.png');
+      floor = p.loadImage('../../assets/Map/Textures/map.png');
       road = p.loadModel('../../assets/Map/Models/road.obj');
       sunshine = p.loadImage('../../assets/Map/Textures/sun.png');
 
@@ -221,13 +223,17 @@ void main(void)
       p.translate(0, 0, zoomAmount); // Josh: Zoom!
       p.noStroke();
 
+      // Draw ground & road
+      p.push();
+      //p.rotateZ(180 * Math.PI/180);
       //p.texture(floor);
       p.box(1152, 1152, 2);
+      p.pop();
       p.push();
       p.scale(115);
       p.translate(0, 0, 0.02);
-      p.rotateX(90 * Math.PI/180);
-      //p.rotateY(180 * Math.PI/180);
+      p.rotateX(270 * Math.PI/180);
+      //p.rotateZ(180 * Math.PI/180);
       p.texture(concrete);
       p.model(road);
       p.pop();
