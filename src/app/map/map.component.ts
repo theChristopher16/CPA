@@ -7,6 +7,7 @@ import { uptime } from 'os';
 import { NavigateRoutes } from '../sidebar/sidebar.component';
 import { zip } from 'rxjs';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { SpeedControllerService } from '../speedcontroller.service';
 
 @Component({
   selector: 'app-map',
@@ -16,18 +17,22 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 export class MapComponent implements OnInit {
   @Input() autoTabBool: boolean;
+  @Input() speedControllerVal: number;
   private p5;
 
   TabScroller$: boolean;
+  SpeedController$: number;
 
   constructor(
     private router: Router,
-    private tabscroller: TabScrollerService
+    private tabscroller: TabScrollerService,
+    private speedcontroller: SpeedControllerService
   //  private p5: p5
 ) { }
 
   ngOnInit() {
     this.TabScroller$ = this.tabscroller.getScrollBool();
+    this.SpeedController$ = this.speedcontroller.getSpeed();
 
     this.createCanvas();
 
@@ -51,7 +56,7 @@ export class MapComponent implements OnInit {
 
     // Variables controlling camera
     let angle = 0;
-    let cameraSpeed = 25;
+    //let cameraSpeed = 25;
     let zoomAmount = 0;
     let maxZoom = 150;
     let minZoom = -950;
@@ -69,77 +74,12 @@ export class MapComponent implements OnInit {
 
     let sun;
 
-    var vert=`
-#ifdef GL_ES
-      precision highp float;
-      precision highp int;
-    #endif
-		#extension GL_OES_standard_derivatives : enable
+    // Shaders
+    var colorShader;
+    var fogShader;
 
-    // attributes, in
-    attribute vec3 aPosition;
-    attribute vec3 aNormal;
-    attribute vec2 aTexCoord;
-    attribute vec4 aVertexColor;
-
-    // attributes, out
-    varying vec3 var_vertPos;
-    varying vec4 var_vertCol;
-    varying vec3 var_vertNormal;
-    varying vec2 var_vertTexCoord;
-
-    // matrices
-    uniform mat4 uModelViewMatrix;
-    uniform mat4 uProjectionMatrix;
-    //uniform mat3 uNormalMatrix;
-
-    void main() {
-      gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aPosition, 1.0);
-
-      // just passing things through
-      // var_vertPos      = aPosition;
-      // var_vertCol      = aVertexColor;
-      // var_vertNormal   = aNormal;
-      // var_vertTexCoord = aTexCoord;
-    }
-`;
-var frag=`
-
-#ifdef GL_ES
-precision highp float;
-#endif
-
-uniform vec2 resolution;
-uniform float time;
-
-void main(void)
-{
-    vec2 p = -1.0 + 4.0 * gl_FragCoord.xy / resolution.xy;
-    float a = time*1.0;
-    float d,e,f,g=1.0/40.0,h,i,r,q;
-    e=40.0*(p.x*0.5+0.5);
-    f=400.0*(p.y*0.5+0.5);
-    i=20.0+sin(e*g+a/150.0)*20.0;
-  //  d=200.0+sin(f*g/2.0)*18.0+cos(e*g)*7.0;
-    r=sqrt(pow(i-e,2.0)+pow(d-f,2.0));
-    q=f/r;
-    e=(r*sin(q))-a/2.0;f=(r*atan(q))-a/2.0;
-    d=cos(e*g)*1.0+cos(e*g)*1.0+r;
-    h=((f+d)+a/2.0)*g;
-    i=cos(h+r*p.x/1.3)*(e+e+a)+cos(q*g*6.0)*(r+h/3.0);
-    h=sin(f*g)*144.0-sin(e*g)*212.0*p.x;
-    h=(h+(f-e)*q+sin(r-(a+h)/7.0)*10.0+i/4.0)*g;
-    i+=cos(h*2.3*sin(a/350.0-q))*184.0*sin(q-(r*4.3+a/12.0)*g)+tan(r*g+h)*184.0*cos(r*g+h);
-    i=mod(i/5.6,256.0)/64.0;
-    if(i<0.0) i+=4.0;
-    if(i>=2.0) i=4.0-i;
-    d=r/850.0;
-    d+=sin(d*d*8.0)*0.52;
-    f=(sin(a*g)+1.0)/2.0;
-    gl_FragColor=vec4(vec3(f*i/1.6,i/2.0+d/13.0,i)*d*p.x+vec3(i/1.3+d/8.0,i/2.0+d/18.0,i)*d*(1.0-p.x),1.0);
-    //gl_FragColor=vec4(0.0, 0.0, 0.0, 0.0);
-}`;
-  var program;
+    // Side panel
+    let panel;
 
     // Josh: Added to track fps
     let lastLoop = performance.now();
@@ -147,7 +87,8 @@ void main(void)
    p.preload = () => {
 
       // Initialize shaders
-      program = p.loadShader('../../assets/Map/Shaders/color.vert', '../../assets/Map/Shaders/color.frag');
+      colorShader = p.loadShader('../../assets/Map/Shaders/color.vert', '../../assets/Map/Shaders/color.frag');
+      fogShader = p.loadShader('../../assets/Map/Shaders/fog.vert', '../../assets/Map/Shaders/fog.frag');
 
       // Initialize models
       sun = new Sun(p.loadModel('../../assets/Map/Models/sun.obj'));
@@ -181,14 +122,17 @@ void main(void)
         new Building("Power Plant", -240, 170, 23, -90, 90, 0, 12, p.loadModel('../../assets/Map/Models/powerPlant.obj'), "http://192.168.1.18:80/"),
         new Building("University Hall", 300, -290, 30, 90, 195, 180, 23, p.loadModel('../../assets/Map/Models/cobb.obj'), "http://192.168.1.19:80/"), // Same model as COBB
       ];
+
+      // Initialize side panel
+      panel = new ScrollingPanel(500, 500, 407.5, 100, 1); // width, height, x, y, scrolling speed
     };
 
     p.setup = () => {
       var cnv = p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
       cnv.parent('myContainer');
-      cnv.mouseWheel(zoom);
+      //cnv.mouseWheel(zoom);
       
-      // Josh: Zoom in and out of the map using the scroll wheel
+      /* Josh: Zoom in and out of the map using the scroll wheel
       function zoom(event){
         if (event.deltaY < 0) {
           if(zoomAmount < maxZoom){
@@ -200,7 +144,7 @@ void main(void)
             zoomAmount -= 10;
           }
         }
-      }
+      }*/
     };
 
     p.draw = () => {
@@ -212,21 +156,26 @@ void main(void)
       var g = 13 + Math.abs(242 * p.sin(angle * Math.PI / 180));
       var b = 255;
       p.background(r, g, b);
-      p.shader(program);
-      program.setUniform('angle', angle * 3);
-      program.setUniform('time', angle * 10);
-      program.setUniform('resolution', [500, 500]);
+     
+      //program.setUniform('u_fogColor', [0.5, 0.5, 0.5, 0.5]);
+      //program.setUniform()
+      colorShader.setUniform('angle', angle * 3);
+      //program.setUniform('time', angle * 10);
+      colorShader.setUniform('resolution', [1000, 1000]);
+      p.shader(colorShader);
 
       // Move camera
       p.noStroke(0);
       p.rotateX(1 + zoomAmount / 1000); // Josh: Rotate the camera based on zoom. When zoomed all the way out, camera faces down, when zoomed all the way in, camera faces up.
       p.rotateY(0);
-      p.rotateZ(angle * cameraSpeed * Math.PI / 180);
+      p.rotateZ(angle * 25 * Math.PI / 180);
       p.translate(0, 0, zoomAmount); // Josh: Zoom!
       p.noStroke();
 
       // Draw ground & road
       p.box(1152, 1152, 2);
+      //p.box(1152, 1152, 2000);
+      
       p.push();
       p.scale(115);
       p.translate(0, 0, 0.02);
@@ -257,7 +206,6 @@ void main(void)
         p.model(b.getModel());
         p.pop();
       }
-      
       // Josh: Lighting
       p.ambientLight(255);
       //p.ambientLight(r, g, b);
@@ -275,11 +223,24 @@ void main(void)
       p.model(sun.getModel());
       p.pop();
 
+      p.shader(fogShader);
+
       angle += 0.005;
       if(angle == 360){
         angle = 0;
       }
       
+
+      // Draw scrolling panel
+      p.push();
+      p.rotateZ(-angle * 25 * Math.PI / 180); // Rotate opposite of camera rotation so box looks stationary
+      p.rotateX(65.3 * Math.PI/180); // Rotate perfectly so box is vertical
+      p.rotateX(1 -zoomAmount / 1000);
+      p.translate(panel.getX(), panel.getY(), -400); // Move to the correct position
+      p.ambientMaterial(66); // Colors the box (can be changed to a texture later)
+      p.box(panel.getWidth(), panel.getHeight(), 1); // Draw the box
+      p.pop();
+
       // Josh: Calculates fps and writes it to console
       var thisLoop = performance.now();
       var fps = Math.round(1000 / (thisLoop - lastLoop));
@@ -459,5 +420,40 @@ class Sun{
   }
   getModel(){
     return this.model;
+  }
+}
+
+class ScrollingPanel{
+
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+
+  scrollSpeed: number;
+
+  constructor(w: number, h: number, x: number, y: number, ss: number){
+    this.width = w;
+    this.height = h;
+    this.x = x;
+    this.y = y;
+    this.scrollSpeed = ss;
+  }
+
+  update(){
+    this.y -= this.scrollSpeed;
+  }
+
+  getX(){
+    return this.x;
+  }
+  getY(){
+    return this.y;
+  }
+  getWidth(){
+    return this.width;
+  }
+  getHeight(){
+    return this.height;
   }
 }

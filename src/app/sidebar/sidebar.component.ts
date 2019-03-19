@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
 import { TabScrollerService } from '../tabscroller.service';
 import { Router } from '@angular/router';
+import { MapComponent } from '../map/map.component';
+import { SpeedControllerService } from '../speedcontroller.service';
 
 /*
   Singleton used to keep track of the current route
@@ -67,21 +69,29 @@ export class BottomSheetMenu implements OnInit {
   Tabscroller$: boolean;
   device: boolean;
   navTo: string;
+  CameraSlider$: number;
 
   constructor(private bottomSheetRef: MatBottomSheetRef<BottomSheetMenu>, 
     private tabscroller: TabScrollerService,
-    private router: Router) {}
+    private router: Router,
+    private speedcontroller: SpeedControllerService) {}
+    
 
   ngOnInit(){
     this.Tabscroller$ = this.tabscroller.getScrollBool();
     if(this.Tabscroller$){
       this.device = true;
     }
+    this.CameraSlider$ = this.speedcontroller.getSpeed();
   }
 
   openLink(event: MouseEvent): void {
     this.bottomSheetRef.dismiss();
     event.preventDefault();
+  }
+
+  changeSpeed(){
+    this.speedcontroller.setSpeed(50);
   }
 
   //function executed by the slide toggle

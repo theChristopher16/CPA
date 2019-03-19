@@ -17,7 +17,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BottomSheetMenu } from './sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms';
-import { SlideshowModule } from 'ng-simple-slideshow'
+import { SlideshowModule } from 'ng-simple-slideshow';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -35,13 +36,14 @@ import { SlideshowModule } from 'ng-simple-slideshow'
     AppRoutingModule,
     Ng2CarouselamosModule,
     HttpClientModule,
-  BrowserAnimationsModule,
+    BrowserAnimationsModule,
     MatCardModule,
     MatBottomSheetModule,
     MatButtonModule,
     MatSlideToggleModule,
     FormsModule,
-    SlideshowModule
+    SlideshowModule,
+    MatSliderModule
   ],
   entryComponents: [
     BottomSheetMenu
