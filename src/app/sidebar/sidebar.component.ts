@@ -41,12 +41,14 @@ export class NavigateRoutes {
 })
 export class SidebarComponent implements OnInit {
 
-  Tabscroller$:boolean;
+  Tabscroller$: boolean;
+  CameraSlider$: number;
   
-  constructor(private bottomSheet: MatBottomSheet, private tabscroller: TabScrollerService) { }
+  constructor(private bottomSheet: MatBottomSheet, private tabscroller: TabScrollerService, private cameraslider: SpeedControllerService) { }
 
   ngOnInit() {
     this.Tabscroller$ = this.tabscroller.getScrollBool();
+    this.CameraSlider$ = this.cameraslider.getSpeed();
   }
 
   //function to open the bottom sheet
@@ -70,6 +72,7 @@ export class BottomSheetMenu implements OnInit {
   device: boolean;
   navTo: string;
   CameraSlider$: number;
+  cameraslider: number;
 
   constructor(private bottomSheetRef: MatBottomSheetRef<BottomSheetMenu>, 
     private tabscroller: TabScrollerService,
@@ -83,6 +86,8 @@ export class BottomSheetMenu implements OnInit {
       this.device = true;
     }
     this.CameraSlider$ = this.speedcontroller.getSpeed();
+    this.cameraslider = this.speedcontroller.getSpeed();
+    console.log("cameraslider:" + this.CameraSlider$);
   }
 
   openLink(event: MouseEvent): void {
@@ -91,7 +96,7 @@ export class BottomSheetMenu implements OnInit {
   }
 
   changeSpeed(){
-    this.speedcontroller.setSpeed(50);
+    this.speedcontroller.setSpeed(this.cameraslider);
   }
 
   //function executed by the slide toggle

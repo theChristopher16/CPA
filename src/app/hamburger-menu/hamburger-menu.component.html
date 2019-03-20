@@ -10,7 +10,7 @@
 </mat-card>
 <mat-card>
   Camera Rotation
-  <mat-slider min="0" max="50" step="5" value="0" [(ngModel)]="cameraslider" class="floatRight">
+  <mat-slider min="0" max="50" step="5" value="0" [(ngModel)]="cameraslider" class="floatRight" (click)="changeSpeed()">
 
   </mat-slider>
 </mat-card>

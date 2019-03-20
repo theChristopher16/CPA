@@ -18,22 +18,29 @@ import { SpeedControllerService } from '../speedcontroller.service';
 export class MapComponent implements OnInit {
   @Input() autoTabBool: boolean;
   @Input() speedControllerVal: number;
+
   private p5;
 
   TabScroller$: boolean;
   SpeedController$: number;
 
+  public cameraspeed: number;
+
   constructor(
     private router: Router,
     private tabscroller: TabScrollerService,
     private speedcontroller: SpeedControllerService
-  //  private p5: p5
 ) { }
+
+  public getCameraSpeed(){
+    return this.cameraspeed;
+  }
 
   ngOnInit() {
     this.TabScroller$ = this.tabscroller.getScrollBool();
     this.SpeedController$ = this.speedcontroller.getSpeed();
-
+    console.log("asdf:" + this.speedcontroller.getSpeed());
+    this.cameraspeed = this.speedcontroller.getSpeed();
     this.createCanvas();
 
     NavigateRoutes.getInstance().setCurrentRoute(''); //used to tell sidebar the current route
@@ -56,7 +63,6 @@ export class MapComponent implements OnInit {
 
     // Variables controlling camera
     let angle = 0;
-    //let cameraSpeed = 25;
     let zoomAmount = 0;
     let maxZoom = 150;
     let minZoom = -950;
@@ -65,6 +71,7 @@ export class MapComponent implements OnInit {
     let buildingOn;
     let buildingOff;
     let concrete;
+    let floor;
     let sunshine;
 
     // Models
@@ -99,6 +106,7 @@ export class MapComponent implements OnInit {
       buildingOn = p.loadImage('../../assets/Map/Textures/buildingon.png');
       sunshine = p.loadImage('../../assets/Map/Textures/sun.png');
       concrete = p.loadImage('../../assets/Map/Textures/road.png');
+      floor = p.loadImage('../../assets/Map/Textures/floor.png');
 
       // Initialize buildings
       buildings = [
@@ -128,11 +136,10 @@ export class MapComponent implements OnInit {
     };
 
     p.setup = () => {
-      var cnv = p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL);
+      var cnv = p.createCanvas(window.innerWidth * 0.765, window.innerHeight, p.WEBGL);
       cnv.parent('myContainer');
-      //cnv.mouseWheel(zoom);
-      
-      /* Josh: Zoom in and out of the map using the scroll wheel
+      cnv.mouseWheel(zoom);
+      // Josh: Zoom in and out of the map using the scroll wheel
       function zoom(event){
         if (event.deltaY < 0) {
           if(zoomAmount < maxZoom){
@@ -144,12 +151,11 @@ export class MapComponent implements OnInit {
             zoomAmount -= 10;
           }
         }
-      }*/
+      }
     };
 
     p.draw = () => {
       
-      console.log(angle);
       // Draw background color
       // Josh: Changed background color to fluctuate between our color scheme
       var r = 242 - Math.abs(242 * p.sin(angle * Math.PI / 180));
@@ -157,24 +163,26 @@ export class MapComponent implements OnInit {
       var b = 255;
       p.background(r, g, b);
      
-      //program.setUniform('u_fogColor', [0.5, 0.5, 0.5, 0.5]);
-      //program.setUniform()
-      colorShader.setUniform('angle', angle * 3);
-      //program.setUniform('time', angle * 10);
-      colorShader.setUniform('resolution', [1000, 1000]);
-      p.shader(colorShader);
+      //colorShader.setUniform('angle', angle * 3);
+      //colorShader.setUniform('resolution', [1000, 1000]);
+      //p.shader(colorShader);
 
       // Move camera
       p.noStroke(0);
       p.rotateX(1 + zoomAmount / 1000); // Josh: Rotate the camera based on zoom. When zoomed all the way out, camera faces down, when zoomed all the way in, camera faces up.
       p.rotateY(0);
-      p.rotateZ(angle * 25 * Math.PI / 180);
+      try{
+        p.rotateZ(angle * 25 * Math.PI / 180);
+      }catch(error){
+        console.log("camera speed undefined");
+      }
+      
       p.translate(0, 0, zoomAmount); // Josh: Zoom!
       p.noStroke();
 
       // Draw ground & road
+      p.texture(floor);
       p.box(1152, 1152, 2);
-      //p.box(1152, 1152, 2000);
       
       p.push();
       p.scale(115);
@@ -207,7 +215,7 @@ export class MapComponent implements OnInit {
         p.pop();
       }
       // Josh: Lighting
-      p.ambientLight(255);
+      p.ambientLight(200);
       //p.ambientLight(r, g, b);
       //p.ambientLight(p.cos(angle * 10));
 
@@ -229,17 +237,6 @@ export class MapComponent implements OnInit {
       if(angle == 360){
         angle = 0;
       }
-      
-
-      // Draw scrolling panel
-      p.push();
-      p.rotateZ(-angle * 25 * Math.PI / 180); // Rotate opposite of camera rotation so box looks stationary
-      p.rotateX(65.3 * Math.PI/180); // Rotate perfectly so box is vertical
-      p.rotateX(1 -zoomAmount / 1000);
-      p.translate(panel.getX(), panel.getY(), -400); // Move to the correct position
-      p.ambientMaterial(66); // Colors the box (can be changed to a texture later)
-      p.box(panel.getWidth(), panel.getHeight(), 1); // Draw the box
-      p.pop();
 
       // Josh: Calculates fps and writes it to console
       var thisLoop = performance.now();
