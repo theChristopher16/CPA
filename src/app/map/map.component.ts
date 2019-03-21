@@ -20,11 +20,6 @@ var timesUp = false;
 export class MapComponent implements OnInit {
   @Input() autoTabBool: boolean;
   @Input() speedControllerVal: number;
-<<<<<<< HEAD
-
-=======
-
->>>>>>> ping
   private p5;
 
   TabScroller$: boolean;
