@@ -19,6 +19,7 @@ import { BottomSheetMenu } from './sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms';
 import { SlideshowModule } from 'ng-simple-slideshow';
 import {MatSliderModule} from '@angular/material/slider';
+import { ServicesDisplayComponent } from './services-display/services-display.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {MatSliderModule} from '@angular/material/slider';
     StatsComponent,
     InfoComponent,
     HamburgerMenuComponent,
-    BottomSheetMenu
+    BottomSheetMenu,
+    ServicesDisplayComponent
   ],
   imports: [
     BrowserModule,
