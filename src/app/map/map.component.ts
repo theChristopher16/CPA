@@ -8,6 +8,7 @@ import { NavigateRoutes } from '../sidebar/sidebar.component';
 import { zip } from 'rxjs';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { SpeedControllerService } from '../speedcontroller.service';
+import { ServicesDisplayComponent } from '../services-display/services-display.component';
 
 var timesUp = false;
 
@@ -30,7 +31,7 @@ export class MapComponent implements OnInit {
   constructor(
     private router: Router,
     private tabscroller: TabScrollerService,
-    private speedcontroller: SpeedControllerService
+    private speedcontroller: SpeedControllerService,
 ) { }
 
   public getCameraSpeed(){
@@ -238,6 +239,7 @@ export class MapComponent implements OnInit {
         //buildings[16].ping(); //Power Plant
         //buildings[17].ping(); //University Hall
         timesUp = false;
+        //ServicesDisplayComponent.changeMyVariable("Poop Canoe");
       }  //Ping for that building
 
       // Josh: Lighting
@@ -282,6 +284,10 @@ export class MapComponent implements OnInit {
       lastLoop = thisLoop;
       //console.log(fps);
     };
+  }
+
+  public getDict() {
+    return dict;
   }
 }
 
@@ -523,19 +529,5 @@ class ScrollingPanel{
   getHeight(){
     return this.height;
   }
-}
-
-@Component({
-  selector: 'services-display',
-  template: `
-    <ul>
-      <li *ngFor="let item of items">
-        {{ item.title }}
-      </li>
-    </ul>
-  `,
-})
-export class ServicesDisplayComponent {
-  items: ["taco", "hello", "please work"];
 }
 
