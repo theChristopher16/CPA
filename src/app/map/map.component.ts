@@ -34,10 +34,6 @@ export class MapComponent implements OnInit {
     private speedcontroller: SpeedControllerService,
 ) { }
 
-  public getCameraSpeed(){
-    return this.cameraspeed;
-  }
-
   ngOnInit() {
     this.TabScroller$ = this.tabscroller.getScrollBool();
     this.SpeedController$ = this.speedcontroller.getSpeed();
@@ -61,13 +57,12 @@ export class MapComponent implements OnInit {
 
   private sketch(p: any){
 
-    let s;
-
     // Variables controlling camera
     let angle = 0;
     let zoomAmount = 0;
     let maxZoom = 150;
     let minZoom = -950;
+    let cameraspeed = 15;
 
     // Textures
     let buildingOn;
@@ -173,11 +168,9 @@ export class MapComponent implements OnInit {
       p.noStroke(0);
       p.rotateX(1 + zoomAmount / 1000); // Josh: Rotate the camera based on zoom. When zoomed all the way out, camera faces down, when zoomed all the way in, camera faces up.
       p.rotateY(0);
-      try{
-        p.rotateZ(angle * 25 * Math.PI / 180);
-      }catch(error){
-        console.log("camera speed undefined");
-      }
+      
+      //rotateCamera(p, angle);
+      p.rotateZ(angle * cameraspeed * Math.PI / 180);
 
       p.translate(0, 0, zoomAmount); // Josh: Zoom!
       p.noStroke();
