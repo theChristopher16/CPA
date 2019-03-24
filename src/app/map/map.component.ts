@@ -517,3 +517,18 @@ class ScrollingPanel{
     return this.height;
   }
 }
+
+@Component({
+  selector: 'services-display',
+  template: `
+    <ul>
+      <li *ngFor="let item of items">
+        {{ item.title }}
+      </li>
+    </ul>
+  `,
+})
+export class ServicesDisplayComponent {
+  items: ["taco", "hello", "please work"];
+}
+
