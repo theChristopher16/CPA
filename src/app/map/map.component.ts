@@ -53,6 +53,7 @@ export class MapComponent implements OnInit {
 
   private createCanvas(){
     this.p5 = new p5(this.sketch);
+    this.p5.setSpeedController(this.speedcontroller);
   }
 
   private sketch(p: any){
@@ -62,7 +63,7 @@ export class MapComponent implements OnInit {
     let zoomAmount = 0;
     let maxZoom = 150;
     let minZoom = -950;
-    let cameraspeed = 15;
+    var controller;
 
     // Textures
     let buildingOn;
@@ -87,6 +88,10 @@ export class MapComponent implements OnInit {
 
     // Josh: Added to track fps
     let lastLoop = performance.now();
+
+  p.setSpeedController = (speedcontroller: any) => {
+    controller = speedcontroller;
+  }
 
    p.preload = () => {
 
@@ -170,7 +175,7 @@ export class MapComponent implements OnInit {
       p.rotateY(0);
       
       //rotateCamera(p, angle);
-      p.rotateZ(angle * cameraspeed * Math.PI / 180);
+      p.rotateZ(angle * controller.getSpeed() * Math.PI / 180);
 
       p.translate(0, 0, zoomAmount); // Josh: Zoom!
       p.noStroke();
