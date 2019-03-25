@@ -63,7 +63,7 @@ export class MapComponent implements OnInit {
     let zoomAmount = 0;
     let maxZoom = 150;
     let minZoom = -950;
-    var controller;
+    var speed_controller;
 
     // Textures
     let buildingOn;
@@ -90,7 +90,7 @@ export class MapComponent implements OnInit {
     let lastLoop = performance.now();
 
   p.setSpeedController = (speedcontroller: any) => {
-    controller = speedcontroller;
+    speed_controller = speedcontroller;
   }
 
    p.preload = () => {
@@ -175,7 +175,7 @@ export class MapComponent implements OnInit {
       p.rotateY(0);
       
       //rotateCamera(p, angle);
-      p.rotateZ(angle * controller.getSpeed() * Math.PI / 180);
+      p.rotateZ(angle * speed_controller.getSpeed() * Math.PI / 180);
 
       p.translate(0, 0, zoomAmount); // Josh: Zoom!
       p.noStroke();

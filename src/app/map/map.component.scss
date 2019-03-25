@@ -25,3 +25,10 @@ panel {
     position: relative;
     left: 38%;
 }
+
+body
+{
+    position: fixed; 
+    overflow-y: scroll;
+    width: 100%;
+}
