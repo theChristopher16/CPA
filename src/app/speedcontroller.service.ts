@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 })
 export class SpeedControllerService {
 
-  public speedval$ = 25;
+  public speedval$ = 10;
 
   constructor(private router: Router) { }
 

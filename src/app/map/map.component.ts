@@ -37,7 +37,6 @@ export class MapComponent implements OnInit {
   ngOnInit() {
     this.TabScroller$ = this.tabscroller.getScrollBool();
     this.SpeedController$ = this.speedcontroller.getSpeed();
-    console.log("asdf:" + this.speedcontroller.getSpeed());
     this.cameraspeed = this.speedcontroller.getSpeed();
     this.createCanvas();
 
@@ -61,8 +60,8 @@ export class MapComponent implements OnInit {
     // Variables controlling camera
     let angle = 0;
     let zoomAmount = 0;
-    let maxZoom = 150;
-    let minZoom = -950;
+    let maxZoom = 100;
+    let minZoom = -460;
     var speed_controller;
 
     // Textures
@@ -82,9 +81,6 @@ export class MapComponent implements OnInit {
     // Shaders
     var colorShader;
     var fogShader;
-
-    // Side panel
-    let panel;
 
     // Josh: Added to track fps
     let lastLoop = performance.now();
@@ -132,9 +128,6 @@ export class MapComponent implements OnInit {
         new Building("Power Plant", -240, 170, 23, -90, 90, 0, 12, p.loadModel('../../assets/Map/Models/powerPlant.obj'), "http://10.16.17.18:80/"),
         new Building("University Hall", 300, -290, 30, 90, 195, 180, 23, p.loadModel('../../assets/Map/Models/cobb.obj'), "http://10.16.17.19:80/"), // Same model as COBB
       ];
-
-      // Initialize side panel
-      panel = new ScrollingPanel(500, 500, 407.5, 100, 1); // width, height, x, y, scrolling speed
     };
 
     p.setup = () => {
@@ -145,12 +138,12 @@ export class MapComponent implements OnInit {
       function zoom(event){
         if (event.deltaY < 0) {
           if(zoomAmount < maxZoom){
-            zoomAmount += 10;
+            zoomAmount += 20;
           }
         }
         else {
           if(zoomAmount > minZoom){
-            zoomAmount -= 10;
+            zoomAmount -= 20;
           }
         }
       }
@@ -171,10 +164,9 @@ export class MapComponent implements OnInit {
 
       // Move camera
       p.noStroke(0);
-      p.rotateX(1 + zoomAmount / 1000); // Josh: Rotate the camera based on zoom. When zoomed all the way out, camera faces down, when zoomed all the way in, camera faces up.
+      p.rotateX(1 + zoomAmount / 500); // Josh: Rotate the camera based on zoom. When zoomed all the way out, camera faces down, when zoomed all the way in, camera faces up.
       p.rotateY(0);
 
-      //rotateCamera(p, angle);
       p.rotateZ(angle * speed_controller.getSpeed() * Math.PI / 180);
 
       p.translate(0, 0, zoomAmount); // Josh: Zoom!
@@ -240,10 +232,10 @@ export class MapComponent implements OnInit {
         //ServicesDisplayComponent.changeMyVariable("Poop Canoe");
       }  //Ping for that building
 
-      // Josh: Lighting
-      p.ambientLight(200);
-      //p.ambientLight(r, g, b);
-      //p.ambientLight(p.cos(angle * 10));
+      // Josh: Lighting based on sun height
+      p.ambientLight(210 + 40 * (sun.getZ()/1800));
+      // sun max height = 1798
+      // sun min height = -1801
 
       // Josh: Sun stuff
       p.push();
@@ -259,22 +251,10 @@ export class MapComponent implements OnInit {
 
       p.shader(fogShader);
 
-      angle += 0.005;
+      angle += 0.05;
       if(angle == 360){
         angle = 0;
       }
-
-      /*
-      // Draw scrolling panel
-      p.push();
-      p.rotateZ(-angle * 25 * Math.PI / 180); // Rotate opposite of camera rotation so box looks stationary
-      p.rotateX(65.3 * Math.PI/180); // Rotate perfectly so box is vertical
-      p.rotateX(1 -zoomAmount / 1000);
-      p.translate(panel.getX(), panel.getY(), -400); // Move to the correct position
-      p.ambientMaterial(66); // Colors the box (can be changed to a texture later)
-      p.box(panel.getWidth(), panel.getHeight(), 1); // Draw the box
-      p.pop();
-      */
 
       // Josh: Calculates fps and writes it to console
       var thisLoop = performance.now();
@@ -417,7 +397,7 @@ class Sun{
   y: number;
   z: number;
   distance_x: number;
-  distance_y: number;
+  distance_z: number;
   counter: number;
   phase: number;
 
@@ -428,15 +408,15 @@ class Sun{
   model: any;
 
   constructor(m: any){
-    this.distance_x = 0.06;
-    this.distance_y = 1000;
+    this.distance_x = 0.6;
+    this.distance_z = 1;
     this.counter = 0;
     this.phase = 1;
     this.color_r = 255;
     this.color_g = 0;
     this.color_b = 0;
 
-    this.init_x = 1000;
+    this.init_x = 1100;
     this.init_y = 0;
     this.init_z = 0;
 
@@ -448,27 +428,27 @@ class Sun{
   }
 
   update(angle: number){
-    if(angle % 90 == 0){
-      this.phase++;
-      if(this.phase == 5){
-        this.phase = 1;
-      }
+    this.phase = 2 + Math.floor(angle / 90);
+    if(this.phase > 4){
+      this.phase = this.phase - 4;
     }
-    angle = angle * Math.PI / 180;
+    
     if(this.phase == 3){
       this.x -= this.distance_x;
+      this.z += this.distance_z;
     }
     else if(this.phase == 1){
       this.x += this.distance_x;
+      this.z -= this.distance_z;
     }
     else if(this.phase == 2){
       this.x -= this.distance_x;
+      this.z -= this.distance_z;
     }
     else if(this.phase == 4){
       this.x += this.distance_x;
+      this.z += this.distance_z;
     }
-    this.z = -Math.sin(angle - Math.PI/180);
-    this.z *= this.distance_y;
   }
 
   getX(){
@@ -491,40 +471,5 @@ class Sun{
   }
   getModel(){
     return this.model;
-  }
-}
-
-class ScrollingPanel{
-
-  width: number;
-  height: number;
-  x: number;
-  y: number;
-
-  scrollSpeed: number;
-
-  constructor(w: number, h: number, x: number, y: number, ss: number){
-    this.width = w;
-    this.height = h;
-    this.x = x;
-    this.y = y;
-    this.scrollSpeed = ss;
-  }
-
-  update(){
-    this.y -= this.scrollSpeed;
-  }
-
-  getX(){
-    return this.x;
-  }
-  getY(){
-    return this.y;
-  }
-  getWidth(){
-    return this.width;
-  }
-  getHeight(){
-    return this.height;
   }
 }
