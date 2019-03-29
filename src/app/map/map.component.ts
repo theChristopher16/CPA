@@ -1,3 +1,4 @@
+#test
 import { Component, OnInit, Input } from '@angular/core';
 import * as p5 from '../../../node_modules/p5/';
 import { Router } from '@angular/router';
