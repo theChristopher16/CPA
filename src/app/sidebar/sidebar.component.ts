@@ -4,6 +4,7 @@ import { TabScrollerService } from '../tabscroller.service';
 import { Router } from '@angular/router';
 import { MapComponent } from '../map/map.component';
 import { SpeedControllerService } from '../speedcontroller.service';
+import { BuildingNameService } from '../buildingname.service';
 
 /*
   Singleton used to keep track of the current route
@@ -42,21 +43,21 @@ export class NavigateRoutes {
 export class SidebarComponent implements OnInit {
 
   Tabscroller$: boolean;
+  BuildingName$: boolean;
   CameraSlider$: number;
   
-  constructor(private bottomSheet: MatBottomSheet, private tabscroller: TabScrollerService, private cameraslider: SpeedControllerService) { }
+  constructor(private bottomSheet: MatBottomSheet, private tabscroller: TabScrollerService, private cameraslider: SpeedControllerService, private buildingnamer: BuildingNameService) { }
 
   ngOnInit() {
     this.Tabscroller$ = this.tabscroller.getScrollBool();
     this.CameraSlider$ = this.cameraslider.getSpeed();
+    this.BuildingName$ = this.buildingnamer.getNameBool();
   }
 
   //function to open the bottom sheet
   openBottomSheet(): void {
     this.bottomSheet.open(BottomSheetMenu);
-    console.log("SCROLL VAL IS " + this.Tabscroller$);
   }
-
 }
 
 //Additional component for the bottom sheet
@@ -69,7 +70,9 @@ export class SidebarComponent implements OnInit {
 export class BottomSheetMenu implements OnInit {
 
   Tabscroller$: boolean;
-  device: boolean;
+  BuildingNamer$: boolean;
+  device1: boolean;
+  device2: boolean;
   navTo: string;
   CameraSlider$: number;
   cameraslider: number;
@@ -77,13 +80,18 @@ export class BottomSheetMenu implements OnInit {
   constructor(private bottomSheetRef: MatBottomSheetRef<BottomSheetMenu>, 
     private tabscroller: TabScrollerService,
     private router: Router,
-    private speedcontroller: SpeedControllerService) {}
+    private speedcontroller: SpeedControllerService,
+    private buildingname: BuildingNameService){}
     
 
   ngOnInit(){
     this.Tabscroller$ = this.tabscroller.getScrollBool();
     if(this.Tabscroller$){
-      this.device = true;
+      this.device1 = true;
+    }
+    this.BuildingNamer$ = this.buildingname.getNameBool();
+    if(this.BuildingNamer$){
+      this.device2 = true;
     }
     this.CameraSlider$ = this.speedcontroller.getSpeed();
     this.cameraslider = this.speedcontroller.getSpeed();
@@ -100,7 +108,7 @@ export class BottomSheetMenu implements OnInit {
   }
 
   //function executed by the slide toggle
-  toggle(){
+  toggleAutoScroll(){
     if(this.tabscroller.getScrollBool()){
       this.tabscroller.setScrollBool(false);
     }
@@ -144,4 +152,9 @@ export class BottomSheetMenu implements OnInit {
       }
     }
   }
+
+  toggleBuildingNames(){
+    this.buildingname.setNameBool(!this.buildingname.getNameBool())
+  }
+
 }

@@ -9,6 +9,7 @@ import { zip } from 'rxjs';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { SpeedControllerService } from '../speedcontroller.service';
 import { ServicesDisplayComponent } from '../services-display/services-display.component';
+import { BuildingNameService } from '../buildingname.service';
 
 var timesUp = false;
 
@@ -24,6 +25,7 @@ export class MapComponent implements OnInit {
   private p5;
 
   TabScroller$: boolean;
+  BuildingName$: boolean;
   SpeedController$: number;
 
   public cameraspeed: number;
@@ -32,6 +34,7 @@ export class MapComponent implements OnInit {
     private router: Router,
     private tabscroller: TabScrollerService,
     private speedcontroller: SpeedControllerService,
+    private buildingnamer: BuildingNameService,
 ) { }
 
   ngOnInit() {
@@ -53,6 +56,7 @@ export class MapComponent implements OnInit {
   private createCanvas(){
     this.p5 = new p5(this.sketch);
     this.p5.setSpeedController(this.speedcontroller);
+    this.p5.setBuildingNamer(this.buildingnamer);
   }
 
   private sketch(p: any){
@@ -63,6 +67,7 @@ export class MapComponent implements OnInit {
     let maxZoom = 100;
     let minZoom = -460;
     var speed_controller;
+    var building_namer;
 
     // Textures
     let buildingOn;
@@ -87,6 +92,9 @@ export class MapComponent implements OnInit {
 
   p.setSpeedController = (speedcontroller: any) => {
     speed_controller = speedcontroller;
+  }
+  p.setBuildingNamer = (buildingnamer: any) => {
+    building_namer = buildingnamer;
   }
 
    p.preload = () => {
@@ -207,8 +215,8 @@ export class MapComponent implements OnInit {
         p.model(b.getModel());
         p.pop();
       }
-      // Later change to toggle button
-      if(true){
+      // Josh: If building names toggle is on, draw building name models
+      if(building_namer.getNameBool()){
         for(let b of buildings){
           p.push();
           // Get name into position
