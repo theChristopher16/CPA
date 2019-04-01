@@ -468,7 +468,7 @@ class Sun{
     if(this.phase > 4){
       this.phase = this.phase - 4;
     }
-    
+
     if(this.phase == 3){
       this.x -= this.distance_x;
       this.z += this.distance_z;
