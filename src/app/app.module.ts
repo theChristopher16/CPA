@@ -20,6 +20,9 @@ import { FormsModule } from '@angular/forms';
 import { SlideshowModule } from 'ng-simple-slideshow';
 import {MatSliderModule} from '@angular/material/slider';
 import { ServicesDisplayComponent } from './services-display/services-display.component';
+import { CommonModule } from '@angular/common';
+ 
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -34,11 +37,13 @@ import { ServicesDisplayComponent } from './services-display/services-display.co
     ServicesDisplayComponent
   ],
   imports: [
+    CommonModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     Ng2CarouselamosModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     MatCardModule,
     MatBottomSheetModule,
     MatButtonModule,

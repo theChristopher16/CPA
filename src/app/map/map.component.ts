@@ -42,7 +42,6 @@ export class MapComponent implements OnInit {
     this.SpeedController$ = this.speedcontroller.getSpeed();
     this.cameraspeed = this.speedcontroller.getSpeed();
     this.createCanvas();
-
     NavigateRoutes.getInstance().setCurrentRoute(''); //used to tell sidebar the current route
 
     setTimeout(() => {
@@ -158,7 +157,6 @@ export class MapComponent implements OnInit {
     };
 
     p.draw = () => {
-
       // Draw background color
       // Josh: Changed background color to fluctuate between our color scheme
       var r = 242 - Math.abs(242 * p.sin(angle * Math.PI / 180));
@@ -169,7 +167,6 @@ export class MapComponent implements OnInit {
       //colorShader.setUniform('angle', angle * 3);
       //colorShader.setUniform('resolution', [1000, 1000]);
       //p.shader(colorShader);
-
       // Move camera
       p.noStroke(0);
       p.rotateX(1 + zoomAmount / 500); // Josh: Rotate the camera based on zoom. When zoomed all the way out, camera faces down, when zoomed all the way in, camera faces up.
