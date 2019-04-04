@@ -116,25 +116,25 @@ export class MapComponent implements OnInit {
 
       // Initialize buildings
       buildings = [
-        // Building parameters are: NAME, X, Y, Z, rotX, rotY, rotZ, SCALE, MODEL, URL
-        new Building("Wyly", 125, -290, 170, 90, 15, 180, 18, p.loadModel('../../assets/Map/Models/wyly.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.2:80/"),
-        new Building("Nethkin", 510, 130, 0, 90, 180, 0, 14, p.loadModel('../../assets/Map/Models/nethkin.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.3:80/"),
-        new Building("Bogard", 380, -20, 30, 270, 270, 0, 18, p.loadModel('../../assets/Map/Models/bogard.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.4:80/"),
-        new Building("Keeny", 265, -150, 30, 270, 90, 0, 13, p.loadModel('../../assets/Map/Models/keeny.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.5:80/"),
-        new Building("Carson Taylor", 315, 190, 23, -90, 0, 0, 16, p.loadModel('../../assets/Map/Models/carsonTaylor.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.6:80/"),
-        new Building("Hale", -270, -290, 0, -90, 0, 180, 10, p.loadModel('../../assets/Map/Models/hale.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.7:80/"),
-        new Building("GTM", -50, -325, 35, 90, -174, 180, 25, p.loadModel('../../assets/Map/Models/gtm.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.8:80/"),
-        new Building("Engineering Annex", 410, 150, 23, -90, 0, 0, 11, p.loadModel('../../assets/Map/Models/engineeringAnnex.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.9:80/"),
-        new Building("Howard", 155, -40, 0, -90, 0, 180, 12, p.loadModel('../../assets/Map/Models/howard.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.10:80/"),
-        new Building("Student Center", -20, -55, 30, 90, 15, 180, 12, p.loadModel('../../assets/Map/Models/studentCenter.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.11:80/"),
-        new Building("Tolliver", -130, 40, 23, -90, 163, 0, 15, p.loadModel('../../assets/Map/Models/tolliver.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.12:80/"),
-        new Building("Woodard", -325, -100, 20, 270, 90, 0, 13, p.loadModel('../../assets/Map/Models/woodard.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.13:80/"),
-        new Building("COBB", 535, -200, 55, 270, 0, 0, 26, p.loadModel('../../assets/Map/Models/cobb.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.14:80/"),
-        new Building("Band Building", -320, 10, 23, -90, 0, 0, 11, p.loadModel('../../assets/Map/Models/bandBuilding.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.15:80/"),
+        // Building parameters are: NAME, X, Y, Z, rotX, rotY, rotZ, SCALE, MODEL, NAME, URL
+        new Building("Wyly", 125, -290, 170, 90, 15, 180, 18, p.loadModel('../../assets/Map/Models/wyly.obj'), p.loadModel('../../assets/Map/Models/wyly_name.obj'), "http://10.16.17.2:80/"),
+        new Building("Nethkin", 510, 130, 0, 90, 180, 0, 14, p.loadModel('../../assets/Map/Models/nethkin.obj'), p.loadModel('../../assets/Map/Models/nethken_name.obj'), "http://10.16.17.3:80/"),
+        new Building("Bogard", 380, -20, 30, 270, 270, 0, 18, p.loadModel('../../assets/Map/Models/bogard.obj'), p.loadModel('../../assets/Map/Models/bogard_name.obj'), "http://10.16.17.4:80/"),
+        new Building("Keeny", 265, -150, 30, 270, 90, 0, 13, p.loadModel('../../assets/Map/Models/keeny.obj'), p.loadModel('../../assets/Map/Models/keeny_name.obj'), "http://10.16.17.5:80/"),
+        new Building("Carson Taylor", 315, 190, 23, -90, 0, 0, 16, p.loadModel('../../assets/Map/Models/carsonTaylor.obj'), p.loadModel('../../assets/Map/Models/carsonTaylor_name.obj'), "http://10.16.17.6:80/"),
+        new Building("Hale", -270, -290, 0, -90, 0, 180, 10, p.loadModel('../../assets/Map/Models/hale.obj'), p.loadModel('../../assets/Map/Models/hale_name.obj'), "http://10.16.17.7:80/"),
+        new Building("GTM", -50, -325, 35, 90, -174, 180, 25, p.loadModel('../../assets/Map/Models/gtm.obj'), p.loadModel('../../assets/Map/Models/gtm_name.obj'), "http://10.16.17.8:80/"),
+        new Building("Engineering Annex", 410, 150, 23, -90, 0, 0, 11, p.loadModel('../../assets/Map/Models/engineeringAnnex.obj'), p.loadModel('../../assets/Map/Models/engineeringAnnex_name.obj'), "http://10.16.17.9:80/"),
+        new Building("Howard", 155, -40, 0, -90, 0, 180, 12, p.loadModel('../../assets/Map/Models/howard.obj'), p.loadModel('../../assets/Map/Models/howard_name.obj'), "http://10.16.17.10:80/"),
+        new Building("Student Center", -20, -55, 30, 90, 15, 180, 12, p.loadModel('../../assets/Map/Models/studentCenter.obj'), p.loadModel('../../assets/Map/Models/studentCenter_name.obj'), "http://10.16.17.11:80/"),
+        new Building("Tolliver", -130, 40, 23, -90, 163, 0, 15, p.loadModel('../../assets/Map/Models/tolliver.obj'), p.loadModel('../../assets/Map/Models/tolliver_name.obj'), "http://10.16.17.12:80/"),
+        new Building("Woodard", -325, -100, 20, 270, 90, 0, 13, p.loadModel('../../assets/Map/Models/woodard.obj'), p.loadModel('../../assets/Map/Models/woodard_name.obj'), "http://10.16.17.13:80/"),
+        new Building("COBB", 535, -200, 55, 270, 0, 0, 26, p.loadModel('../../assets/Map/Models/cobb.obj'), p.loadModel('../../assets/Map/Models/cobb_name.obj'), "http://10.16.17.14:80/"),
+        new Building("Band Building", -320, 10, 23, -90, 0, 0, 11, p.loadModel('../../assets/Map/Models/bandBuilding.obj'), p.loadModel('../../assets/Map/Models/bandBuilding_name.obj'), "http://10.16.17.15:80/"),
         new Building("IFM", -430, 320, 0, -90, 0, -180, 13, p.loadModel('../../assets/Map/Models/ifm.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.16:80/"),
-        new Building("South Hall", -500, 200, 39, 270, 0, 0, 12, p.loadModel('../../assets/Map/Models/southHall.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.17:80/"),
-        new Building("Power Plant", -240, 170, 23, -90, 90, 0, 12, p.loadModel('../../assets/Map/Models/powerPlant.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.18:80/"),
-        new Building("University Hall", 300, -290, 30, 90, 195, 180, 23, p.loadModel('../../assets/Map/Models/cobb.obj'), p.loadModel('../../assets/Map/Models/ifm_name.obj'), "http://10.16.17.19:80/"), // Same model as COBB
+        new Building("South Hall", -500, 200, 39, 270, 0, 0, 12, p.loadModel('../../assets/Map/Models/southHall.obj'), p.loadModel('../../assets/Map/Models/southHall_name.obj'), "http://10.16.17.17:80/"),
+        new Building("Power Plant", -240, 170, 23, -90, 90, 0, 12, p.loadModel('../../assets/Map/Models/powerPlant.obj'), p.loadModel('../../assets/Map/Models/powerPlant_name.obj'), "http://10.16.17.18:80/"),
+        new Building("University Hall", 300, -290, 30, 90, 195, 180, 23, p.loadModel('../../assets/Map/Models/cobb.obj'), p.loadModel('../../assets/Map/Models/cobb_name.obj'), "http://10.16.17.19:80/"), // Same model as COBB
       ];
     };
 

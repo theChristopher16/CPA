@@ -7,11 +7,10 @@
     "\\src\\app\\hamburger-menu",
     "\\src\\app\\services-display",
     "\\src\\assets",
+    "\\src\\assets\\Achievements",
     "\\src\\assets\\Info",
-    "\\src\\assets\\Info\\Images",
-    "\\src\\assets\\Map",
-    "\\src\\assets\\Map\\Textures"
+    "\\src\\assets\\Info\\Images"
   ],
-  "SelectedNode": "\\src\\assets\\Map\\Textures\\panelbg.png",
+  "SelectedNode": "\\src\\assets\\Achievements\\Lighthouse_P3.png",
   "PreviewInSolutionExplorer": false
 }
