@@ -10,8 +10,10 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { SpeedControllerService } from '../speedcontroller.service';
 import { ServicesDisplayComponent } from '../services-display/services-display.component';
 import { BuildingNameService } from '../buildingname.service';
+import { RaspberryPiInfoService } from '../raspberry-pi-info.service';
 
 var timesUp = false;
+var globalPis; //global object to hold raspberry pi network info
 
 @Component({
   selector: 'app-map',
@@ -27,6 +29,7 @@ export class MapComponent implements OnInit {
   TabScroller$: boolean;
   BuildingName$: boolean;
   SpeedController$: number;
+  raspPis$: Object;
 
   public cameraspeed: number;
 
@@ -35,13 +38,51 @@ export class MapComponent implements OnInit {
     private tabscroller: TabScrollerService,
     private speedcontroller: SpeedControllerService,
     private buildingnamer: BuildingNameService,
-) { }
+    private raspPi: RaspberryPiInfoService,
+  ) { }
 
   ngOnInit() {
     this.TabScroller$ = this.tabscroller.getScrollBool();
     this.SpeedController$ = this.speedcontroller.getSpeed();
     this.cameraspeed = this.speedcontroller.getSpeed();
     this.createCanvas();
+
+    //gets initial status of raspberry pi network
+    //updates the "dictionaty": dict for appropiate drawing based on status 
+    this.raspPi.getRaspberryPiNetwork().subscribe(
+      raspPi => {
+        this.raspPis$ = raspPi;
+        globalPis = raspPi;
+        let ind = 0;
+        for(var pi in globalPis){
+          if(globalPis[ind]['port80'] == "0"){
+            dict[globalPis[ind]['Name']] = false;
+          }else{
+            dict[globalPis[ind]['Name']] = true;            
+          }
+          ind++;
+        }
+      }
+    );
+
+    //runs subscription to service every 2 minutes (120,000 ms)
+    //updates dict every time to reflect network status of raspbery pis
+    setInterval(() => {
+      this.raspPi.getRaspberryPiNetwork().subscribe(
+        raspPi => {
+          this.raspPis$ = raspPi;
+          globalPis = raspPi;
+          let ind = 0;
+          for(var pi in globalPis){
+            if(globalPis[ind]['port80'] == "0"){
+              dict[globalPis[ind]['Name']] = false;
+            }else{
+              dict[globalPis[ind]['Name']] = true;            
+            }
+            ind++;
+          }
+        }
+    );},120000);
 
     NavigateRoutes.getInstance().setCurrentRoute(''); //used to tell sidebar the current route
 
@@ -239,30 +280,6 @@ export class MapComponent implements OnInit {
         }
       }
 
-      // PING STUFF
-      if (timesUp){
-        buildings[0].ping() //Wyly
-        buildings[1].ping();  //Nethkin
-        buildings[2].ping(); //Bogard
-        buildings[3].ping();  //Keeny
-        buildings[4].ping();  //Carson Taylor
-        buildings[5].ping(); //Hale
-        buildings[6].ping();  //GTM
-        buildings[7].ping();  //Engineering Annex
-        buildings[8].ping(); //Howard
-        buildings[9].ping(); //Student Center
-        buildings[10].ping();  //Tolliver
-        buildings[11].ping(); //Woodard
-        buildings[12].ping();  //COBB
-        buildings[13].ping(); //Band Building
-        buildings[14].ping(); //IFM
-        buildings[15].ping();  //South Hall
-        buildings[16].ping(); //Power Plant
-        buildings[17].ping(); //University Hall
-        timesUp = false;
-        //ServicesDisplayComponent.changeMyVariable("Poop Canoe");
-      }  //Ping for that building
-
       // Josh: Lighting based on sun height
       p.ambientLight(210 + 40 * (sun.getZ()/1800));
       // sun max height = 1798
@@ -300,10 +317,7 @@ export class MapComponent implements OnInit {
   }
 }
 
-var clearTimer = setInterval(function(){
-  timesUp = true;
-}, 20 * 1000);
-
+//Global? dictionary that holds port80 status for pis
 var dict = {
   "Wyly": true,
   "Nethkin": true,
@@ -394,32 +408,6 @@ class Building{
   // Setters
   setUp(b: boolean){
     this.up = b;
-  }
-
-  // Functionality
-  ping(){
-    var bn = this.name;
-    let ping = new XMLHttpRequest();;
-    ping.open("GET", this.url, true);
-    ping.onreadystatechange = function(){
-      //console.log(ping)
-      if(ping.status == 200){
-        dict[bn] = true;
-        console.log(`${bn} is connected!`);
-      }
-      ping.onerror = function(e){
-        dict[bn] = false;
-        console.log(`${bn} is down!`);
-      };
-    };
-
-    ping.send();
-    /*if(didPing){
-      return true;
-    }
-    else{
-      return false;
-    }*/
   }
 }
 
