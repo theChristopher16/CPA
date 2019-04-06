@@ -46,44 +46,6 @@ export class MapComponent implements OnInit {
     this.SpeedController$ = this.speedcontroller.getSpeed();
     this.cameraspeed = this.speedcontroller.getSpeed();
     this.createCanvas();
-
-    //gets initial status of raspberry pi network
-    //updates the "dictionaty": dict for appropiate drawing based on status 
-    this.raspPi.getRaspberryPiNetwork().subscribe(
-      raspPi => {
-        this.raspPis$ = raspPi;
-        globalPis = raspPi;
-        let ind = 0;
-        for(var pi in globalPis){
-          if(globalPis[ind]['port80'] == "0"){
-            dict[globalPis[ind]['Name']] = false;
-          }else{
-            dict[globalPis[ind]['Name']] = true;            
-          }
-          ind++;
-        }
-      }
-    );
-
-    //runs subscription to service every 2 minutes (120,000 ms)
-    //updates dict every time to reflect network status of raspbery pis
-    setInterval(() => {
-      this.raspPi.getRaspberryPiNetwork().subscribe(
-        raspPi => {
-          this.raspPis$ = raspPi;
-          globalPis = raspPi;
-          let ind = 0;
-          for(var pi in globalPis){
-            if(globalPis[ind]['port80'] == "0"){
-              dict[globalPis[ind]['Name']] = false;
-            }else{
-              dict[globalPis[ind]['Name']] = true;            
-            }
-            ind++;
-          }
-        }
-    );},120000);
-
     NavigateRoutes.getInstance().setCurrentRoute(''); //used to tell sidebar the current route
 
     setTimeout(() => {
@@ -199,7 +161,6 @@ export class MapComponent implements OnInit {
     };
 
     p.draw = () => {
-
       // Draw background color
       // Josh: Changed background color to fluctuate between our color scheme
       var r = 242 - Math.abs(242 * p.sin(angle * Math.PI / 180));
@@ -210,7 +171,6 @@ export class MapComponent implements OnInit {
       //colorShader.setUniform('angle', angle * 3);
       //colorShader.setUniform('resolution', [1000, 1000]);
       //p.shader(colorShader);
-
       // Move camera
       p.noStroke(0);
       p.rotateX(1 + zoomAmount / 500); // Josh: Rotate the camera based on zoom. When zoomed all the way out, camera faces down, when zoomed all the way in, camera faces up.
