@@ -78,13 +78,13 @@ export class MapComponent implements OnInit {
     let concrete;
     let floor;
     let sunshine;
+    let bark;
 
     // Models
     let road;
-
     let buildings:Building[];
-
     let sun;
+    let trees:Tree[];
 
     // Shaders
     var colorShader;
@@ -116,6 +116,7 @@ export class MapComponent implements OnInit {
       sunshine = p.loadImage('../../assets/Map/Textures/sun.png');
       concrete = p.loadImage('../../assets/Map/Textures/road.png');
       floor = p.loadImage('../../assets/Map/Textures/floor.png');
+      bark = p.loadImage('../../assets/Map/Textures/tree.png');
 
       // Initialize buildings
       buildings = [
@@ -139,6 +140,31 @@ export class MapComponent implements OnInit {
         new Building("Power Plant", -240, 170, 23, -90, 90, 0, 12, p.loadModel('../../assets/Map/Models/powerPlant.obj'), p.loadModel('../../assets/Map/Models/powerPlant_name.obj'), "http://10.16.17.18:80/"),
         new Building("University Hall", 300, -290, 30, 90, 195, 180, 23, p.loadModel('../../assets/Map/Models/cobb.obj'), p.loadModel('../../assets/Map/Models/cobb_name.obj'), "http://10.16.17.19:80/"), // Same model as COBB
       ];
+      
+      // Initialize trees
+      // Random
+      trees = [];
+      let numTrees = 10;
+      let spacing = 90;
+      let counter = 0;
+      for(let i = 0; i < numTrees; i++){
+        for(let j = 0; j < numTrees; j++){
+          let spawn = Math.floor(Math.random() * Math.floor(3));
+          if(spawn == 0){
+            let randX = Math.floor(Math.random() * Math.floor(numTrees));
+            let randY = Math.floor(Math.random() * Math.floor(numTrees));
+            let rot = Math.floor(Math.random() * Math.floor(180));
+            trees[counter] = new Tree(-300 + randX * spacing, -450 + randY * spacing, 17, 90, rot, 0, 10, p.loadModel('../../assets/Map/Models/tree.obj'));
+            counter++;
+          }
+        }
+      }
+      // Manual
+      /*trees = [
+        new Tree(125, -250, 5, 90, 15, 0, 0.1, p.loadModel('../../assets/Map/Models/treetest.obj')),
+        new Tree(200, -250, 5, 90, 15, 0, 0.1, p.loadModel('../../assets/Map/Models/treetest.obj')),
+        new Tree(275, -250, 5, 90, 15, 0, 0.1, p.loadModel('../../assets/Map/Models/treetest.obj'))
+      ]*/
     };
 
     p.setup = () => {
@@ -239,6 +265,26 @@ export class MapComponent implements OnInit {
           p.pop();
         }
       }
+
+      // Draw trees
+      for(let t of trees){
+        p.push();
+        // Get tree into position
+        p.translate(t.getX(), t.getY(), t.getZ());
+        // Rotate tree
+        p.rotateX(t.getRX());
+        p.rotateY(t.getRY());
+        p.rotateZ(t.getRZ());
+        // Scale
+        p.scale(t.getScale());
+        // Texture
+        p.texture(bark);
+        // Model
+        
+        p.model(t.getModel());
+        p.pop();
+      }
+
 
       // Josh: Lighting based on sun height
       p.ambientLight(210 + 40 * (sun.getZ()/1800));
@@ -368,6 +414,52 @@ class Building{
   // Setters
   setUp(b: boolean){
     this.up = b;
+  }
+}
+
+class Tree{
+  x: number; // Position values
+  y: number;
+  z: number;
+  rx: number; // Rotation values
+  ry: number;
+  rz: number;
+  model: any;
+  scale: number;
+
+  constructor(_x: number, _y: number, _z: number, _rx: number, _ry: number, _rz: number, s: number, m: any) {
+      this.x = _x;
+      this.y = _y;
+      this.z = _z;
+      this.rx = _rx * Math.PI / 180;
+      this.ry = _ry * Math.PI / 180;
+      this.rz = _rz * Math.PI / 180;
+      this.scale = s;
+      this.model = m;
+  }
+  getX(){
+    return this.x;
+  }
+  getY(){
+    return this.y;
+  }
+  getZ(){
+    return this.z;
+  }
+  getRX(){
+    return this.rx;
+  }
+  getRY(){
+    return this.ry;
+  }
+  getRZ(){
+    return this.rz;
+  }
+  getModel(){
+    return this.model;
+  }
+  getScale(){
+    return this.scale;
   }
 }
 
