@@ -248,10 +248,13 @@ export class MapComponent implements OnInit {
           p.push();
           // Get name into position
           p.translate(b.getX(), b.getY(), b.getZ() + 50);
+          if (b.getName() == "Hale") {
+            p.translate(0, 0, 50); // fix Hale name stuck inside building
+          }
           p.rotateX(90 * Math.PI/180);
           p.rotateY(angle * 20 * Math.PI/180);
           // Scale
-          p.scale(30);
+          p.scale(40);
           // Texture
           //b.ping();
           if(dict[b.getName()]){
