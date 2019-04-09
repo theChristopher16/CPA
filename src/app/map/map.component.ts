@@ -75,6 +75,7 @@ export class MapComponent implements OnInit {
     // Textures
     let buildingOn;
     let buildingOff;
+    let buildingName;
     let concrete;
     let floor;
     let sunshine;
@@ -113,6 +114,7 @@ export class MapComponent implements OnInit {
       // Initialize textures
       buildingOff = p.loadImage('../../assets/Map/Textures/buildingoff.png');
       buildingOn = p.loadImage('../../assets/Map/Textures/buildingon.png');
+      buildingName = p.loadImage('../../assets/Map/Textures/buildingname.png');
       sunshine = p.loadImage('../../assets/Map/Textures/sun.png');
       concrete = p.loadImage('../../assets/Map/Textures/road.png');
       floor = p.loadImage('../../assets/Map/Textures/floor.png');
@@ -257,12 +259,8 @@ export class MapComponent implements OnInit {
           p.scale(40);
           // Texture
           //b.ping();
-          if(dict[b.getName()]){
-            p.texture(buildingOn);
-          }
-          else{
-            p.texture(buildingOff);
-          }
+          p.texture(buildingName);
+
           // Model
           p.model(b.getNameModel());
           p.pop();
