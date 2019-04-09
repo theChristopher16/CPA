@@ -1,8 +1,8 @@
 <ul>
   <div class="services">
   <!--{{displayServices()}}-->
-  <li *ngFor="let element of servicesStatus | keyvalue">
-    {{element.key}}, {{element.value}}
+  <li *ngFor="let element of whoStatus | keyvalue">
+    {{element.key}}: {{element.value}}
   </li>
 </div>
 </ul>

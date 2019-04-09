@@ -15,6 +15,7 @@ export class ServicesDisplayComponent implements OnInit {
   // will update automatically here. Store information about service
   // status in that dictionary to have it updated here.
   servicesStatus = this.parent.getDict();
+  whoStatus = this.parent.getWho();
   servicesHTML: string;
 
   constructor(private parent: MapComponent,

@@ -75,6 +75,7 @@ export class MapComponent implements OnInit {
     // Textures
     let buildingOn;
     let buildingOff;
+    let buildingOcc;
     let buildingName;
     let concrete;
     let floor;
@@ -114,6 +115,7 @@ export class MapComponent implements OnInit {
       // Initialize textures
       buildingOff = p.loadImage('../../assets/Map/Textures/buildingoff.png');
       buildingOn = p.loadImage('../../assets/Map/Textures/buildingon.png');
+      buildingOcc = p.loadImage('../../assets/Map/Textures/buildingoccupied.png');
       buildingName = p.loadImage('../../assets/Map/Textures/buildingname.png');
       sunshine = p.loadImage('../../assets/Map/Textures/sun.png');
       concrete = p.loadImage('../../assets/Map/Textures/road.png');
@@ -233,9 +235,11 @@ export class MapComponent implements OnInit {
         // Scale
         p.scale(b.getScale());
         // Texture
-        //b.ping();
-        if(dict[b.getName()]){
+        if(dict[b.getName()] && who[b.getName()] == ""){
           p.texture(buildingOn);
+        }
+        else if(dict[b.getName()] && who[b.getName()] != ""){
+          p.texture(buildingOcc);
         }
         else{
           p.texture(buildingOff);
@@ -322,6 +326,11 @@ export class MapComponent implements OnInit {
   public getDict() {
     return dict;
   }
+
+  // Used to send who is at what PI to side panel
+  public getWho(){
+    return who;
+  }
 }
 
 //Global? dictionary that holds port80 status for pis
@@ -344,6 +353,27 @@ var dict = {
   "South Hall": true,
   "Power Plant": true,
   "University Hall": true
+};
+
+var who = {
+  "Wyly": "Adam",
+  "Nethkin": "",
+  "Bogard": "",
+  "Keeny": "Gabby",
+  "Carson Taylor": "",
+  "Hale": "Josh",
+  "GTM": "",
+  "Engineering Annex": "",
+  "Howard": "",
+  "Student Center": "",
+  "Tolliver": "",
+  "Woodard": "",
+  "COBB": "Chris",
+  "Band Building": "",
+  "IFM": "",
+  "South Hall": "Maddie",
+  "Power Plant": "",
+  "University Hall": ""
 };
 
 // Josh: Made building class to refactor code
