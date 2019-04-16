@@ -15,6 +15,9 @@ import { RaspberryPiInfoService } from '../raspberry-pi-info.service';
 var timesUp = false;
 var globalPis; //global object to hold raspberry pi network info
 
+// Trigger events
+var transmitting = true;
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -81,16 +84,22 @@ export class MapComponent implements OnInit {
     let floor;
     let sunshine;
     let bark;
+    let metal;
 
     // Models
     let road;
     let buildings:Building[];
     let sun;
     let trees:Tree[];
+    let transmitter;
+    let transmit_ring;
 
     // Shaders
     var colorShader;
     var fogShader;
+
+    // Transmit counter
+    let t_counter = 0;
 
     // Josh: Added to track fps
     let lastLoop = performance.now();
@@ -111,6 +120,8 @@ export class MapComponent implements OnInit {
       // Initialize models
       sun = new Sun(p.loadModel('../../assets/Map/Models/sun.obj'));
       road = p.loadModel('../../assets/Map/Models/road.obj');
+      transmitter = p.loadModel('../../assets/Map/Models/transmitter.obj');
+      transmit_ring = p.loadModel('../../assets/Map/Models/transmitring.obj');
 
       // Initialize textures
       buildingOff = p.loadImage('../../assets/Map/Textures/buildingoff.png');
@@ -121,6 +132,7 @@ export class MapComponent implements OnInit {
       concrete = p.loadImage('../../assets/Map/Textures/road.png');
       floor = p.loadImage('../../assets/Map/Textures/floor.png');
       bark = p.loadImage('../../assets/Map/Textures/tree.png');
+      metal = p.loadImage('../../assets/Map/Textures/transmitter.png');
 
       // Initialize buildings
       buildings = [
@@ -271,6 +283,37 @@ export class MapComponent implements OnInit {
         }
       }
 
+      // Trigger events
+      if(transmitting){
+        // Josh: Draw transmitter on IFM
+        p.push();
+        p.scale(17);
+        p.rotateX(90 * Math.PI/180);
+        p.translate(-23, 2, -20);
+        p.texture(metal);
+        p.model(transmitter);
+        p.pop();
+
+        // Draw rings
+        let ringDist = 3;
+        let ringSpeed = 0.1;
+        let numRings = 5;
+        for(let i = 0; i < numRings; i++){
+          p.push();
+          p.scale(17);
+          p.rotateX(90 * Math.PI/180);
+          p.translate(-23 + i * ringDist + t_counter, 3 + i * ringDist + t_counter, -20);
+          p.texture(metal);
+          p.model(transmit_ring);
+          p.pop();
+        }
+
+        t_counter = t_counter + ringSpeed;
+        if(t_counter >= ringDist){
+          t_counter = 0;
+        }
+      }
+
       // Draw trees
       for(let t of trees){
         p.push();
@@ -285,7 +328,6 @@ export class MapComponent implements OnInit {
         // Texture
         p.texture(bark);
         // Model
-        
         p.model(t.getModel());
         p.pop();
       }
@@ -307,8 +349,6 @@ export class MapComponent implements OnInit {
       p.texture(sunshine);
       p.model(sun.getModel());
       p.pop();
-
-      p.shader(fogShader);
 
       angle += 0.05;
       if(angle == 360){
