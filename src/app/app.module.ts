@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MapComponent } from './map/map.component';
 import { UsersComponent } from './users/users.component';
+import { UserSearchComponent } from './users/userSearch.component';
 import { StatsComponent } from './stats/stats.component';
 import { InfoComponent } from './info/info.component';
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
@@ -30,6 +31,7 @@ import { ToastrModule } from 'ngx-toastr';
     SidebarComponent,
     MapComponent,
     UsersComponent,
+    UserSearchComponent,
     StatsComponent,
     InfoComponent,
     HamburgerMenuComponent,
