@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MapComponent } from './map/map.component';
 import { UsersComponent } from './users/users.component';
+import { UserSearchComponent } from './users/userSearch.component';
 import { StatsComponent } from './stats/stats.component';
 import { InfoComponent } from './info/info.component';
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
@@ -18,7 +19,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BottomSheetMenu } from './sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms';
 import { SlideshowModule } from 'ng-simple-slideshow';
-import {MatSliderModule} from '@angular/material/slider';
+import { MatSliderModule } from '@angular/material/slider';
 import { ServicesDisplayComponent } from './services-display/services-display.component';
 import { CommonModule } from '@angular/common';
  
@@ -30,11 +31,13 @@ import { ToastrModule } from 'ngx-toastr';
     SidebarComponent,
     MapComponent,
     UsersComponent,
+    UserSearchComponent,
     StatsComponent,
     InfoComponent,
     HamburgerMenuComponent,
     BottomSheetMenu,
     ServicesDisplayComponent
+
   ],
   imports: [
     CommonModule,
