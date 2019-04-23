@@ -12,6 +12,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HamburgerMenuComponent implements OnInit {
 
+  public device1;
+
   constructor() { }
 
   ngOnInit() {}
