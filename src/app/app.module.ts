@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MapComponent } from './map/map.component';
-import { UsersComponent } from './users/users.component';
+import { UsersComponent, PlayerSearchMenu } from './users/users.component';
 import { StatsComponent } from './stats/stats.component';
 import { InfoComponent } from './info/info.component';
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
@@ -23,6 +23,7 @@ import { ServicesDisplayComponent } from './services-display/services-display.co
 import { CommonModule } from '@angular/common';
  
 import { ToastrModule } from 'ngx-toastr';
+import { PlayercardComponent } from './playercard/playercard.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { ToastrModule } from 'ngx-toastr';
     StatsComponent,
     InfoComponent,
     HamburgerMenuComponent,
+    PlayercardComponent,
     BottomSheetMenu,
+    PlayerSearchMenu,
     ServicesDisplayComponent
   ],
   imports: [
@@ -53,7 +56,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatSliderModule
   ],
   entryComponents: [
-    BottomSheetMenu
+    BottomSheetMenu,
+    PlayerSearchMenu
 ],
   providers: [],
   bootstrap: [AppComponent]

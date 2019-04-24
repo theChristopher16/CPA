@@ -4,14 +4,18 @@ import { Observable } from 'rxjs';
 import { AchievementsService } from '../achievements.service';
 import { TabScrollerService } from '../tabscroller.service';
 import { Router } from '@angular/router';
-import { NavigateRoutes } from '../sidebar/sidebar.component';
+import { NavigateRoutes, BottomSheetMenu } from '../sidebar/sidebar.component';
 import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
+
+var userList:User[];
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
+
 export class UsersComponent implements OnInit, OnDestroy {
 
   users$: object;
@@ -21,11 +25,44 @@ export class UsersComponent implements OnInit, OnDestroy {
   onlineSorted: object;
   offlineSorted: object;
 
-  constructor(private user: UserInfoService, private achievement: AchievementsService,
+  searchText: string;
+
+  constructor(private bottomSheet: MatBottomSheet, private user: UserInfoService, private achievement: AchievementsService,
   private router: Router, private tabscroller: TabScrollerService) { }
+
+  onClickMe() {
+    var value = (<HTMLInputElement>document.getElementById("searchVal")).value;
+
+    var player = this.findPlayer(value);
+    if(player != undefined){
+      console.log("PLAYER EXISTS");
+      PlayerSearchMenu.user = player;
+    }
+    else{
+      console.log("PLAYER DOES NOT EXIST");
+      PlayerSearchMenu.user = new User("User Not Found", 0, null);
+    }
+    this.openBottomSheet();
+  }
+
+  findPlayer(v: string){
+    var user = undefined;
+    for(let u of userList){
+      if(v == u.getName()){
+        user = u;
+      }
+    }
+    return user;
+  }
+
+  //function to open the bottom sheet
+  openBottomSheet(): void {
+    this.bottomSheet.open(PlayerSearchMenu);
+  }
 
   ngOnInit() {
 
+    this.searchText = "";
     /**this.tabscroller.getScrollBool().subscribe(
       tabscroller => {
         this.TabScroller$ = tabscroller;
@@ -105,6 +142,8 @@ export class UsersComponent implements OnInit, OnDestroy {
 
         this.onlineSorted = onlineSort;
         this.offlineSorted = offlineSort;
+
+        this.initUsers(this.onlineSorted, this.offlineSorted);
       }
     );
 
@@ -121,4 +160,63 @@ export class UsersComponent implements OnInit, OnDestroy {
     //this.tabscroller.destroy();
   }
 
+  initUsers(on: any, off: any){
+    userList = [];
+    let counter = 0;
+    for(let u of on){
+      userList[counter] = new User(u.Name, u.Score, u.achievements);
+      counter++;
+    }
+    for(let u of off){
+      userList[counter] = new User(u.Name, u.Score, u.achievements);
+      counter++;
+    }
+  }
+}
+
+class User{
+
+  name: string;
+  score: number;
+  achievements: string[];
+
+  constructor(n: any, s: any, a: any){
+    this.name = n;
+    this.score = s;
+    this.achievements = a;
+  }
+
+  getName(){
+    return this.name;
+  }
+  getScore(){
+    return this.score;
+  }
+}
+
+//Additional component for the bottom sheet
+@Component({
+  selector: 'bottom-sheet-overview-example-sheet',
+  templateUrl: '../playercard/playercard.component.html',
+  styleUrls: ['../playercard/playercard.component.scss'],
+})
+
+export class PlayerSearchMenu implements OnInit {
+
+  name: string;
+  score: number;
+
+  public static user: User;
+
+  constructor(private playerSearchRef: MatBottomSheetRef<PlayerSearchMenu>){
+  }
+
+  ngOnInit(){
+    document.getElementById("name").innerHTML = PlayerSearchMenu.user.getName();
+    document.getElementById("score").innerHTML = String(PlayerSearchMenu.user.getScore());
+  }
+  openLink(event: MouseEvent): void {
+    this.playerSearchRef.dismiss();
+    event.preventDefault();
+  }
 }
