@@ -141,7 +141,14 @@ $router->post('/addUser',function($request){
   $usertData = json_decode($jsonData,true); //creates Map to use for SQL
   
   $userName = $usertData['Name'];
+  $APIKey = $usertData['Key'];
   $score = 0;
+
+  //Verifies that the API key is correct
+  if($APIKey != "SSBsb3ZlIHRpZGRpZXM"){
+    http_response_code(403);
+    die(mysqli_error($conn));
+  }
   
   $sql = "INSERT INTO usersTest ( Id, Name, Score, Online, Achievements, LastLocation)
     VALUES ( null, '$userName', $score, TRUE, '1','Wyly')";
