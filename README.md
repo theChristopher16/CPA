@@ -30,6 +30,34 @@ You can verify it's working by going to 127.0.0.1:8080 in your browser.
 SSH to aws instance with the key in the directory using:
 `ssh -i "testPhpServer.pem" ubuntu@ec2-34-222-160-131.us-west-2.compute.amazonaws.com`
 
+## Database
+Table: Users
+
+Id: int | Name: varchar | Score: int | Online: bool | Achievements: varchar | LastLocation: varchar
+
+Table: Achievements
+
+Id: int | Title: varchar | Description: varchar | Points: int
+
+Table: RaspPi
+
+Id: int | Name: varchar | IP: varchar | PingResponse: bool | Port80: bool
+
+## API
+### GET
+/scores - returns Id, Name, and Score from Users
+
+/userInfo - returns everything from Users
+
+/achievements - returns everything from Achievements
+
+/networkStatus - returns everything from RaspPi
+
+### POST
+/addUser - params(Name,Key) - adds new user to DB; sets score to 0; sets last location to Wyly
+
+/updateScore - params(Name, Key, Score) - increases the score for a user
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
