@@ -20,7 +20,7 @@ export class ServicesDisplayComponent implements OnInit {
 
   constructor(private parent: MapComponent,
     private cdRef: ChangeDetectorRef) {
-    this.myVariable = "Hello World";
+    this.myVariable = 'Hello World';
     this.myCounter = 0;
   }
 

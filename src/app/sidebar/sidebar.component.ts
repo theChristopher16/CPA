@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
 import { TabScrollerService } from '../tabscroller.service';
 import { Router } from '@angular/router';
-import { MapComponent } from '../map/map.component';
 import { SpeedControllerService } from '../speedcontroller.service';
 import { BuildingNameService } from '../buildingname.service';
 
@@ -15,59 +14,36 @@ export class NavigateRoutes {
   private static instance: NavigateRoutes;
   private currentRoute: string;
 
-  private constructor(){
+  private constructor() {
   }
 
-  static getInstance(){
-    if (!NavigateRoutes.instance){
-      NavigateRoutes.instance = new NavigateRoutes()
+  static getInstance() {
+    if (!NavigateRoutes.instance) {
+      NavigateRoutes.instance = new NavigateRoutes();
     }
-    return NavigateRoutes.instance
+    return NavigateRoutes.instance;
   }
 
-  setCurrentRoute(navTo:string){
+  setCurrentRoute(navTo: string) {
     this.currentRoute = navTo;
   }
 
-  getCurrentRoute(){
+  getCurrentRoute() {
     return this.currentRoute.toString();
   }
 }
 
-//original component genereated for sidebar
+// original component genereated for sidebar
+
+
+// Additional component for the bottom sheet
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
-})
-export class SidebarComponent implements OnInit {
-
-  Tabscroller$: boolean;
-  BuildingName$: boolean;
-  CameraSlider$: number;
-  
-  constructor(private bottomSheet: MatBottomSheet, private tabscroller: TabScrollerService, private cameraslider: SpeedControllerService, private buildingnamer: BuildingNameService) { }
-
-  ngOnInit() {
-    this.Tabscroller$ = this.tabscroller.getScrollBool();
-    this.CameraSlider$ = this.cameraslider.getSpeed();
-    this.BuildingName$ = this.buildingnamer.getNameBool();
-  }
-
-  //function to open the bottom sheet
-  openBottomSheet(): void {
-    this.bottomSheet.open(BottomSheetMenu);
-  }
-}
-
-//Additional component for the bottom sheet
-@Component({
-  selector: 'bottom-sheet-overview-example-sheet',
+  selector: 'app-bottom-sheet-overview-example-sheet',
   templateUrl: '../hamburger-menu/hamburger-menu.component.html',
   styleUrls: ['../hamburger-menu/hamburger-menu.component.scss'],
 })
 
-export class BottomSheetMenu implements OnInit {
+export class BottomSheetMenuComponent implements OnInit {
 
   Tabscroller$: boolean;
   BuildingNamer$: boolean;
@@ -77,25 +53,24 @@ export class BottomSheetMenu implements OnInit {
   CameraSlider$: number;
   cameraslider: number;
 
-  constructor(private bottomSheetRef: MatBottomSheetRef<BottomSheetMenu>, 
+  constructor(private bottomSheetRef: MatBottomSheetRef<BottomSheetMenuComponent>,
     private tabscroller: TabScrollerService,
     private router: Router,
     private speedcontroller: SpeedControllerService,
-    private buildingname: BuildingNameService){}
-    
+    private buildingname: BuildingNameService) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.Tabscroller$ = this.tabscroller.getScrollBool();
-    if(this.Tabscroller$){
+    if (this.Tabscroller$) {
       this.device1 = true;
     }
     this.BuildingNamer$ = this.buildingname.getNameBool();
-    if(this.BuildingNamer$){
+    if (this.BuildingNamer$) {
       this.device2 = true;
     }
     this.CameraSlider$ = this.speedcontroller.getSpeed();
     this.cameraslider = this.speedcontroller.getSpeed();
-    console.log("cameraslider:" + this.CameraSlider$);
+    console.log('cameraslider:' + this.CameraSlider$);
   }
 
   openLink(event: MouseEvent): void {
@@ -103,24 +78,23 @@ export class BottomSheetMenu implements OnInit {
     event.preventDefault();
   }
 
-  changeSpeed(){
+  changeSpeed() {
     this.speedcontroller.setSpeed(this.cameraslider);
   }
 
-  //function executed by the slide toggle
-  toggleAutoScroll(){
-    if(this.tabscroller.getScrollBool()){
+  // function executed by the slide toggle
+  toggleAutoScroll() {
+    if (this.tabscroller.getScrollBool()) {
       this.tabscroller.setScrollBool(false);
-    }
-    else{
-      //need a way to refresh current route or restart timer...
-      //set timer then change to next one based on route (switchcase)
-      //component might not be with other routes...
-      console.log("THE CURRENT ROUTE IS");
+    } else {
+      // need a way to refresh current route or restart timer...
+      // set timer then change to next one based on route (switchcase)
+      // component might not be with other routes...
+      console.log('THE CURRENT ROUTE IS');
       console.log(NavigateRoutes.getInstance().getCurrentRoute());
       this.tabscroller.setScrollBool(true);
-      let currentRoute = NavigateRoutes.getInstance().getCurrentRoute();
-      switch(currentRoute){
+      const currentRoute = NavigateRoutes.getInstance().getCurrentRoute();
+      switch (currentRoute) {
         case '':
           setTimeout(() => {
             if (this.tabscroller.getScrollBool()) {
@@ -153,8 +127,36 @@ export class BottomSheetMenu implements OnInit {
     }
   }
 
-  toggleBuildingNames(){
-    this.buildingname.setNameBool(!this.buildingname.getNameBool())
+  toggleBuildingNames() {
+    this.buildingname.setNameBool(!this.buildingname.getNameBool());
+  }
+}
+
+@Component({
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss']
+})
+export class SidebarComponent implements OnInit {
+
+  Tabscroller$: boolean;
+  BuildingName$: boolean;
+  CameraSlider$: number;
+
+  constructor(
+    private bottomSheet: MatBottomSheet,
+    private tabscroller: TabScrollerService,
+    private cameraslider: SpeedControllerService,
+    private buildingnamer: BuildingNameService) { }
+
+  ngOnInit() {
+    this.Tabscroller$ = this.tabscroller.getScrollBool();
+    this.CameraSlider$ = this.cameraslider.getSpeed();
+    this.BuildingName$ = this.buildingnamer.getNameBool();
   }
 
+  // function to open the bottom sheet
+  openBottomSheet(): void {
+    this.bottomSheet.open(BottomSheetMenuComponent);
+  }
 }

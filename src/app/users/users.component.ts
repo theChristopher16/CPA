@@ -32,17 +32,17 @@ export class UsersComponent implements OnInit, OnDestroy {
         console.log(this.TabScroller$);
       }
     );*/
-    NavigateRoutes.getInstance().setCurrentRoute('users'); //used to tell sidebar the current route
+    NavigateRoutes.getInstance().setCurrentRoute('users'); // used to tell sidebar the current route
 
     this.TabScroller$ = this.tabscroller.getScrollBool();
     // auto scrolling
     setTimeout(() => {
-      if (this.tabscroller.getScrollBool() && NavigateRoutes.getInstance().getCurrentRoute()=='users') {
+      if (this.tabscroller.getScrollBool() && NavigateRoutes.getInstance().getCurrentRoute() === 'users') {
         this.router.navigate(['stats']);
       }
     }, 45000); // 2s
 
-    //Subscribe to service to get scores from database
+    // Subscribe to service to get scores from database
     this.user.getUserInfo().subscribe(
       user => {
         this.users$ = user;
@@ -51,39 +51,39 @@ export class UsersComponent implements OnInit, OnDestroy {
         // Find size of user list
         let findingSize = true;
         let size = 0;
-        while(findingSize){
+        while (findingSize) {
 
           console.log(this.users$[size]);
           size++;
-          if(this.users$[size] == undefined){
+          if (this.users$[size] === undefined) {
             findingSize = false;
           }
         }
 
         // Sort the users by score
-        let sortedScore = [];
-        let alreadySorted = [];
+        const sortedScore = [];
+        const alreadySorted = [];
 
         // Find absolute smallest value
-        let smallest = this.users$[0].Score*1;
-        for(let i = 0; i < size; i++){
-          if(smallest > this.users$[i].Score*1){
+        let smallest = this.users$[0].Score * 1;
+        for (let i = 0; i < size; i++) {
+          if (smallest > this.users$[i].Score * 1) {
             smallest = i;
           }
         }
 
-        for(let h = 0; h < size; h++){
+        for (let h = 0; h < size; h++) {
 
           let biggest = smallest;
-          for(let i = 0; i < size; i++){
+          for (let i = 0; i < size; i++) {
             // Check if already sorted
             let as = false;
-            for(let a = 0; a < alreadySorted.length; a++){
-              if(alreadySorted[a] == i){
+            for (let a = 0; a < alreadySorted.length; a++) {
+              if (alreadySorted[a] === i) {
                 as = true;
               }
             }
-            if(this.users$[i].Score*1 > this.users$[biggest].Score*1 && !as){
+            if (this.users$[i].Score * 1 > this.users$[biggest].Score * 1 && !as) {
               biggest = i;
             }
           }
@@ -92,13 +92,12 @@ export class UsersComponent implements OnInit, OnDestroy {
         }
 
         // Sort the users by online status
-        let onlineSort = [];
-        let offlineSort = [];
-        for(let i = 0; i < size; i++){
-          if(sortedScore[i].Online == 0){
+        const onlineSort = [];
+        const offlineSort = [];
+        for (let i = 0; i < size; i++) {
+          if (sortedScore[i].Online === 0) {
             offlineSort.push(sortedScore[i]);
-          }
-          else if(sortedScore[i].Online == 1){
+          } else if (sortedScore[i].Online === 1) {
             onlineSort.push(sortedScore[i]);
           }
         }
@@ -108,17 +107,17 @@ export class UsersComponent implements OnInit, OnDestroy {
       }
     );
 
-    //subscribe to service to get achievement info
+    // subscribe to service to get achievement info
     this.achievement.getAchievements().subscribe(
       achievement => {
         this.Achievements$ = achievement;
-        console.log(this.Achievements$)
+        console.log(this.Achievements$);
       }
     );
 
   }
   ngOnDestroy() {
-    //this.tabscroller.destroy();
+    // this.tabscroller.destroy();
   }
 
 }

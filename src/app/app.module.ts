@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -16,13 +15,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { BottomSheetMenu } from './sidebar/sidebar.component';
+import { BottomSheetMenuComponent } from './sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms';
 import { SlideshowModule } from 'ng-simple-slideshow';
 import {MatSliderModule} from '@angular/material/slider';
 import { ServicesDisplayComponent } from './services-display/services-display.component';
 import { CommonModule } from '@angular/common';
- 
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -35,7 +33,7 @@ import { ToastrModule } from 'ngx-toastr';
     StatsComponent,
     InfoComponent,
     HamburgerMenuComponent,
-    BottomSheetMenu,
+    BottomSheetMenuComponent,
     ServicesDisplayComponent
   ],
   imports: [
@@ -55,7 +53,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatSliderModule
   ],
   entryComponents: [
-    BottomSheetMenu
+    BottomSheetMenuComponent
 ],
   providers: [],
   bootstrap: [AppComponent]

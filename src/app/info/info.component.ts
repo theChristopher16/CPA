@@ -13,7 +13,7 @@ export class InfoComponent implements OnInit {
   items: Array<any> = [];
 
   // auto scrolling variables
-  TabScroller$: boolean
+  TabScroller$: boolean;
 
   constructor(private router: Router, private tabscroller: TabScrollerService) {
   this.items = [
@@ -28,23 +28,23 @@ export class InfoComponent implements OnInit {
   ];
   }
 
-  //The array of images to be shown in the slide show
+  // The array of images to be shown in the slide show
   imageArr = ['../../assets/Info/Images/img1.png',
     '../../assets/Info/Images/img2.jpg',
     '../../assets/Info/Images/img3.png'];
-  
+
   slideAutoPlay = true;
-  playInterval = 3000; //in ms
+  playInterval = 3000; // in ms
   showDots = true;
 
   ngOnInit() {
 
-    NavigateRoutes.getInstance().setCurrentRoute('info'); //used to tell sidebar the current route
+    NavigateRoutes.getInstance().setCurrentRoute('info'); // used to tell sidebar the current route
 
     // auto scrolling functionality
     this.TabScroller$ = this.tabscroller.getScrollBool();
     setTimeout(() => {
-      if (this.tabscroller.getScrollBool() && NavigateRoutes.getInstance().getCurrentRoute()=='info') {
+      if (this.tabscroller.getScrollBool() && NavigateRoutes.getInstance().getCurrentRoute() === 'info') {
         this.router.navigate(['']);
       }
     }, 45000); // 45s

@@ -12,13 +12,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HamburgerMenuComponent implements OnInit {
 
-  public device1;
-  public cameraslider;
-  public device2;
-  public toggleAutoScroll;
-  public changeSpeed;
-  public toggleBuildingNames;
-  
+  public device1: any;
+  public cameraslider: any;
+  public device2: any;
+  public toggleAutoScroll: any;
+  public changeSpeed: any;
+  public toggleBuildingNames: any;
+
 
 
   constructor() { }
