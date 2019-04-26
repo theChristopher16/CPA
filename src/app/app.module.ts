@@ -22,6 +22,8 @@ import {MatSliderModule} from '@angular/material/slider';
 import { ServicesDisplayComponent } from './services-display/services-display.component';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import {MatDialogModule} from '@angular/material/dialog';
+import { UserFormComponent } from './user-form/user-form.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { ToastrModule } from 'ngx-toastr';
     InfoComponent,
     HamburgerMenuComponent,
     BottomSheetMenuComponent,
-    ServicesDisplayComponent
+    ServicesDisplayComponent,
+    UserFormComponent
   ],
   imports: [
     CommonModule,
@@ -50,10 +53,12 @@ import { ToastrModule } from 'ngx-toastr';
     MatSlideToggleModule,
     FormsModule,
     SlideshowModule,
-    MatSliderModule
+    MatSliderModule,
+    MatDialogModule
   ],
   entryComponents: [
-    BottomSheetMenuComponent
+    BottomSheetMenuComponent,
+    UserFormComponent
 ],
   providers: [],
   bootstrap: [AppComponent]

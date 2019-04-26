@@ -4,6 +4,8 @@ import { TabScrollerService } from '../tabscroller.service';
 import { Router } from '@angular/router';
 import { SpeedControllerService } from '../speedcontroller.service';
 import { BuildingNameService } from '../buildingname.service';
+import { UserFormComponent } from '../user-form/user-form.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 /*
   Singleton used to keep track of the current route
@@ -33,9 +35,6 @@ export class NavigateRoutes {
   }
 }
 
-// original component genereated for sidebar
-
-
 // Additional component for the bottom sheet
 @Component({
   selector: 'app-bottom-sheet-overview-example-sheet',
@@ -57,7 +56,8 @@ export class BottomSheetMenuComponent implements OnInit {
     private tabscroller: TabScrollerService,
     private router: Router,
     private speedcontroller: SpeedControllerService,
-    private buildingname: BuildingNameService) {}
+    private buildingname: BuildingNameService,
+    public dialog: MatDialog) {}
 
   ngOnInit() {
     this.Tabscroller$ = this.tabscroller.getScrollBool();
@@ -130,8 +130,16 @@ export class BottomSheetMenuComponent implements OnInit {
   toggleBuildingNames() {
     this.buildingname.setNameBool(!this.buildingname.getNameBool());
   }
+
+  openForm(){
+    let dialogRef = this.dialog.open(UserFormComponent,{
+      height: '400px',
+      width: '600px',
+    });
+  }
 }
 
+//SIDEBAR COMPONENT CLASS
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
