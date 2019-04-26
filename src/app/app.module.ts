@@ -24,6 +24,7 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import {MatDialogModule} from '@angular/material/dialog';
 import { UserFormComponent } from './user-form/user-form.component';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { UserFormComponent } from './user-form/user-form.component';
     FormsModule,
     SlideshowModule,
     MatSliderModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule
   ],
   entryComponents: [
     BottomSheetMenuComponent,
