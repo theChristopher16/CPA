@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "angular-material": "^1.1.18",
     "chart.js": "^2.7.3",
     "core-js": "^2.5.4",
     "cron": "^1.6.0",
@@ -33,6 +34,7 @@
     "node-sass": "^4.11.0",
     "p5": "^0.7.3",
     "rxjs": "^6.3.3",
+    "toastr": "^2.1.4",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
