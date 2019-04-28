@@ -23,6 +23,12 @@
       </mat-form-field>
   </div>
 
+  <div>
+    <mat-form-field class="fullWidth">
+      <input matInput placeholder="Password" type="password" [(ngModel)]="model.password" name="password">
+    </mat-form-field>
+  </div>
+
   <button mat-raised-button class="centerButton" type="submit" [disabled]="!userForm.form.valid" (click)="newUser(); userForm.reset(); closeDialog();">
     Submit
   </button>

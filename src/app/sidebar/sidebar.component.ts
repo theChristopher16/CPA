@@ -133,8 +133,8 @@ export class BottomSheetMenuComponent implements OnInit {
 
   openForm(){
     let dialogRef = this.dialog.open(UserFormComponent,{
-      height: '400px',
-      width: '600px',
+      height: '530px',
+      width: '800px',
     });
   }
 }

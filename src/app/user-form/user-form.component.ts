@@ -12,14 +12,14 @@ export class UserFormComponent{
   
   constructor(public dialogRef: MatDialogRef<SidebarComponent>){}
 
-  model = new User(null,null,null,null);
+  model = new User(null,null,null,null,null);
 
   submitted = false;
 
   onSubmit(){ this.submitted = true; }
 
   newUser(){
-    this.model = new User(null,null,null,null);
+    this.model = new User(null,null,null,null,null);
   }
 
   closeDialog(){
