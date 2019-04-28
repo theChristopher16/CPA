@@ -4,19 +4,22 @@
 
   <div>
       <mat-form-field class="fullWidth">
-        <input matInput placeholder="Name" type="text" [(ngModel)]="model.name" name="name">
+        <input matInput placeholder="Name" type="text" [(ngModel)]="model.name" name="name"  ngModel pattern="^[A-Za-z\s\-]+$">
+        <mat-error>Letters Only</mat-error>
       </mat-form-field>
   </div>
 
   <div>
       <mat-form-field class="fullWidth"> 
-        <input matInput placeholder="Email" type="email" [(ngModel)]="model.email" name="email" required>
+        <input matInput placeholder="Email" type="email" [(ngModel)]="model.email" name="email" required ngModel pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
+        <mat-error>Enter a valid email</mat-error>
       </mat-form-field>
   </div>
 
   <div>
       <mat-form-field class="fullWidth">
-        <input matInput placeholder="Username" type="text" [(ngModel)]="model.userName" name="userName">
+        <input matInput placeholder="Username" type="text" [(ngModel)]="model.userName" name="userName" ngModel pattern="^[a-zA-Z0-9]*$">
+        <mat-error>Numbers and letters only</mat-error>
       </mat-form-field>
   </div>
 
