@@ -14,5 +14,9 @@ export class UserFormComponent{
 
   onSubmit(){ this.submitted = true; }
 
+  newUser(){
+    this.model = new User(null,null,null,null);
+  }
+
   get diagnotstic() { return JSON.stringify(this.model); }
 }

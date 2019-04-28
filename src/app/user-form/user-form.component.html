@@ -20,6 +20,8 @@
       </mat-form-field>
   </div>
 
-  <button mat-raised-button class="centerButton" type="submit">Submit</button>
+  <button mat-raised-button class="centerButton" type="submit" (click)="newUser(); userForm.reset()">
+    Submit
+  </button>
 
 </form>
