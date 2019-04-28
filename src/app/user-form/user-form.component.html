@@ -1,25 +1,25 @@
 <h1 class="centerText">JOIN CPA</h1>
 
-<form>
+<form #userForm="ngForm">
 
   <div>
       <mat-form-field class="fullWidth">
-        <input matInput placeholder="Name">
+        <input matInput placeholder="Name" type="text" [(ngModel)]="model.name" name="name">
       </mat-form-field>
   </div>
 
   <div>
       <mat-form-field class="fullWidth"> 
-        <input matInput placeholder="Email" >
+        <input matInput placeholder="Email" type="email" [(ngModel)]="model.email" name="email">
       </mat-form-field>
   </div>
 
   <div>
       <mat-form-field class="fullWidth">
-        <input matInput placeholder="Username">
+        <input matInput placeholder="Username" type="text" [(ngModel)]="model.userName" name="userName">
       </mat-form-field>
   </div>
 
-  <button mat-raised-button class="centerButton">Submit</button>
+  <button mat-raised-button class="centerButton" type="submit">Submit</button>
 
 </form>
