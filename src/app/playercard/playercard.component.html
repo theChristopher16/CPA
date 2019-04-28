@@ -17,5 +17,7 @@
   Badges
 </h3>
 <mat-card id="badges">
-  Not Implemented
+  <li *ngFor="let a of achievements$">
+    {{a.Title + ": " + a.Description}}
+  </li>
 </mat-card>

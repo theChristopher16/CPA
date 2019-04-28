@@ -27,10 +27,19 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   searchText: string;
 
+  achFilled: boolean;
+
   constructor(private bottomSheet: MatBottomSheet, private user: UserInfoService, private achievement: AchievementsService,
   private router: Router, private tabscroller: TabScrollerService) { }
 
   onClickMe() {
+    
+    if(!this.achFilled){
+      // Fill user achievements here
+      this.fillUserAchievements();
+      this.achFilled = true;
+    }
+
     var value = (<HTMLInputElement>document.getElementById("searchVal")).value;
 
     var player = this.findPlayer(value);
@@ -58,6 +67,27 @@ export class UsersComponent implements OnInit, OnDestroy {
   //function to open the bottom sheet
   openBottomSheet(): void {
     this.bottomSheet.open(PlayerSearchMenu);
+  }
+
+  fillUserAchievements(){
+    for(let u of userList){
+      for(let a of u.achievements_uf){
+        let counter = 0;
+        while(true){
+          if(this.Achievements$[counter].Id == a){
+            u.fillAch(this.Achievements$[counter]);
+            counter = 0;
+            break;
+          }
+          // Catch if not found
+          if(counter == 100){
+            counter = 0;
+            break;
+          }
+          counter = counter + 1;
+        }
+      }
+    }
   }
 
   ngOnInit() {
@@ -164,11 +194,11 @@ export class UsersComponent implements OnInit, OnDestroy {
     userList = [];
     let counter = 0;
     for(let u of on){
-      userList[counter] = new User(u.Name, u.Score, u.achievements);
+      userList[counter] = new User(u.Name, u.Score, u.Achievements);
       counter++;
     }
     for(let u of off){
-      userList[counter] = new User(u.Name, u.Score, u.achievements);
+      userList[counter] = new User(u.Name, u.Score, u.Achievements);
       counter++;
     }
   }
@@ -178,12 +208,24 @@ class User{
 
   name: string;
   score: number;
-  achievements: string[];
+  achievements: any[] = new Array();
+  achievements_uf: any[] = new Array();
 
   constructor(n: any, s: any, a: any){
     this.name = n;
     this.score = s;
-    this.achievements = a;
+    // Get all achievements from user and store in list
+    let ach = "";
+    for(let i = 0; i < a.length; i++){
+      if(a.charAt(i) != ","){
+        ach = ach + a.charAt(i);
+      }
+      else{
+        this.achievements_uf.push(ach);
+        ach = ""
+      }
+    }
+    this.achievements_uf.push(ach);
   }
 
   getName(){
@@ -191,6 +233,17 @@ class User{
   }
   getScore(){
     return this.score;
+  }
+  getAchievements_UF(){
+    return this.achievements_uf;
+  }
+  getAchievements(){
+    return this.achievements;
+  }
+
+  fillAch(ach: any){
+    console.log("FILLING");
+    this.achievements.push(ach);
   }
 }
 
@@ -205,6 +258,7 @@ export class PlayerSearchMenu implements OnInit {
 
   name: string;
   score: number;
+  achievements$: any;
 
   public static user: User;
 
@@ -214,6 +268,8 @@ export class PlayerSearchMenu implements OnInit {
   ngOnInit(){
     document.getElementById("name").innerHTML = PlayerSearchMenu.user.getName();
     document.getElementById("score").innerHTML = String(PlayerSearchMenu.user.getScore());
+    this.achievements$ = PlayerSearchMenu.user.getAchievements();
+    console.log(this.achievements$);
   }
   openLink(event: MouseEvent): void {
     this.playerSearchRef.dismiss();
