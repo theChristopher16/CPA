@@ -17,16 +17,11 @@
   </div>
 
   <div>
+      <p [hidden]="!userNameTaken" class="warning">Username taken</p>
       <mat-form-field class="fullWidth">
         <input matInput placeholder="Username" type="text" [(ngModel)]="model.userName" name="userName" ngModel pattern="^[a-zA-Z0-9]*$">
         <mat-error>Numbers and letters only</mat-error>
       </mat-form-field>
-  </div>
-
-  <div>
-    <mat-form-field class="fullWidth">
-      <input matInput placeholder="Password" type="password" [(ngModel)]="model.password" name="password">
-    </mat-form-field>
   </div>
 
   <button mat-raised-button class="centerButton" type="submit" [disabled]="!userForm.form.valid" (click)="newUser(); userForm.reset(); closeDialog();">
