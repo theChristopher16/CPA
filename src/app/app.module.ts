@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { Component, NgModule, OnDestroy } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,8 +22,44 @@ import { SlideshowModule } from 'ng-simple-slideshow';
 import { MatSliderModule } from '@angular/material/slider';
 import { ServicesDisplayComponent } from './services-display/services-display.component';
 import { CommonModule } from '@angular/common';
- 
+import { Observable, Subscription } from 'rxjs';
 import { ToastrModule } from 'ngx-toastr';
+import {
+  IMqttMessage,
+  MqttModule,
+  IMqttServiceOptions,
+  MqttService
+} from 'ngx-mqtt';
+
+export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+  hostname: 'localhost',
+  port: 1883,
+  path: '/mqtt'
+};
+
+@Component({
+  template: `
+    <h1></h1>
+  `
+})
+export class ExampleComponent implements OnDestroy {
+  private subscription: Subscription;
+  public message: string;
+
+  constructor(private _mqttService: MqttService) {
+    this.subscription = this._mqttService.observe('CoreElectronics/test').subscribe((message: IMqttMessage) => {
+      this.message = message.payload.toString();
+    });
+  }
+
+  public unsafePublish(topic: string, message: string): void {
+    this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+  }
+
+  public ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+}
 
 @NgModule({
   declarations: [
@@ -36,7 +72,8 @@ import { ToastrModule } from 'ngx-toastr';
     InfoComponent,
     HamburgerMenuComponent,
     BottomSheetMenu,
-    ServicesDisplayComponent
+    ServicesDisplayComponent,
+    ExampleComponent
 
   ],
   imports: [
@@ -53,7 +90,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatSlideToggleModule,
     FormsModule,
     SlideshowModule,
-    MatSliderModule
+    MatSliderModule,
+    MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
   ],
   entryComponents: [
     BottomSheetMenu
@@ -62,3 +100,4 @@ import { ToastrModule } from 'ngx-toastr';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

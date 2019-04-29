@@ -10,7 +10,16 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './hamburger-menu.component.html',
   styleUrls: ['./hamburger-menu.component.scss']
 })
+
+
 export class HamburgerMenuComponent implements OnInit {
+
+  device1: any;
+  cameraslider: any;
+  device2: any;
+  toggleAutoScroll: any;
+  changeSpeed: any;
+  toggleBuildingNames: any;
 
   constructor() { }
 
