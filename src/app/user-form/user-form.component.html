@@ -24,7 +24,7 @@
       </mat-form-field>
   </div>
 
-  <button mat-raised-button class="centerButton" type="submit" [disabled]="!userForm.form.valid" (click)="newUser(); userForm.reset(); closeDialog();">
+  <button mat-raised-button class="centerButton" type="submit" [disabled]="!userForm.form.valid" (click)="verifyForm()">
     Submit
   </button>
 
