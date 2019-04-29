@@ -250,6 +250,7 @@ export class MapComponent implements OnInit {
     let buildings: Building[];
     let sun: Sun;
     let trees: Tree[];
+    let positionList: any;
 
     // Shaders
     let colorShader: any;
@@ -309,10 +310,18 @@ export class MapComponent implements OnInit {
       ];
 
       // Initialize trees
-      // Random
+
       trees = [];
-      const numTrees = 10;
-      const spacing = 90;
+
+      positionList = [[325, -250],[175, -200],[100, -125], [-325,200], [100,375],[-250,425], [325,550],[525,50],[-250,-450],[280,-450]]
+      for(let i = 0; i < positionList.length; i++){
+        trees[i] = new Tree(positionList[i][0], positionList[i][1], 5, 90, 15, 0, 10, p.loadModel('../../assets/Map/Models/tree.obj'));
+
+      }
+
+      //Random
+      //const numTrees = 10;
+      /*const spacing = 90;
       let counter = 0;
       for (let i = 0; i < numTrees; i++) {
         for (let j = 0; j < numTrees; j++) {
@@ -332,12 +341,14 @@ export class MapComponent implements OnInit {
             counter++;
           }
         }
-      }
-      // Manual
+      }*/
+
+
+      //Manual
       /**trees = [
-        new Tree(125, -250, 5, 90, 15, 0, 0.1, p.loadModel('../../assets/Map/Models/treetest.obj')),
-        new Tree(200, -250, 5, 90, 15, 0, 0.1, p.loadModel('../../assets/Map/Models/treetest.obj')),
-        new Tree(275, -250, 5, 90, 15, 0, 0.1, p.loadModel('../../assets/Map/Models/treetest.obj'))
+        new Tree(125, -250, 5, 90, 15, 0, 10, p.loadModel('../../assets/Map/Models/tree.obj')),
+        new Tree(200, -250, 5, 90, 15, 0, 10, p.loadModel('../../assets/Map/Models/tree.obj')),
+        new Tree(275, -250, 5, 90, 15, 0, 10, p.loadModel('../../assets/Map/Models/tree.obj'))
       ]*/
     };
 
