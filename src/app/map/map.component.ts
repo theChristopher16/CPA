@@ -334,7 +334,7 @@ export class MapComponent implements OnInit {
         }
       }
       // Manual
-      /*trees = [
+      /**trees = [
         new Tree(125, -250, 5, 90, 15, 0, 0.1, p.loadModel('../../assets/Map/Models/treetest.obj')),
         new Tree(200, -250, 5, 90, 15, 0, 0.1, p.loadModel('../../assets/Map/Models/treetest.obj')),
         new Tree(275, -250, 5, 90, 15, 0, 0.1, p.loadModel('../../assets/Map/Models/treetest.obj'))
@@ -581,7 +581,3 @@ class Building {
     this.up = b;
   }
 }
-
-
-
-
