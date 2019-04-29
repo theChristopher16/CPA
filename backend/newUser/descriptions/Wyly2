@@ -1,0 +1,3 @@
+NAME: Decompressing the Password
+
+DESCRIPTION: A file has been compressed too many times (gzip'd and even bzip2'd!). Bring it back to its former glory! For help, try checking out Level 12 of OverTheWire's Bandit challenge. 

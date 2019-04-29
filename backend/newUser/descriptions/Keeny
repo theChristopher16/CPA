@@ -1,0 +1,3 @@
+NAME: A Hashed Pass
+
+DESCRIPTION: You have been given a dictionary that contains the password. You also have been given a file containing the MD5 hash of that password. Which of those words in the dictionary could the password be?
