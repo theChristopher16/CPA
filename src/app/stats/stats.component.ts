@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { TabScrollerService } from '../tabscroller.service';
 import { NavigateRoutes } from '../sidebar/sidebar.component';
 import { MapComponent } from '../map/map.component';
+import { UserInfoService } from '../user-info.service';
 
 @Component({
   selector: 'app-stats',
@@ -21,6 +22,7 @@ export class StatsComponent implements OnInit {
 
   nameList=[];
   scoreList=[];
+  achList=[];
   tupleArray = [];
 
   // auto scrolling variable
@@ -30,7 +32,7 @@ export class StatsComponent implements OnInit {
 
   autoTabBool: boolean;
 
-  constructor(private score: ScoresService,
+  constructor(private score: UserInfoService,
     private router: Router, private tabscroller: TabScrollerService) { }
 
   ngOnInit() {
@@ -46,7 +48,7 @@ export class StatsComponent implements OnInit {
     }, 45000); // 2s
 
     //Subscribe to service to get scores from database
-    this.score.getScores().subscribe(
+    this.score.getUserInfo().subscribe(
       score => {
         this.scores$ = score;
 
@@ -104,10 +106,21 @@ export class StatsComponent implements OnInit {
           this.tupleArray.push(Object.values(this.scores$[i]));
           this.nameList.push(this.tupleArray[i][1]);
           this.scoreList.push(parseInt(this.tupleArray[i][2],10));
+          // Find # achievements of each player
+          let numAch = 0;
+          if(this.tupleArray[i][4].length > 0){
+            numAch++;
+          }
+          for(let j = 0; j < this.tupleArray[i][4].length; j++){
+            if(this.tupleArray[i][4].charAt(j) == ","){
+              numAch++;
+            }
+          }
+          this.achList.push(numAch);
         }
 
         //charts should be declared here because of async reasons...(I think)
-        this.createChart(this.nameList,this.scoreList);
+        this.createChart(this.nameList,this.achList);
         this.createBarGraph(this.nameList,this.scoreList, this.genColors(size), this.genColors(size));
       }
     );
@@ -279,7 +292,7 @@ export class StatsComponent implements OnInit {
       },
       options: {
         title:{
-          text:"Score Pie Chart",
+          text:"Number of Achievements Completed",
           display:true
         },
         scales: {
