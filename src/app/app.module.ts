@@ -57,11 +57,9 @@ import { PlayercardComponent } from './playercard/playercard.component';
     MatSliderModule
   ],
   entryComponents: [
-
-  //  BottomSheetMenu,
-    PlayerSearchMenu
-
-//    BottomSheetMenuComponent
+    //BottomSheetMenu,
+    PlayerSearchMenu,
+    BottomSheetMenuComponent
 
 ],
   providers: [],
