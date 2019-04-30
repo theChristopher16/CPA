@@ -24,25 +24,25 @@ import { ServicesDisplayComponent } from './services-display/services-display.co
 import { CommonModule } from '@angular/common';
 import { Observable, Subscription } from 'rxjs';
 import { ToastrModule } from 'ngx-toastr';
-import {
+/*import {
   IMqttMessage,
   MqttModule,
   IMqttServiceOptions,
   MqttService
-} from 'ngx-mqtt';
+} from 'ngx-mqtt';*/
 
-export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+/*export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'localhost',
   port: 1883,
   path: '/mqtt'
-};
+};*/
 
 @Component({
   template: `
     <h1></h1>
   `
 })
-export class ExampleComponent implements OnDestroy {
+/*export class ExampleComponent implements OnDestroy {
   private subscription: Subscription;
   public message: string;
 
@@ -60,7 +60,7 @@ export class ExampleComponent implements OnDestroy {
     this.subscription.unsubscribe();
   }
 }
-
+*/
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,7 +73,7 @@ export class ExampleComponent implements OnDestroy {
     HamburgerMenuComponent,
     BottomSheetMenu,
     ServicesDisplayComponent,
-    ExampleComponent
+    //ExampleComponent
 
   ],
   imports: [
@@ -91,7 +91,7 @@ export class ExampleComponent implements OnDestroy {
     FormsModule,
     SlideshowModule,
     MatSliderModule,
-    MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
+    //MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
   ],
   entryComponents: [
     BottomSheetMenu
