@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MapComponent } from './map/map.component';
-import { UsersComponent } from './users/users.component';
+import { UsersComponent, PlayerSearchMenu } from './users/users.component';
 import { UserSearchComponent } from './users/userSearch.component';
 import { StatsComponent } from './stats/stats.component';
 import { InfoComponent } from './info/info.component';
@@ -18,10 +18,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BottomSheetMenuComponent } from './sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms';
 import { SlideshowModule } from 'ng-simple-slideshow';
-import {MatSliderModule} from '@angular/material/slider';
+import { MatSliderModule } from '@angular/material/slider';
 import { ServicesDisplayComponent } from './services-display/services-display.component';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { PlayercardComponent } from './playercard/playercard.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,9 @@ import { ToastrModule } from 'ngx-toastr';
     StatsComponent,
     InfoComponent,
     HamburgerMenuComponent,
+    PlayercardComponent,
+    //BottomSheetMenu,
+    PlayerSearchMenu,
     BottomSheetMenuComponent,
     ServicesDisplayComponent
   ],
@@ -53,7 +57,12 @@ import { ToastrModule } from 'ngx-toastr';
     MatSliderModule
   ],
   entryComponents: [
-    BottomSheetMenuComponent
+
+  //  BottomSheetMenu,
+    PlayerSearchMenu
+
+//    BottomSheetMenuComponent
+
 ],
   providers: [],
   bootstrap: [AppComponent]
