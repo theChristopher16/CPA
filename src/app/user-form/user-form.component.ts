@@ -3,7 +3,7 @@ import {User} from '../user';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { MatDialogRef } from '@angular/material';
 import { UserInfoService } from '../user-info.service';
-import { modelGroupProvider } from '@angular/forms/src/directives/ng_model_group';
+import { PostRequest } from '../post-request';
 
 @Component({
   selector: 'app-user-form',
@@ -42,8 +42,11 @@ export class UserFormComponent implements OnInit{
     this.dialogRef.close();
   }
 
-  //Ran when submit button is clicked
-  //makes sure username is not taken
+  /*
+  Ran when submit button is clicked
+  makes sure username is not taken
+  make POST request
+  */
   verifyForm(){
 
     //Go thru users from database
@@ -60,6 +63,19 @@ export class UserFormComponent implements OnInit{
       }
       i++;
     }
+
+    //Creates form to send to API
+    let posty = new PostRequest();
+    let data = new URLSearchParams();
+    data.append("Name",this.model.name);
+    data.append("UserName",this.model.userName);
+    data.append("Email",this.model.email);
+    data.append("Key", posty.getApiCode());
+
+    fetch("http://127.0.0.1:8080/addNewRegister",{
+      method: "POST",
+      body: data,
+    })
 
     //closes dialog and submits form if name available
     if(!this.userNameTaken){

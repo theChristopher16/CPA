@@ -283,13 +283,13 @@ $router->post('/addNewRegister',function($request){
   $jsonData = json_encode($request->getBody());
   $usertData = json_decode($jsonData,true); //creates Map to use for SQL
   
-$name = $usertData['Name'];
-$userName = $usertData['UserName'];
-$email = $usertData['Email'];
-$APIKey = $usertData['Key'];
+  $name = $usertData['Name'];
+  $userName = $usertData['UserName'];
+  $email = $usertData['Email'];
+  $APIKey = $usertData['Key'];
 
   //Verifies that the API key is correct
-  if($APIKey != "SSBsb3ZlIHRpZGRpZXM"){
+  if($APIKey != "SSBsb3ZlIGJpZyBidXR0cw"){
     http_response_code(403);
     die(mysqli_error($conn));
   }
