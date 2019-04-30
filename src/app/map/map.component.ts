@@ -318,38 +318,6 @@ export class MapComponent implements OnInit {
         trees[i] = new Tree(positionList[i][0], positionList[i][1], 5, 90, 15, 0, 10, p.loadModel('../../assets/Map/Models/tree.obj'));
 
       }
-
-      //Random
-      //const numTrees = 10;
-      /*const spacing = 90;
-      let counter = 0;
-      for (let i = 0; i < numTrees; i++) {
-        for (let j = 0; j < numTrees; j++) {
-          const spawn = Math.floor(Math.random() * Math.floor(3));
-          if (spawn === 0) {
-            const randX = Math.floor(Math.random() * Math.floor(numTrees));
-            const randY = Math.floor(Math.random() * Math.floor(numTrees));
-            const rot = Math.floor(Math.random() * Math.floor(180));
-            trees[counter] = new Tree(-300 + randX * spacing,
-              -450 + randY * spacing,
-              17,
-              90,
-              rot,
-              0,
-              10,
-              p.loadModel('../../assets/Map/Models/tree.obj'));
-            counter++;
-          }
-        }
-      }*/
-
-
-      //Manual
-      /**trees = [
-        new Tree(125, -250, 5, 90, 15, 0, 10, p.loadModel('../../assets/Map/Models/tree.obj')),
-        new Tree(200, -250, 5, 90, 15, 0, 10, p.loadModel('../../assets/Map/Models/tree.obj')),
-        new Tree(275, -250, 5, 90, 15, 0, 10, p.loadModel('../../assets/Map/Models/tree.obj'))
-      ]*/
     };
 
     p.setup = () => {
