@@ -58,11 +58,11 @@ mycursor = dbConnection.cursor()
 #update the DB on Ping and port 80 info for each pi
 for pi in raspberryPis:
 
-    sql = "UPDATE testRaspPi SET pingResponse = %s where Name = %s"
+    sql = "UPDATE RaspberryPis SET pingResponse = %s where Name = %s"
     vals = (raspberryPis[pi]['PingResponse'],pi)
     mycursor.execute(sql,vals)
 
-    sql = "UPDATE testRaspPi SET port80 = %s where Name = %s"
+    sql = "UPDATE RaspberryPis SET port80 = %s where Name = %s"
     vals = (raspberryPis[pi]['port80'],pi)
     mycursor.execute(sql,vals)
 
