@@ -120,6 +120,7 @@ export class StatsComponent implements OnInit {
         }
 
         //charts should be declared here because of async reasons...(I think)
+        // Create random color scheme for each user and make pie chart and bar graph
         let bgc = this.genColors(size);
         let bdc = this.genColors(size);
         this.createChart(this.nameList,this.achList, bgc, bdc);
