@@ -1,3 +1,7 @@
+<!--
+  List of color codes can be found here:
+  https://htmlcolorcodes.com/color-names/
+-->
 <div class = "row">
   <div class = "column">
       <h1>Users</h1>
@@ -6,7 +10,7 @@
             <div class = "column">
                 <h2>Online</h2>
                   <ul>
-                    <li *ngFor="let user of onlineSorted">
+                    <li *ngFor="let user of onlineSorted" [style.backgroundColor]="'springgreen'">
                       {{user.Name + ": " + user.Score}}
                     </li>
                   </ul>
@@ -14,7 +18,7 @@
               <div class = "column">
                 <h2>Offline</h2>
                   <ul>
-                    <li *ngFor="let user of offlineSorted">
+                    <li *ngFor="let user of offlineSorted" [style.backgroundColor]="'tomato'">
                       {{user.Name + ": " + user.Score}}
                     </li>
                   </ul>
@@ -27,7 +31,7 @@
       <div flex = 50 id="achievement">
       
         <ul>
-          <li *ngFor="let a of Achievements$">
+          <li *ngFor="let a of Achievements$" [style.backgroundColor]="'ghostwhite'">
             {{a.Title + ": " + a.Description}}
           </li>
         </ul>
