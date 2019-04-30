@@ -35,15 +35,12 @@
 
       <h1>Find a Player</h1>
       <div flex = 50 id="search">
-          <label>Username:
-              <input type="text" name="input" ng-model="example.text"
-                     ng-pattern="example.word" required ng-trim="false">
-            </label>
+            <input id="searchVal" matInput placeholder="Username">
+            <button (click)="onClickMe()" mat-button>Search</button>
       </div>
 
     </div>
   </div>
-
 
  
 

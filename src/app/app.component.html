@@ -15,11 +15,16 @@
   </head>
   <body>
     <script>
-      var client = mqtt.connect('ws://localhost:9001');
+      var client = mqtt.connect('winnet.duckdns.org:1883');
       client.subscribe("mqtt/demo");
 
-      client.on("message", function (topic, payload) {
+      client.on("broadcast", function (topic, payload) {
         alert([topic, payload].join(": "));
+        client.end();
+      });
+
+      client.on("toast", function (topic, payload) {
+        showToaster(topic, payload);
         client.end();
       });
 

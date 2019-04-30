@@ -1,0 +1,23 @@
+<h2 class="centerText" id="found">
+  Player
+</h2>
+<h3>
+  Name
+</h3>
+<mat-card id="name">
+  J
+</mat-card>
+<h3>
+  Score
+</h3>
+<mat-card id="score">
+  1
+</mat-card>
+<h3>
+  Badges
+</h3>
+<mat-card id="badges">
+  <li *ngFor="let a of achievements$">
+    {{a.Title + ": " + a.Description}}
+  </li>
+</mat-card>
