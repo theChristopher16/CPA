@@ -3,7 +3,8 @@ import { UserInfoService } from '../user-info.service';
 import { AchievementsService } from '../achievements.service';
 import { TabScrollerService } from '../tabscroller.service';
 import { Router } from '@angular/router';
-import { NavigateRoutes } from '../sidebar/sidebar.component';
+import { NavigateRoutes, BottomSheetMenuComponent } from '../sidebar/sidebar.component';
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
 
 var userList:User[];
@@ -19,12 +20,9 @@ export class UsersComponent implements OnInit, OnDestroy {
   users$: object;
   Achievements$: object;
   TabScroller$: boolean;
-
   onlineSorted: object;
   offlineSorted: object;
-
   searchText: string;
-
   achFilled: boolean;
 
   constructor(private bottomSheet: MatBottomSheet, private user: UserInfoService, private achievement: AchievementsService,
@@ -42,11 +40,9 @@ export class UsersComponent implements OnInit, OnDestroy {
 
     var player = this.findPlayer(value);
     if(player != undefined){
-      console.log("PLAYER EXISTS");
       PlayerSearchMenu.user = player;
     }
     else{
-      console.log("PLAYER DOES NOT EXIST");
       PlayerSearchMenu.user = new User("User Not Found", 0, null);
     }
     this.openBottomSheet();
@@ -155,21 +151,19 @@ export class UsersComponent implements OnInit, OnDestroy {
           sortedScore.push(this.users$[biggest]);
           alreadySorted.push(biggest);
         }
-
         // Sort the users by online status
         const onlineSort = [];
         const offlineSort = [];
         for (let i = 0; i < size; i++) {
-          if (sortedScore[i].Online === 0) {
+          if (sortedScore[i].Online == 0) {
             offlineSort.push(sortedScore[i]);
-          } else if (sortedScore[i].Online === 1) {
+          } else if (sortedScore[i].Online == 1) {
             onlineSort.push(sortedScore[i]);
           }
         }
 
         this.onlineSorted = onlineSort;
         this.offlineSorted = offlineSort;
-
         this.initUsers(this.onlineSorted, this.offlineSorted);
       }
     );
