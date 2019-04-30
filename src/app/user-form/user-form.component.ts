@@ -72,7 +72,7 @@ export class UserFormComponent implements OnInit{
     data.append("Email",this.model.email);
     data.append("Key", posty.getApiCode());
 
-    fetch("http://127.0.0.1:8080/addNewRegister",{
+    fetch("http://ec2-34-219-116-164.us-west-2.compute.amazonaws.com/addNewRegister",{
       method: "POST",
       body: data,
     })
