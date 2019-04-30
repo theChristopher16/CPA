@@ -120,8 +120,10 @@ export class StatsComponent implements OnInit {
         }
 
         //charts should be declared here because of async reasons...(I think)
-        this.createChart(this.nameList,this.achList);
-        this.createBarGraph(this.nameList,this.scoreList, this.genColors(size), this.genColors(size));
+        let bgc = this.genColors(size);
+        let bdc = this.genColors(size);
+        this.createChart(this.nameList,this.achList, bgc, bdc);
+        this.createBarGraph(this.nameList,this.scoreList, bgc, bdc);
       }
     );
     
@@ -263,7 +265,7 @@ export class StatsComponent implements OnInit {
 
   //Creates a pie chart
   //requires an array of labels: String and values: Number
-  createChart(labelArray, valueArray){
+  createChart(labelArray, valueArray, bg_colors, bd_colors){
     this.PieChart = new Chart('pieChart', {
       type: 'pie',
       data: {
@@ -271,23 +273,9 @@ export class StatsComponent implements OnInit {
         datasets: [{
           label: '# of Votes', //should probably change this?
           data: valueArray,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
+          backgroundColor: bg_colors,
+          borderColor: bd_colors,
+          borderWidth: 3
         }]
       },
       options: {
