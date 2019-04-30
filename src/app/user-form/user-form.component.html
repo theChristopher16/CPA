@@ -1,0 +1,31 @@
+<h1 class="centerText">JOIN CPA</h1>
+<p class="centerText">Take the challenge! <br> Provide an email and an Admin will contact you with more information.</p>
+<form (ngSubmit)="onSubmit()" #userForm="ngForm">
+
+  <div>
+      <mat-form-field class="fullWidth">
+        <input matInput placeholder="Name" type="text" [(ngModel)]="model.name" name="name"  ngModel pattern="^[A-Za-z\s\-]+$">
+        <mat-error>Letters Only</mat-error>
+      </mat-form-field>
+  </div>
+
+  <div>
+      <mat-form-field class="fullWidth"> 
+        <input matInput placeholder="Email" type="email" [(ngModel)]="model.email" name="email" required ngModel pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
+        <mat-error>Enter a valid email</mat-error>
+      </mat-form-field>
+  </div>
+
+  <div>
+      <p [hidden]="!userNameTaken" class="warning">Username taken</p>
+      <mat-form-field class="fullWidth">
+        <input matInput placeholder="Username" type="text" [(ngModel)]="model.userName" name="userName" ngModel pattern="^[a-zA-Z0-9]*$">
+        <mat-error>Numbers and letters only</mat-error>
+      </mat-form-field>
+  </div>
+
+  <button mat-raised-button class="centerButton" type="submit" [disabled]="!userForm.form.valid" (click)="verifyForm()">
+    Submit
+  </button>
+
+</form>

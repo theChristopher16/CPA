@@ -22,6 +22,9 @@ import { MatSliderModule } from '@angular/material/slider';
 import { ServicesDisplayComponent } from './services-display/services-display.component';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import {MatDialogModule} from '@angular/material/dialog';
+import { UserFormComponent } from './user-form/user-form.component';
+import {MatInputModule} from '@angular/material/input';
 import { PlayercardComponent } from './playercard/playercard.component';
 
 @NgModule({
@@ -37,7 +40,8 @@ import { PlayercardComponent } from './playercard/playercard.component';
     PlayercardComponent,
     PlayerSearchMenu,
     BottomSheetMenuComponent,
-    ServicesDisplayComponent
+    ServicesDisplayComponent,
+    UserFormComponent
   ],
   imports: [
     CommonModule,
@@ -52,9 +56,13 @@ import { PlayercardComponent } from './playercard/playercard.component';
     MatSlideToggleModule,
     FormsModule,
     SlideshowModule,
-    MatSliderModule
+    MatSliderModule,
+    MatDialogModule,
+    MatInputModule
   ],
   entryComponents: [
+    BottomSheetMenuComponent,
+    UserFormComponent,
     PlayerSearchMenu,
     BottomSheetMenuComponent
 ],
