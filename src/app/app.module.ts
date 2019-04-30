@@ -27,6 +27,36 @@ import { UserFormComponent } from './user-form/user-form.component';
 import {MatInputModule} from '@angular/material/input';
 import { PlayercardComponent } from './playercard/playercard.component';
 
+/*export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+  hostname: 'localhost',
+  port: 1883,
+  path: '/mqtt'
+};*/
+
+// @Component({
+//   template: `
+//     <h1></h1>
+//   `
+// })
+/*export class ExampleComponent implements OnDestroy {
+  private subscription: Subscription;
+  public message: string;
+
+  constructor(private _mqttService: MqttService) {
+    this.subscription = this._mqttService.observe('CoreElectronics/test').subscribe((message: IMqttMessage) => {
+      this.message = message.payload.toString();
+    });
+  }
+
+  public unsafePublish(topic: string, message: string): void {
+    this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+  }
+
+  public ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+}
+*/
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,3 +100,4 @@ import { PlayercardComponent } from './playercard/playercard.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

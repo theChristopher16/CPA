@@ -10,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './hamburger-menu.component.html',
   styleUrls: ['./hamburger-menu.component.scss']
 })
+
+
 export class HamburgerMenuComponent implements OnInit {
 
   public device1: any;
