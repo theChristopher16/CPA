@@ -19,6 +19,6 @@
 <mat-card id="badges">
   <li *ngFor="let a of achievements$">
     {{a.Title + ": " + a.Description}}
-    <img src="./assets/Achievements/A_Single_Badges/sha-512.png" alt="badge" style="float:right" width=20 height=20>
+    <img src="./assets/Achievements/{{a.Title}}/badge.png" alt="badge" style="float:right" width=20 height=20>
   </li>
 </mat-card>

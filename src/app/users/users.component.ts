@@ -173,6 +173,11 @@ export class UsersComponent implements OnInit, OnDestroy {
       achievement => {
         this.Achievements$ = achievement;
         console.log(this.Achievements$);
+        // Hardcode TEST
+        for(let i = 0; i < 5; i++){
+          this.Achievements$[i].Title = "Carson_Taylor";
+          console.log(this.Achievements$[i]);
+        }
       }
     );
 
