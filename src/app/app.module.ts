@@ -8,7 +8,7 @@ import { UsersComponent, PlayerSearchMenu } from './users/users.component';
 import { UserSearchComponent } from './users/userSearch.component';
 import { StatsComponent } from './stats/stats.component';
 import { InfoComponent } from './info/info.component';
-import { Ng2CarouselamosModule } from 'ng2-carouselamos';
+
 import { HttpClientModule } from '@angular/common/http'; import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
@@ -35,7 +35,6 @@ import { PlayercardComponent } from './playercard/playercard.component';
     InfoComponent,
     HamburgerMenuComponent,
     PlayercardComponent,
-    //BottomSheetMenu,
     PlayerSearchMenu,
     BottomSheetMenuComponent,
     ServicesDisplayComponent
@@ -46,7 +45,6 @@ import { PlayercardComponent } from './playercard/playercard.component';
     ToastrModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
-    Ng2CarouselamosModule,
     HttpClientModule,
     MatCardModule,
     MatBottomSheetModule,
@@ -57,12 +55,10 @@ import { PlayercardComponent } from './playercard/playercard.component';
     MatSliderModule
   ],
   entryComponents: [
-    //BottomSheetMenu,
     PlayerSearchMenu,
     BottomSheetMenuComponent
-
 ],
-  providers: [],
+  //providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

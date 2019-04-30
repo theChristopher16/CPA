@@ -1,11 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserInfoService } from '../user-info.service';
-import { Observable } from 'rxjs';
 import { AchievementsService } from '../achievements.service';
 import { TabScrollerService } from '../tabscroller.service';
 import { Router } from '@angular/router';
-import { NavigateRoutes, BottomSheetMenu } from '../sidebar/sidebar.component';
-import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
+import { NavigateRoutes } from '../sidebar/sidebar.component';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
 
 var userList:User[];
