@@ -48,9 +48,9 @@ for pi in raspberryPis.keys():
 #ADD SECURITY TO PASSWORD
 dbConnection = mysql.connector.connect(
     host='localhost',
-    user='database',
-    password = 'dbpass',
-    database = 'testDB'
+    user='cpaDatabase',
+    password = 'BCM-116-06',
+    database = 'cpaDB'
 )
 
 mycursor = dbConnection.cursor()
