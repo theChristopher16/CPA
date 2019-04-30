@@ -11,7 +11,7 @@ export class AppComponent {
 
   constructor(private toastr: ToastrService) { }
 
-  showToaster(){
-    this.toastr.success("Gettin toasty", "Roast the toast");
+  showToaster() {
+    this.toastr.success('Gettin toasty', 'Roast the toast');
   }
 }

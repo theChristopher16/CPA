@@ -8,3 +8,22 @@
 <button (click)="showToaster()">  
   Show Toaster
 </button>  
+
+<html>
+  <head>
+    <title>test ws mqtt.js</title>
+  </head>
+  <body>
+    <script>
+      var client = mqtt.connect('ws://localhost:9001');
+      client.subscribe("mqtt/demo");
+
+      client.on("message", function (topic, payload) {
+        alert([topic, payload].join(": "));
+        client.end();
+      });
+
+      client.publish("mqtt/demo", "hello world!");
+    </script>
+  </body>
+</html>
