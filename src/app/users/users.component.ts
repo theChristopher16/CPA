@@ -215,17 +215,19 @@ class User{
     this.name = n;
     this.score = s;
     // Get all achievements from user and store in list
-    let ach = "";
-    for(let i = 0; i < a.length; i++){
-      if(a.charAt(i) != ","){
-        ach = ach + a.charAt(i);
+    if(a != null){
+      let ach = "";
+      for(let i = 0; i < a.length; i++){
+        if(a.charAt(i) != ","){
+          ach = ach + a.charAt(i);
+        }
+        else{
+          this.achievements_uf.push(ach);
+          ach = ""
+        }
       }
-      else{
-        this.achievements_uf.push(ach);
-        ach = ""
-      }
+      this.achievements_uf.push(ach);
     }
-    this.achievements_uf.push(ach);
   }
 
   getName(){
