@@ -1,5 +1,3 @@
-#!/bin/bash
-
 echo Enter username
 read usn
 echo Enter password
