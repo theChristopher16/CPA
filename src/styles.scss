@@ -8,19 +8,21 @@
 
 #container {
     margin: 0;
-    background: #F2F2F2;
+    background: #00FFFF;
     font-family: 'Montserrat', sans-serif;
-    
+    margin: 0;
     display: grid;
     grid-template-columns: 70px auto;
     
     #content {
+        margin: 0;
         height: 100vh;
         padding: 0px 0px;
 
         ul {
             list-style-type: none;
-            margin:0;padding:0;
+            margin:0;
+            padding:0;
         
             li {
                 background:#fff;
@@ -53,4 +55,4 @@
 }
 
 // html{ height: 100%; }
-// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; }
