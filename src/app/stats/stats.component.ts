@@ -249,8 +249,9 @@ export class StatsComponent implements OnInit {
         }]
       },
       options: {
+        responsive: true,
         title:{
-          text:"Leaderboards",
+          text : 'Leaderboards',
           display:true
         },
         scales: {
@@ -280,6 +281,7 @@ export class StatsComponent implements OnInit {
         }]
       },
       options: {
+        responsive: true,
         title:{
           text:"Number of Achievements Completed",
           display:true
