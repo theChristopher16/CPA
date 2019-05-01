@@ -10,7 +10,7 @@ import { LocationService } from '../location.service';
 // Global? dictionary that holds port80 status for pis
 const dict = {
   'Wyly': true,
-  'Nethken': true,
+  'Nethkin': true,
   'Bogard': true,
   'Keeny': true,
   'Carson Taylor': true,
@@ -426,9 +426,9 @@ export class MapComponent implements OnInit {
         // Scale
         p.scale(b.getScale());
         // Texture
-        if (dict[b.getName()] && who[b.getName()] === '') {
+        if (dict[b.getName()] && who[b.getName()] == '') {
           p.texture(buildingOn);
-        } else if (dict[b.getName()] && who[b.getName()] !== '') {
+        } else if (dict[b.getName()] && who[b.getName()] != '') {
           p.texture(buildingOcc);
         } else {
           p.texture(buildingOff);
