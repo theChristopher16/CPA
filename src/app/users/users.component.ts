@@ -173,11 +173,11 @@ export class UsersComponent implements OnInit, OnDestroy {
       achievement => {
         this.Achievements$ = achievement;
         console.log(this.Achievements$);
-        // Hardcode TEST
+        /* Hardcode TEST remove when adam changes the db
         for(let i = 0; i < 5; i++){
-          this.Achievements$[i].Title = "Carson_Taylor";
+          this.Achievements$[i].Title = "IFM1";
           console.log(this.Achievements$[i]);
-        }
+        }*/
       }
     );
 
