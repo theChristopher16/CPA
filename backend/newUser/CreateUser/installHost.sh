@@ -10,12 +10,23 @@ for i in {0..17}
 do
     echo ${arr[i]}
 done
+
 # WYLY
 if [[ $(hostname) = wyly ]]; then
     printf  "${arr[0]}\n${arr[0]}\n\n\n\n\n\n\n" | sudo adduser $usn
     sudo usermod -g player $usn
     cp ./descriptions/Wyly /home/$usn/README.txt
     cp ./descriptions/Wyly2 /home/$usn/README2.txt
+    
+    echo usn=$(whoami) >> /home/"$usn"/.bashrc
+    echo loc=$(hostname) >> /home/"$usn"/.bashrc
+    echo curlCmd="curl -F 'UserName='$usn'' -F 'Key=SSBsb3ZlIHRpZGRpZXM' -F 'Log=1' -F 'Location='$loc'' -X POST http://ec2-34-219-116-164.us-west-2.compute.amazonaws.com/updateLocation" >> /home/'$usn'/.bashrc
+    echo eval curlCmd >> /home/"$usn"/.bashrc
+    echo curlCmd="curl -F 'UserName='$usn'' -F 'Key=SSBsb3ZlIHRpZGRpZXM' -F 'Log=0' -F 'Location='$loc'' -X POST http://ec2-34-219-116-164.us-west-2.compute.amazonaws.com/updateLocation" >> /home/'$usn'/.bash_logout
+    echo updateCmd ="curl -F 'UserName='$usn'' -F 'Score=10' -F 'Key=SSBsb3ZlIHRpZGRpZXM' -X POST http://ec2-34-219-116-164.us-west-2.compute.amazonaws.com/updateScore"
+    echo tac .bashrc | sed "1,4d" | tac >> what.txt
+    echo cat what.txt > .bashrc
+    echo rm what.txt >> /home/"$usn"/.bashrc
 # IFM
   elif [[ $(hostname) = IFM ]]; then
         printf  "${arr[10]}\n${arr[10]}\n\n\n\n\n\n\n" | sudo adduser $usn

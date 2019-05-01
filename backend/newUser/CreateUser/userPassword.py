@@ -10,7 +10,7 @@ def userPassword():
     userPassword = ["" for x in range(size)]
     for i in range(size):
         if i == 0:
-            userPassword[0] = fline=open("user.txt").readline().rstrip()
+            userPassword[0] = open("user.txt").readline().rstrip()
             pwd = userPassword[0]
         elif i > 0:
             hash.update(('%s%s' % (salt, pwd)).encode('utf-8'))
