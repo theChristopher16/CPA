@@ -5,6 +5,7 @@ import { TabScrollerService } from '../tabscroller.service';
 import { NavigateRoutes } from '../sidebar/sidebar.component';
 import { SpeedControllerService } from '../speedcontroller.service';
 import { BuildingNameService } from '../buildingname.service';
+import { LocationService } from '../location.service';
 
 // Global? dictionary that holds port80 status for pis
 const dict = {
@@ -197,6 +198,7 @@ export class MapComponent implements OnInit {
   BuildingName$: boolean;
   SpeedController$: number;
   raspPis$: Object;
+  Locations$: object;
 
   public cameraspeed: number;
 
@@ -205,7 +207,8 @@ export class MapComponent implements OnInit {
     private tabscroller: TabScrollerService,
     private speedcontroller: SpeedControllerService,
     private buildingnamer: BuildingNameService,
-  ) { }
+    private location: LocationService
+  ) { } 
 
   ngOnInit() {
     this.TabScroller$ = this.tabscroller.getScrollBool();
@@ -220,6 +223,13 @@ export class MapComponent implements OnInit {
         this.router.navigate(['users']);
       }
     }, 45000); // 2s
+
+    // subscribe to service to get achievement info
+    this.location.getLocations().subscribe(
+      location => {
+        this.Locations$ = location;
+      }
+    ); 
   }
 
   private createCanvas() {
