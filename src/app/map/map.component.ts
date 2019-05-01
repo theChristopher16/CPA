@@ -30,22 +30,22 @@ const dict = {
 };
 
 const who = {
-  'Wyly': 'Adam',
+  'Wyly': '',
   'Nethken': '',
   'Bogard': '',
-  'Keeny': 'Gabby',
+  'Keeny': '',
   'Carson Taylor': '',
-  'Hale': 'Josh',
+  'Hale': '',
   'GTM': '',
   'Engineering Annex': '',
   'Howard': '',
   'Student Center': '',
   'Tolliver': '',
   'Woodard': '',
-  'COBB': 'Chris',
+  'COBB': '',
   'Band Building': '',
   'IFM': '',
-  'South Hall': 'Maddie',
+  'South Hall': '',
   'Power Plant': '',
   'University Hall': ''
 };
