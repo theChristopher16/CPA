@@ -10,7 +10,7 @@ import { LocationService } from '../location.service';
 // Global? dictionary that holds port80 status for pis
 const dict = {
   'Wyly': true,
-  'Nethkin': true,
+  'Nethken': true,
   'Bogard': true,
   'Keeny': true,
   'Carson Taylor': true,
@@ -31,7 +31,7 @@ const dict = {
 
 const who = {
   'Wyly': 'Adam',
-  'Nethkin': '',
+  'Nethken': '',
   'Bogard': '',
   'Keeny': 'Gabby',
   'Carson Taylor': '',
@@ -224,12 +224,33 @@ export class MapComponent implements OnInit {
       }
     }, 45000); // 2s
 
-    // subscribe to service to get achievement info
+    // subscribe to service to get location info
     this.location.getLocations().subscribe(
       location => {
         this.Locations$ = location;
+        this.updateWho();
       }
     ); 
+  }
+
+  updateWho(){
+    // Clear list
+    for(let u in who){
+      who[u] = ""
+    }
+    // Add users to buildings
+    for(let u in this.Locations$){
+      for(let w in who){
+        if(this.Locations$[u].LastLocation == w){
+          if(who[w] == ""){
+            who[w] = this.Locations$[u].Name;
+          }
+          else{
+            who[w] = who[w] + ", " + this.Locations$[u].Name;
+          }
+        }
+      }
+    }
   }
 
   private createCanvas() {
