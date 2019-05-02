@@ -1,16 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
-body {
+/* body {
     margin: 0;
-    background: #F2F2F2;
+    background: #00FFFF;
     font-family: 'Montserrat', sans-serif;
     height: 100vh;
-}
+} */
 
 #container {
     display: grid;
     grid-template-columns: 70px auto;
-    height: 100%;
+    height: 100vh;
 }
 
 #content {
@@ -46,11 +46,3 @@ body {
 
 
 
-html, body {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-}

@@ -9,10 +9,13 @@
   </div>
 </mat-card>
 <h3 class="centerText">
-  Map
+  Map Controls
 </h3>
+<mat-card class="centerText">
+  Use Mouse Wheel to Zoom
+</mat-card>
 <mat-card>
-  Camera Rotation
+  Camera Speed
   <mat-slider min="0" max="10" step="2" value="0" [thumbLabel]="true" [(ngModel)]="cameraslider" class="floatRight" (click)="changeSpeed()">
 
   </mat-slider>

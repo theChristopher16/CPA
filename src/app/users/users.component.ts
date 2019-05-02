@@ -32,6 +32,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     
     if(!this.achFilled){
       // Fill user achievements here
+      console.log("asasdfasdf");
       this.fillUserAchievements();
       this.achFilled = true;
     }
@@ -68,7 +69,8 @@ export class UsersComponent implements OnInit, OnDestroy {
       for(let a of u.achievements_uf){
         let counter = 0;
         while(true){
-          if(this.Achievements$[counter].Id == a){
+          console.log(this.Achievements$[counter].Id);
+          if(this.Achievements$[counter].Id == String(Number(a) + 5)){
             u.fillAch(this.Achievements$[counter]);
             counter = 0;
             break;
@@ -173,6 +175,11 @@ export class UsersComponent implements OnInit, OnDestroy {
       achievement => {
         this.Achievements$ = achievement;
         console.log(this.Achievements$);
+        /* Hardcode TEST remove when adam changes the db
+        for(let i = 0; i < 5; i++){
+          this.Achievements$[i].Title = "IFM1";
+          console.log(this.Achievements$[i]);
+        }*/
       }
     );
 

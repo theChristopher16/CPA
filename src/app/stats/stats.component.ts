@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { TabScrollerService } from '../tabscroller.service';
 import { NavigateRoutes } from '../sidebar/sidebar.component';
+import { MapComponent } from '../map/map.component';
+import { UserInfoService } from '../user-info.service';
 
 @Component({
   selector: 'app-stats',
@@ -15,11 +17,12 @@ import { NavigateRoutes } from '../sidebar/sidebar.component';
 export class StatsComponent implements OnInit {
   title = 'Ng7ChartJs By DotNet Techy';
   //LineChart=[];
-  //BarChart=[];
+  BarChart=[];
   PieChart=[];
 
   nameList=[];
   scoreList=[];
+  achList=[];
   tupleArray = [];
 
   // auto scrolling variable
@@ -29,7 +32,7 @@ export class StatsComponent implements OnInit {
 
   autoTabBool: boolean;
 
-  constructor(private score: ScoresService,
+  constructor(private score: UserInfoService,
     private router: Router, private tabscroller: TabScrollerService) { }
 
   ngOnInit() {
@@ -45,9 +48,57 @@ export class StatsComponent implements OnInit {
     }, 45000); // 2s
 
     //Subscribe to service to get scores from database
-    this.score.getScores().subscribe(
+    this.score.getUserInfo().subscribe(
       score => {
         this.scores$ = score;
+
+        // Sort scores by score
+        this.scores$ = score;
+        console.log(this.scores$);
+
+        // Find size of score list
+        let findingSize = true;
+        let size = 0;
+        while (findingSize) {
+
+          console.log(this.scores$[size]);
+          size++;
+          if (this.scores$[size] === undefined) {
+            findingSize = false;
+          }
+        }
+
+        // Sort the scores by score
+        const sortedScore = [];
+        const alreadySorted = [];
+
+        // Find absolute smallest value
+        let smallest = this.scores$[0].Score * 1;
+        for (let i = 0; i < size; i++) {
+          if (smallest > this.scores$[i].Score * 1) {
+            smallest = i;
+          }
+        }
+
+        for (let h = 0; h < size; h++) {
+
+          let biggest = smallest;
+          for (let i = 0; i < size; i++) {
+            // Check if already sorted
+            let as = false;
+            for (let a = 0; a < alreadySorted.length; a++) {
+              if (alreadySorted[a] === i) {
+                as = true;
+              }
+            }
+            if (this.scores$[i].Score * 1 > this.scores$[biggest].Score * 1 && !as) {
+              biggest = i;
+            }
+          }
+          sortedScore.push(this.scores$[biggest]);
+          alreadySorted.push(biggest);
+        }
+        this.scores$ = sortedScore;
 
         //iterates through scores$ object and puts names/scores into array
         //(could maybe be improved by using keys)
@@ -55,10 +106,25 @@ export class StatsComponent implements OnInit {
           this.tupleArray.push(Object.values(this.scores$[i]));
           this.nameList.push(this.tupleArray[i][1]);
           this.scoreList.push(parseInt(this.tupleArray[i][2],10));
+          // Find # achievements of each player
+          let numAch = 0;
+          if(this.tupleArray[i][4].length > 0){
+            numAch++;
+          }
+          for(let j = 0; j < this.tupleArray[i][4].length; j++){
+            if(this.tupleArray[i][4].charAt(j) == ","){
+              numAch++;
+            }
+          }
+          this.achList.push(numAch);
         }
 
         //charts should be declared here because of async reasons...(I think)
-        this.createChart(this.nameList,this.scoreList);
+        // Create random color scheme for each user and make pie chart and bar graph
+        let bgc = this.genColors(size);
+        let bdc = this.genColors(size);
+        this.createChart(this.nameList,this.achList, bgc, bdc);
+        this.createBarGraph(this.nameList,this.scoreList, bgc, bdc);
       }
     );
     
@@ -104,56 +170,9 @@ export class StatsComponent implements OnInit {
           }]
         }
       }
-    });
+    });*/
     // Bar chart:
-    this.BarChart = new Chart('barChart', {
-      type: 'bar',
-      data: {
-        labels: [
-          "Red",
-          "Blue",
-          "Yellow",
-          "Green",
-          "Purple",
-          "Orange"
-        ],
-        datasets: [ {
-          label: '# of Votes',
-          data: [9,7 , 3, 5, 2, 10],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        title:{
-          text:"Bar Chart",
-          display:true
-        },
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero:true
-            }
-          }]
-        }
-      }
-    });
-    */
+    
     /*
     // pie chart:
     this.PieChart = new Chart('pieChart', {
@@ -204,9 +223,51 @@ export class StatsComponent implements OnInit {
     });*/
   }
 
+  genColors(num){
+    let colors = [];
+    for(let i = 0; i < num; i++){
+      // Calculate random number rgb 0-255
+      let r = Math.floor(Math.random() * 255); 
+      let g = Math.floor(Math.random() * 255); 
+      let b = Math.floor(Math.random() * 255); 
+      colors.push("rgba(" + String(r) + ", " + String(g) + ", " + String(b) + ", 0.5)");
+    }
+    return colors;
+  }
+
+  createBarGraph(labelArray, valueArray, bg_colors, bd_colors){
+    this.BarChart = new Chart('barChart', {
+      type: 'bar',
+      data: {
+        labels: labelArray,
+        datasets: [{
+          label: 'Score',
+          data: valueArray,
+          backgroundColor: bg_colors,
+          borderColor: bd_colors,
+          borderWidth: 5
+        }]
+      },
+      options: {
+        responsive: true,
+        title:{
+          text : 'Leaderboards',
+          display:true
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero:true
+            }
+          }]
+        }
+      }
+    });
+  }
+
   //Creates a pie chart
   //requires an array of labels: String and values: Number
-  createChart(labelArray, valueArray){
+  createChart(labelArray, valueArray, bg_colors, bd_colors){
     this.PieChart = new Chart('pieChart', {
       type: 'pie',
       data: {
@@ -214,28 +275,15 @@ export class StatsComponent implements OnInit {
         datasets: [{
           label: '# of Votes', //should probably change this?
           data: valueArray,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
+          backgroundColor: bg_colors,
+          borderColor: bd_colors,
+          borderWidth: 3
         }]
       },
       options: {
+        responsive: true,
         title:{
-          text:"Score Pie Chart",
+          text:"Number of Achievements Completed",
           display:true
         },
         scales: {

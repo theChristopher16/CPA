@@ -6,3 +6,26 @@ table, th, td {
 th, td {
     padding: 5px;
 }
+
+// #pieChart{
+//     position: left;
+//     height: 50%;
+//     width: 50%;
+// }
+
+// #barChart{
+//     position: right;
+//     height: 50%;
+//     width: 50%;
+// }
+
+.column {
+    float: left;
+    width: 50%;
+  }
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
