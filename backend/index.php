@@ -19,9 +19,9 @@ $router = new Router(new Request);
 //credentials for connecting to test database
 //may need to sanitize
 $localhost = "127.0.0.1";
-$username = "database";
-$password = "dbpass";
-$dbname = "testDB";
+$username = "cpaDatabase";
+$password = "BCM-116-06";
+$dbname = "cpaDB";
 
 //Base route
 $router->get('/', function() {
@@ -44,7 +44,7 @@ $router->get('/scores', function($request){
       die("Error : " . $conn->connect_error);
   }
 
-  $sql = "SELECT Id,Name,Score FROM usersTest"; //SQL Querry
+  $sql = "SELECT ID,UserName,Score FROM userInfo"; //SQL Querry
 
   $result = mysqli_query($conn,$sql);
 
@@ -75,7 +75,7 @@ $router->get('/userInfo', function($request){
       die("Error : " . $conn->connect_error);
   }
 
-  $sql = "SELECT * FROM usersTest"; //SQL Querry
+  $sql = "SELECT * FROM userInfo"; //SQL Querry
 
   $result = mysqli_query($conn,$sql);
 
@@ -150,8 +150,8 @@ $router->post('/addUser',function($request){
     die(mysqli_error($conn));
   }
   
-  $sql = "INSERT INTO usersTest ( Id, Name, Score, Online, Achievements, LastLocation)
-    VALUES ( null, '$userName', $score, TRUE, '1','Wyly')";
+  $sql = "INSERT INTO usersInfo ( ID, Username, Score, Online, Achievements, LastLocation)
+    VALUES ( null, '$userName', $score, FALSE, null, null)";
 
   $result = mysqli_query($conn,$sql);
 
@@ -191,7 +191,7 @@ $router->post('/updateScore',function($request){
     die(mysqli_error($conn));
   }
   
-  $sql = "UPDATE usersTest SET Score = Score + $score WHERE Name = '$userName'";
+  $sql = "UPDATE userInfo SET Score = Score + $score WHERE Username = '$userName'";
 
   $result = mysqli_query($conn,$sql);
   
@@ -223,6 +223,7 @@ $router->post('/updateLocation',function($request){
   
   $userName = $usertData['UserName'];
   $location = $usertData['Location'];
+  $log = $userDate['Log'];
   $APIKey = $usertData['Key'];
 
   //Verifies that the API key is correct
@@ -231,7 +232,7 @@ $router->post('/updateLocation',function($request){
     die(mysqli_error($conn));
   }
   
-  $sql = "UPDATE usersTest SET LastLocation = '$location' WHERE Name = '$userName'";
+  $sql = "UPDATE userInfo SET LastLocation = '$location', Online = $log WHERE Username = '$userName'";
 
   $result = mysqli_query($conn,$sql);
   
@@ -258,7 +259,7 @@ $router->get('/networkStatus', function($request){
       die("Error : " . $conn->connect_error);
   }
 
-  $sql = "SELECT * from testRaspPi"; //SQL Querry
+  $sql = "SELECT * from RaspberryPis"; //SQL Querry
 
   $result = mysqli_query($conn,$sql);
 
@@ -289,7 +290,7 @@ $router->get('/getNewestUsers', function($request){
       die("Error : " . $conn->connect_error);
   }
 
-  $sql = "SELECT * FROM testNewUser WHERE 'DateRequest' > Now() - INTERVAL 7 DAY"; //SQL Querry
+  $sql = "SELECT * FROM NewUser WHERE 'DateRequest' > Now() - INTERVAL 7 DAY"; //SQL Querry
 
   $result = mysqli_query($conn,$sql);
 
@@ -334,8 +335,7 @@ $router->post('/addNewRegister',function($request){
     die(mysqli_error($conn));
   }
   
-  $sql = "UPDATE usersTest SET Score = Score + $score WHERE Name = '$userName'";
-  $sql = "Insert into testNewUser (Name, UserName, Email, DateRequest) 
+  $sql = "Insert into NewUser (Name, Username, Email, DateRequest) 
   VALUES ('$name', '$userName', '$email', CURDATE())";
 
   $result = mysqli_query($conn,$sql);
