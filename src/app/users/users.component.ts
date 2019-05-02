@@ -69,8 +69,8 @@ export class UsersComponent implements OnInit, OnDestroy {
       for(let a of u.achievements_uf){
         let counter = 0;
         while(true){
-          console.log(this.Achievements$[counter].Id);
-          if(this.Achievements$[counter].Id == String(Number(a) + 5)){
+          console.log(this.Achievements$[counter].ID);
+          if(this.Achievements$[counter].ID == String(Number(a) + 5)){
             u.fillAch(this.Achievements$[counter]);
             counter = 0;
             break;
@@ -166,6 +166,8 @@ export class UsersComponent implements OnInit, OnDestroy {
 
         this.onlineSorted = onlineSort;
         this.offlineSorted = offlineSort;
+        console.log("JOSH TEST");
+        console.log(this.offlineSorted);
         this.initUsers(this.onlineSorted, this.offlineSorted);
       }
     );
@@ -192,11 +194,13 @@ export class UsersComponent implements OnInit, OnDestroy {
     userList = [];
     let counter = 0;
     for(let u of on){
-      userList[counter] = new User(u.Name, u.Score, u.Achievements);
+      userList[counter] = new User(u.Username, u.Score, u.Achievements);
       counter++;
     }
     for(let u of off){
-      userList[counter] = new User(u.Name, u.Score, u.Achievements);
+      userList[counter] = new User(u.Username, u.Score, u.Achievements);
+      console.log('ADAM TEST');
+      console.log(userList[counter])
       counter++;
     }
   }
