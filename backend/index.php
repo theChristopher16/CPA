@@ -75,7 +75,7 @@ $router->get('/userInfo', function($request){
       die("Error : " . $conn->connect_error);
   }
 
-  $sql = "SELECT * FROM userInfo ORDER BY Score"; //SQL Querry
+  $sql = "SELECT * FROM userInfo ORDER BY Score DESC"; //SQL Querry
 
   $result = mysqli_query($conn,$sql);
 
