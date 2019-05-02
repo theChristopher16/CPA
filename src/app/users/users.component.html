@@ -11,7 +11,7 @@
                 <h2>Online</h2>
                   <ul>
                     <li *ngFor="let user of onlineSorted" [style.backgroundColor]="'springgreen'" style="font-size:18px">
-                      {{user.Name + ": " + user.Score}}
+                      {{user.Username + ": " + user.Score}}
                     </li>
                   </ul>
               </div>
@@ -19,7 +19,7 @@
                 <h2>Offline</h2>
                   <ul>
                     <li *ngFor="let user of offlineSorted" [style.backgroundColor]="'tomato'" style="font-size:18px">
-                      {{user.Name + ": " + user.Score}}
+                      {{user.Username + ": " + user.Score}}
                     </li>
                   </ul>
               </div>

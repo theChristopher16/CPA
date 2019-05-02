@@ -11,6 +11,6 @@ export class LocationService {
   getLocations(){
     //return this.http.get('http://127.0.0.1:8080/achievements') //Sends GET request to PHP server
     //return this.http.get('http://ec2-34-219-116-164.us-west-2.compute.amazonaws.com/locations') //Sends GET request to cloud webserver
-    return this.http.get('http://ec2-34-219-116-164.us-west-2.compute.amazonaws.com/userInfo')
+    return this.http.get('http://winnet.duckdns.org:8080/userInfo')
 }
 }
