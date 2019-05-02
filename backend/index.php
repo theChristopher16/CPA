@@ -150,8 +150,8 @@ $router->post('/addUser',function($request){
     die(mysqli_error($conn));
   }
   
-  $sql = "INSERT INTO usersInfo ( Id, Username, Score, Online, Achievements, LastLocation)
-    VALUES ( null, '$userName', $score, TRUE, '1','Wyly')";
+  $sql = "INSERT INTO usersInfo ( ID, Username, Score, Online, Achievements, LastLocation)
+    VALUES ( null, '$userName', $score, FALSE, null, null)";
 
   $result = mysqli_query($conn,$sql);
 
@@ -223,6 +223,7 @@ $router->post('/updateLocation',function($request){
   
   $userName = $usertData['UserName'];
   $location = $usertData['Location'];
+  $log = $userDate['Log'];
   $APIKey = $usertData['Key'];
 
   //Verifies that the API key is correct
@@ -231,7 +232,7 @@ $router->post('/updateLocation',function($request){
     die(mysqli_error($conn));
   }
   
-  $sql = "UPDATE userInfo SET LastLocation = '$location' WHERE Username = '$userName'";
+  $sql = "UPDATE userInfo SET LastLocation = '$location', Online = $log WHERE Username = '$userName'";
 
   $result = mysqli_query($conn,$sql);
   
