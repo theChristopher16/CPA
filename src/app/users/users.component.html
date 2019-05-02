@@ -10,7 +10,8 @@
             <div class = "column">
                 <h2>Online</h2>
                   <ul>
-                    <li *ngFor="let user of onlineSorted" [style.backgroundColor]="'springgreen'" style="font-size:18px">
+                    <!--springGreen-->
+                    <li *ngFor="let user of onlineSorted" [style.backgroundColor]="'lightgreen'" style="font-size:18px">
                       {{user.Username + ": " + user.Score}}
                     </li>
                   </ul>
@@ -18,7 +19,8 @@
               <div class = "column">
                 <h2>Offline</h2>
                   <ul>
-                    <li *ngFor="let user of offlineSorted" [style.backgroundColor]="'tomato'" style="font-size:18px">
+                    <!--[style.backgroundColor]="'tomato'"-->
+                    <li *ngFor="let user of offlineSorted" [style.backgroundColor]="'LightCoral'" style="font-size:18px">
                       {{user.Username + ": " + user.Score}}
                     </li>
                   </ul>
