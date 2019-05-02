@@ -282,12 +282,12 @@ export class MapComponent implements OnInit {
     // Add users to buildings
     for(let u in this.Locations$){
       for(let w in who){
-        if(this.Locations$[u].LastLocation == w){
+        if(this.Locations$[u].LastLocation == w && this.Locations$[u].Online == '1'){
           if(who[w] == ""){
-            who[w] = this.Locations$[u].Name;
+            who[w] = this.Locations$[u].Username;
           }
           else{
-            who[w] = who[w] + ", " + this.Locations$[u].Name;
+            who[w] = who[w] + ", " + this.Locations$[u].Username;
           }
         }
       }
