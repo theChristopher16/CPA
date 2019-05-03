@@ -229,7 +229,7 @@ export class MapComponent implements OnInit {
         globalPis = raspPi;
         let ind = 0;
         for(var pi in globalPis){
-          if(globalPis[ind]['port80']=="0"){
+          if(globalPis[ind]['pingResponse']=="0"){
             dict[globalPis[ind]['Name']] = false;
           }else{
             dict[globalPis[ind]['Name']] = true;
@@ -248,7 +248,7 @@ export class MapComponent implements OnInit {
           globalPis = raspPi;
           let ind = 0;
           for(var pi in globalPis){
-            if(globalPis[ind]['port80'] == "0"){
+            if(globalPis[ind]['pingResponse'] == "0"){
               dict[globalPis[ind]['Name']] = false;
             }else{
               dict[globalPis[ind]['Name']] = true;            
@@ -256,7 +256,7 @@ export class MapComponent implements OnInit {
             ind++;
           }
         }
-    );},120000);
+    );},45000);
 
     setTimeout(() => {
       // autoscroll only if it is true and on this route
