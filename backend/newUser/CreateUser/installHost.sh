@@ -15,8 +15,23 @@ done
 if [[ $(hostname) = wyly ]]; then
     printf  "${arr[0]}\n${arr[0]}\n\n\n\n\n\n\n" | sudo adduser $usn
     sudo usermod -g player $usn
-    cp ./descriptions/Wyly /home/$usn/README.txt
-    cp ./descriptions/Wyly2 /home/$usn/README2.txt
+    mkdir /home/$usn/Challenge1
+    python /home/winadmin/Storage/Challenges/binary/binary7.py "The password to GTM is: " ${arr[5]} > /home/$usn/Challenge1/challenge.txt
+    cp /home/winadmin/Storage/newUser/descriptions/Wyly /home/$usn/Challenge1/README.txt
+    mkdir /home/$usn/Challenge2
+    echo -n "Your password to Keeny is: ${arr[1]}" > /home/winadmin/Storage/Challenges/tempstuff/challenge.txt
+    gzip /home/winadmin/Storage/Challenges/tempstuff/challenge.txt | mv /home/winadmin/Storage/Challenges/tempstuff/challenge.txt.gz /home/winadmin/Storage/Challenges/tempstuff/challenge.txt
+    gzip /home/winadmin/Storage/Challenges/tempstuff/challenge.txt | mv /home/winadmin/Storage/Challenges/tempstuff/challenge.txt.gz /home/winadmin/Storage/Challenges/tempstuff/challenge.txt
+    bzip2 /home/winadmin/Storage/Challenges/tempstuff/challenge.txt | mv /home/winadmin/Storage/Challenges/tempstuff/challenge.txt.bz2 /home/winadmin/Storage/Challenges/tempstuff/challenge.txt
+    gzip /home/winadmin/Storage/Challenges/tempstuff/challenge.txt | mv /home/winadmin/Storage/Challenges/tempstuff/challenge.txt.gz /home/winadmin/Storage/Challenges/tempstuff/challenge.txt
+    bzip2 /home/winadmin/Storage/Challenges/tempstuff/challenge.txt | mv /home/winadmin/Storage/Challenges/tempstuff/challenge.txt.bz2 /home/winadmin/Storage/Challenges/tempstuff/challenge.txt
+    gzip /home/winadmin/Storage/Challenges/tempstuff/challenge.txt | mv /home/winadmin/Storage/Challenges/tempstuff/challenge.txt.gz /home/winadmin/Storage/Challenges/tempstuff/challenge.txt
+    gzip /home/winadmin/Storage/Challenges/tempstuff/challenge.txt | mv /home/winadmin/Storage/Challenges/tempstuff/challenge.txt.gz /home/winadmin/Storage/Challenges/tempstuff/challenge.txt
+    gzip /home/winadmin/Storage/Challenges/tempstuff/challenge.txt | mv /home/winadmin/Storage/Challenges/tempstuff/challenge.txt.gz /home/winadmin/Storage/Challenges/tempstuff/challenge.txt
+    bzip2 /home/winadmin/Storage/Challenges/tempstuff/challenge.txt | mv /home/winadmin/Storage/Challenges/tempstuff/challenge.txt.bz2 /home/winadmin/Storage/Challenges/tempstuff/challenge.txt
+    bzip2 /home/winadmin/Storage/Challenges/tempstuff/challenge.txt | mv /home/winadmin/Storage/Challenges/tempstuff/challenge.txt.bz2 /home/winadmin/Storage/Challenges/tempstuff/challenge.txt
+    mv /home/winadmin/Storage/Challenges/tempstuff/challenge.txt /home/$usn/Challenge2/challenge.txt
+    cp ./descriptions/Wyly2 /home/$usn/Challenge2/README.txt
 
     echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
@@ -48,7 +63,8 @@ if [[ $(hostname) = wyly ]]; then
       elif [[ $(hostname) = EngineeringAnnex ]]; then
             printf  "${arr[16]}\n${arr[16]}\n\n\n\n\n\n\n" | sudo adduser $usn
             sudo usermod -g player $usn
-            cp ./descriptions/Annex /home/$usn/README.txt
+            mkdir /home/$usn/Challenge
+            cp ./descriptions/Annex /home/$usn/Challenge/README.txt
 
             echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
@@ -64,7 +80,13 @@ if [[ $(hostname) = wyly ]]; then
           elif [[ $(hostname) = Woodard ]]; then
                 printf  "${arr[7]}\n${arr[7]}\n\n\n\n\n\n\n" | sudo adduser $usn
                 sudo usermod -g player $usn
-                cp ./descriptions/Woodard /home/$usn/README.txt
+                mkdir /home/$usn/Challenge
+                echo "The password to Band Building is: ${arr[8]}" > steg2file
+                python /home/winadmin/Storage/Challenges/steg/steg.py -b -s -o729 -w/home/winadmin/Storage/Challenges/steg/steg2/dog3.bmp -hsteg2file > /home/$usn/Challenge/dog3.bmp
+                cp /home/winadmin/Storage/Challenges/steg/steg2/dog1.bmp /home/$usn/Challenge/dog1.bmp
+                cp /home/winadmin/StorageChallenges/steg/steg2/dog2.bmp /home/$usn/Challenge/dog2.bmp
+                rm steg2file
+                cp ./descriptions/Woodard /home/$usn/Challenge/README.txt
 
                 echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
@@ -80,6 +102,10 @@ if [[ $(hostname) = wyly ]]; then
               elif [[ $(hostname) = COBB ]]; then
                     printf  "${arr[3]}\n${arr[3]}\n\n\n\n\n\n\n" | sudo adduser $usn
                     sudo usermod -g player $usn
+					cp /home/winadmin/Storage/Challenges/steg/steg.py /home/winadmin/Storage/Challenges/tempstuff/steg.py
+                    chmod 111 /home/winadmin/Storage/Challenges/tempstuff/steg.py
+                    mv /home/winadmin/Storage/Challenges/tempstuff/steg.py /home/$usn/steg.py
+                    echo "python steg.py [-bB] -r -o[offset] -i[interval] -w[wrapper]" > /home/$usn/syntax.txt
 
                     echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
@@ -95,7 +121,9 @@ if [[ $(hostname) = wyly ]]; then
                   elif [[ $(hostname) = Hale ]]; then
                         printf  "${arr[6]}\n${arr[6]}\n\n\n\n\n\n\n" | sudo adduser $usn
                         sudo usermod -g player $usn
-                        cp ./descriptions/Hale /home/$usn/README.txt
+                        mkdir /home/$usn/Challenge
+                        python /home/winadmin/Storage/Challenges/binary/binary7.py "The password to Woodard is: " ${arr[5]} > /home/$usn/Challenge/challenge.txt
+                        cp ./descriptions/Hale /home/$usn/Challenge/README.txt
 
                         echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
@@ -111,7 +139,9 @@ if [[ $(hostname) = wyly ]]; then
                       elif [[ $(hostname) = StudentCenter ]]; then
                             printf  "${arr[13]}\n${arr[13]}\n\n\n\n\n\n\n" | sudo adduser $usn
                             sudo usermod -g player $usn
-                            cp ./descriptions/StudentCenter /home/$usn/README.txt
+                            mkdir /home/$usn/Challenge
+                            python /home/winadmin/Storage/Challenges/caesar/caesar.py "The password for Tolliver is: " ${arr[12]} "12" > /home/$usn/Challenge/challenge.txt
+                            cp ./descriptions/StudentCenter /home/$usn/Challenge/README.txt
 
                             echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
@@ -127,7 +157,14 @@ if [[ $(hostname) = wyly ]]; then
                           elif [[ $(hostname) = Bogard ]]; then
                                 printf  "${arr[14]}\n${arr[14]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                 sudo usermod -g player $usn
-                                cp ./descriptions/Bogard /home/$usn/README.txt
+                                mkdir /home/$usn/Challenge
+                                cp /home/winadmin/Storage/Challenges/xor/t-rex.bmp /home/$usn/Challenge/t-rex.bmp
+                                cp /home/winadmin/Storage/Challenges/xor/dodo.bmp /home/$usn/Challenge/dodo.bmp
+                                cp /home/winadmin/Storage/Challenges/xor/mammoth.bmp /home/$usn/Challenge/mammoth.bmp
+                                echo "The password to CTH is: ${arr[15]}" > /home/winadmin/Storage/Challenges/tempstuff/xorfile
+                                python /home/winadmin/Storage/Challenges/xor/xor.py t-rex.bmp < /home/winadmin/Storage/Challenges/tempstuff/xorfile > /home/$usn/Challenge/key
+                                rm /home/winadmin/Storage/Challenges/tempstuff/xorfile
+                                cp ./descriptions/Bogard /home/$usn/Challenge/README.txt
 
                                 echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
@@ -143,7 +180,14 @@ if [[ $(hostname) = wyly ]]; then
                               elif [[ $(hostname) = Howard ]]; then
                                     printf  "${arr[4]}\n${arr[4]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                     sudo usermod -g player $usn
-                                    cp ./descriptions/Howard /home/$usn/README.txt
+                                    mkdir /home/$usn/Challenge1
+                                    mkdir /home/$usn/Challenge1/Challenge
+                                    python /home/winadmin/Storage/Challenges/ftp/ftp.py -s "The password to Student Center is: " ${arr[13]} "/home/$usn/Challenge1/Challenge/"
+                                    cp ./descriptions/Howard /home/$usn/Challenge1/README.txt
+                                    mkdir /home/$usn/Challenge2
+                                    mkdir /home/$usn/Challenge2/Challenge
+                                    python /home/winadmin/Storage/Challenges/ftp/ftp -t "The password to Bogard is: " ${arr[14]} "/home/$usn/Challenge2/Challenge/"
+                                    cp ./descriptions/Howard2 /home/$usn/Challenge2/README.txt
 
                                     echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
@@ -159,6 +203,7 @@ if [[ $(hostname) = wyly ]]; then
                                   elif [[ $(hostname) = nethken ]]; then
                                         printf  "${arr[17]}\n${arr[17]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                         sudo usermod -g player $usn
+										echo "Congratulations $usn!!! You've completed all of the CPA cyber challenges!" > /home/$usn/winner.txt
 
                                         echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
@@ -174,7 +219,13 @@ if [[ $(hostname) = wyly ]]; then
                                       elif [[ $(hostname) = gtm ]]; then
                                             printf  "${arr[5]}\n${arr[5]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                             sudo usermod -g player $usn
-                                            cp ./descriptions/GTM /home/$usn/README.txt
+                                            mkdir /home/$usn/Challenge
+                                            echo "The password for Hale is: ${arr[6]}" > /home/winadmin/Storage/Challenges/tempstuff/steg1file
+                                            python /home/winadmin/Storage/Challenges/steg/steg.py -B -s -o1024 -i8 -w/home/winadmin/Storage/Challenges/steg/steg1/cat1.bmp -h/home/winadmin/Storage/Challenges/tempstuff/steg1file > /home/$usn/Challenge/cat1.bmp
+                                            cp /home/winadmin/Storage/Challenges/steg/steg1/cat2.bmp /home/$usn/Challenge/cat2.bmp
+                                            cp /home/winadmin/Storage/Challenges/steg/steg1/cat3.bmp /home/$usn/Challenge/cat3.bmp
+                                            rm /home/winadmin/Storage/Challenges/tempstuff/steg1file
+                                            cp ./descriptions/GTM /home/$usn/Challenge/README.txt
 
                                             echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
@@ -190,7 +241,14 @@ if [[ $(hostname) = wyly ]]; then
                                           elif [[ $(hostname) = SouthHall ]]; then
                                                 printf  "${arr[9]}\n${arr[9]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                                 sudo usermod -g player $usn
-                                                cp ./descriptions/SouthHall /home/$usn/README.txt
+                                                mkdir /home/$usr/Challenge
+                                                echo "The password for IF is: ${arr[10]}" > /home/winadmin/Storage/Challenges/tempstuff/steg3file
+                                                python /home/winadmin/Storage/Challenges/steg/steg.py -b -s -o2938 -w/home/winadmin/Storage/Challenges/steg/steg3/dogpassword.bmp -h/home/winadmin/Storage/Challenges/tempstuff/steg3file > /home/winadmin/Storage/Challenges/tempstuff/dogtohide
+                                                python /home/winadmin/Storage/Challenges/steg/steg.py -B -s -o2005 -i6 -w/home/winadmin/Storage/Challenges/steg/steg3/dogcat2.bmp -h/home/winadmin/Storage/Challenges/tempstuff/dogtohide > /home/$usn/Challenge/dogcat2.bmp
+                                                cp /home/winadmin/Storage/Challenges/steg/steg3/dogcat1.bmp /home/$usn/Challenge/dogcat1.bmp
+                                                cp /home/winadmin/Storage/Challenges/steg/steg3/hiddendogcat3.bmp /home/$usn/Challenge/dogcat3.bmp
+                                                rm /home/winadmin/Storage/Challenges/tempstuff/steg3file /home/winadmin/Storage/Challenges/tempstuff/dogtohide
+                                                cp ./descriptions/SouthHall /home/$usn/Challenge/README.txt
 
                                                 echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
@@ -206,9 +264,20 @@ if [[ $(hostname) = wyly ]]; then
                                               elif [[ $(hostname) = Keeny ]]; then
                                                     printf  "${arr[1]}\n${arr[1]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                                     sudo usermod -g player $usn
-                                                    cp ./descriptions/Keeny /home/$usn/README.txt
-                                                    cp ./descriptions/Keeny2 /home/$usn/README2.txt
-                                                    cp ./descriptions/Keeny3 /home/$usn/README3.txt
+                                                    cp /home/winadmin/Storage/Challenges/shortdictionary.txt /home/$usn/dictionary.txt
+                                                    mkdir /home/$usn/Challenge1
+                                                    echo -n "The password for University Hall is: ${arr[2]}" > /home/winadmin/Storage/Challenges/tempstuff/passwordmd5.txt | ccrypt -K "place" /home/winadmin/Storage/Challenges/tempstuff/passwordmd5.txt
+                                                    mv /home/winadmin/Storage/Challenges/tempstuff/passwordmd5.txt.cpt /home/$usn/Challenge1/password.txt
+                                                    echo -n "place" | md5sum > /home/$usn/Challenge1/challenge.txt
+                                                    cp ./descriptions/Keeny /home/$usn/Challenge1/README.txt
+                                                    mkdir /home/$usn/Challenge2
+                                                    echo -n "The password for COBB is: ${arr[3]}" | base64 > /home/$usn/Challenge2/challenge.txt
+                                                    cp ./descriptions/Keeny2 /home/$usn/Challenge2/README.txt
+                                                    mkdir /home/$usn/Challenge3
+                                                    echo -n "The password for Howard is: ${arr[2]}" > /home/winadmin/Storage/Challenges/tempstuff/passwordsha512.txt | ccrypt -K "Heaven" /home/$usn/Challenge3/passwordsha512.txt
+                                                    mv /home/winadmin/Storage/Challenges/tempstuff/passwordsha512.txt.cpt /home/$usn/Challenge3/password.txt
+                                                    echo -n "Heaven" | sha512 > /home/$usn/Challenge3/challenge.txt
+                                                    cp ./descriptions/Keeny3 /home/$usn/Challenge3/README.txt
 
                                                     echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
@@ -224,6 +293,10 @@ if [[ $(hostname) = wyly ]]; then
                                                   elif [[ $(hostname) = UniversityHall ]]; then
                                                         printf  "${arr[2]}\n${arr[2]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                                         sudo usermod -g player $usn
+														cp /home/winadmin/Storage/Challenges/xor/xor.py /home/winadmin/Storage/Challenges/tempstuff/xor.py
+                                                        chmod 111 /home/winadmin/Storage/Challenges/tempstuff/xor.py
+                                                        mv /home/winadmin/Storage/Challenges/tempstuff/xor.py /home/$usn/xor.py
+                                                        echo "python xor.py [key file] < [encrypted file] > [decrypted file]" > /home/$usn/syntax.txt
 
                                                         echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
@@ -239,7 +312,10 @@ if [[ $(hostname) = wyly ]]; then
                                                       elif [[ $(hostname) = PowerPlant ]]; then
                                                             printf  "${arr[11]}\n${arr[11]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                                             sudo usermod -g player $usn
-                                                            cp ./descriptions/PowerPlant /home/$usn/README.txt
+                                                            mkdir /home/$usn/Challenge
+                                                            cp /home/winadmin/Storage/Challenges/shortdictionary.txt /home/$usn/Challenge/dictionary.txt
+                                                            python /home/winadmin/Storage/Challenges/vigenere/vigenere_encode.py "The password for IFM is: " ${arr[10]} "kinds" > /home/$usn/Challenge/challenge.txt
+                                                            cp ./descriptions/PowerPlant /home/$usn/Challenge/README.txt
 
                                                             echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
@@ -255,7 +331,9 @@ if [[ $(hostname) = wyly ]]; then
                                                           elif [[ $(hostname) = bandBuilding ]]; then
                                                                 printf  "${arr[8]}\n${arr[8]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                                                 sudo usermod -g player $usn
-                                                                cp ./descriptions/Band /home/$usn/README.txt
+                                                                mkdir /home/$usn/Challenge
+                                                                python /home/winadmin/Storage/Challenges/binary/binaryvertical.py "The password for South Hall is: " ${arr[9]} > /home/$usn/Challenge/challenge.txt
+                                                                cp ./descriptions/Band /home/$usn/Challenge/README.txt
 
                                                                 echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
@@ -271,7 +349,10 @@ if [[ $(hostname) = wyly ]]; then
 							      elif [[ $(hostname) = tolliver ]]; then
 								    printf  "${arr[12]}\n${arr[12]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                                                     sudo usermod -g player $usn
-                                                                    cp ./descriptions/Tolliver /home/$usn/README.txt
+                                                                    mkdir /home/$usn/Challenge
+                                                                    cp /home/winadmin/Storage/Challenges/shortdictionary.txt /home/$usn/Challenge/dictionary.txt
+                                                                    python /home/winadmin/Storage/Challenges/abraxas/abraxas.py "The password for the Power Plant is: " ${arr[11]} "Obama" > /home/$usn/Challenge/challenge.txt
+                                                                    cp ./descriptions/Tolliver /home/$usn/Challenge/README.txt
 
                                                                     echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
@@ -287,7 +368,10 @@ if [[ $(hostname) = wyly ]]; then
               						          elif [[ $(hostname) = cth ]]; then
                                                                         printf  "${arr[15]}\n${arr[15]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                                                         sudo usermod -g player $usn
-                                                                        cp ./descriptions/CTH /home/$usn/README.txt
+                                                                        sudo usermod -g player $usn
+                                                                        mkdir /home/$usn/Challenge
+                                                                        echo "Half of the password for the Engineering Annex is: ${arr[16]}" > /home/$usn/Challenge/halfpassword.txt
+                                                                        cp ./descriptions/CTH /home/$usn/Challenge/README.txt
 
                                                                         echo usn=$(whoami) >> /home/"$usn"/.bashrc
     echo loc=$(hostname) >> /home/"$usn"/.bashrc
