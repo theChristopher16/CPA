@@ -31,8 +31,8 @@
       </div>
       <div flex = 50 id="search">
           <h1>Find a Player</h1>
-          <input id="searchVal" matInput placeholder="Username" style="font-size:25px">
-          <button (click)="onClickMe()" style="font-size:25px"mat-button>Search</button>
+          <input id="searchVal" matInput placeholder="Username" style="font-size:25px" onkeydown="if (event.keyCode == 13) document.getElementById('searchBtn').click()">
+          <button id="searchBtn" (click)="onClickMe()" style="font-size:25px" mat-button>Search</button>
       </div>
   </div>
   <div class = "column">
