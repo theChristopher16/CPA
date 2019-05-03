@@ -33,14 +33,21 @@
   <div class = "column">
       <h1>Achievements</h1>
       <div flex = 50 id="achievement">
-      
+        <mat-card>
+        <div class="buildList" *ngFor="let a of Achievements$">
+          <img src="./assets/Achievements/{{a.Title}}/badge.png" alt="badge" width="20px" height="20px">
+          <strong>{{a.Title + ": "}}</strong> {{a.Description}}
+          <mat-divider *ngIf="a.Title != 'Wyly'"></mat-divider>
+        </div>
+        </mat-card>
+        <!--
         <ul>
           <li *ngFor="let a of Achievements$" [style.backgroundColor]="'ghostwhite'" style="font-size:18px">
               <strong>{{a.Title + ": "}}</strong>{{a.Description}}
-              <!--{{a.Title + ": "+ a.Description}}-->
+              {{a.Title + ": "+ a.Description}}
             <img src="./assets/Achievements/{{a.Title}}/badge.png" alt="badge" style="float:left" width=29 height=29>
           </li>
-        </ul>
+        </ul>-->
       </div>
 
       <h1>Find a Player</h1>
