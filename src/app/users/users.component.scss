@@ -11,7 +11,24 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 70%;
+    width: 80%;
+}
+
+.onlineText{
+    font-weight: 600;
+    font-size: 18px;
+    padding-left: 5%;
+    float: left;
+}
+
+.points{
+    padding-left: 40%;
+    font-weight: 600;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.coolLine{
+    margin-bottom: 2%;
 }
 
 #search{

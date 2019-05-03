@@ -26,6 +26,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { UserFormComponent } from './user-form/user-form.component';
 import {MatInputModule} from '@angular/material/input';
 import { PlayercardComponent } from './playercard/playercard.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 /*export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'localhost',
@@ -88,7 +89,8 @@ import { PlayercardComponent } from './playercard/playercard.component';
     SlideshowModule,
     MatSliderModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    MatDividerModule
   ],
   entryComponents: [
     BottomSheetMenuComponent,

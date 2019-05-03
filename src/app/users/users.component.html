@@ -9,19 +9,21 @@
         <div class = "row">
             <div class = "column">
                 <h2>Online</h2>
+                <mat-divider class="coolLine"></mat-divider>
                   <ul>
                     <!--springGreen-->
                     <li *ngFor="let user of onlineSorted" [style.backgroundColor]="'lightgreen'" style="font-size:18px">
-                      {{user.Username + ": " + user.Score}}
+                      <span class="onlineText">{{user.Username}}</span><span class="points">{{user.Score}}</span>
                     </li>
                   </ul>
               </div>
               <div class = "column">
                 <h2>Offline</h2>
+                <mat-divider class="coolLine"></mat-divider>
                   <ul>
                     <!--[style.backgroundColor]="'tomato'"-->
                     <li *ngFor="let user of offlineSorted" [style.backgroundColor]="'LightCoral'" style="font-size:18px">
-                      {{user.Username + ": " + user.Score}}
+                      <span class="onlineText">{{user.Username}}</span> <span class="points">{{user.Score}}</span>
                     </li>
                   </ul>
               </div>
@@ -34,7 +36,8 @@
       
         <ul>
           <li *ngFor="let a of Achievements$" [style.backgroundColor]="'ghostwhite'" style="font-size:18px">
-            {{a.Title + ": " + a.Description}}
+              <strong>{{a.Title + ": "}}</strong>{{a.Description}}
+              <!--{{a.Title + ": "+ a.Description}}-->
             <img src="./assets/Achievements/{{a.Title}}/badge.png" alt="badge" style="float:left" width=29 height=29>
           </li>
         </ul>
