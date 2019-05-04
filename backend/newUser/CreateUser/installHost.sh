@@ -64,6 +64,18 @@ if [[ $(hostname) = wyly ]]; then
             printf  "${arr[16]}\n${arr[16]}\n\n\n\n\n\n\n" | sudo adduser $usn
             sudo usermod -g player $usn
             mkdir /home/$usn/Challenge
+			echo "The password to Nethkin is: ${arr[17]}" > ../../Challenges/tempstuff/PASSWORD
+			python ../../Challenges/supersteg/xor.py ../../Challenges/supersteg/fullkey.bmp < ../../Challenges/tempstuff/PASSWORD > /home/$usn/Challenge/PASSWORD
+			rm ../../Challenges/tempstuff/PASSWORD
+			cp ../../Challenges/supersteg/program_1024-8.bmp /home/$usn/Challenge/t-rex.bmp
+			cp ../../Challenges/supersteg/1_128-4.bmp /home/$usn/Challenge/spinosaurus.bmp
+			cp ../../Challenges/supersteg/2_202.bmp /home/$usn/Challenge/pterodacyl.bmp
+			cp ../../Challenges/supersteg/2_hint.bmp /home/$usn/Challenge/triceratops.bmp
+			cp ../../Challenges/supersteg/3_81.bmp /home/$usn/Challenge/packleader.bmp
+			cp ../../Challenges/supersteg/3_hint1_2048.bmp /home/$usn/Challenge/packmember1.bmp
+			cp ../../Challenges/supersteg/3_hint2_4096.bmp /home/$usn/Challenge/packmember2.bmp
+			cp ../../Challenges/supersteg/4_512-2.bmp /home/$usn/Challenge/stegosaurus.bmp
+			cp ../../Challenges/supersteg/keybase.bmp /home/$usn/Challenge/key.bmp
             cp ./descriptions/Annex /home/$usn/Challenge/README.txt
 
             echo usn=$(whoami) >> /home/"$usn"/.bashrc
@@ -82,9 +94,9 @@ if [[ $(hostname) = wyly ]]; then
                 sudo usermod -g player $usn
                 mkdir /home/$usn/Challenge
                 echo "The password to Band Building is: ${arr[8]}" > ../../Challenges/tempstuff/steg2file
-                python ../../Challenges/steg/steg.py -b -s -o729 -w../../Challenges/steg/steg2/dog3.jpg -h../../Challenges/tempstuff/steg2file > /home/$usn/Challenge/dog3.jpg
-                cp ../../Challenges/steg/steg2/dog1.jpg /home/$usn/Challenge/dog1.jpg
-                cp ../../Challenges/steg/steg2/dog2.jpg /home/$usn/Challenge/dog2.jpg
+                python ../../Challenges/steg/steg.py -b -s -o729 -w../../Challenges/steg/steg2/dog3.bmp -h../../Challenges/tempstuff/steg2file > /home/$usn/Challenge/dog3.bmp
+                cp ../../Challenges/steg/steg2/dog1.bmp /home/$usn/Challenge/dog1.bmp
+                cp ../../Challenges/steg/steg2/dog2.bmp /home/$usn/Challenge/dog2.bmp
                 rm ../../Challenges/tempstuff/steg2file
                 cp ./descriptions/Woodard /home/$usn/Challenge/README.txt
 
@@ -158,11 +170,11 @@ if [[ $(hostname) = wyly ]]; then
                                 printf  "${arr[14]}\n${arr[14]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                 sudo usermod -g player $usn
                                 mkdir /home/$usn/Challenge
-                                cp ../../Challenges/xor/t-rex.jpg /home/$usn/Challenge/t-rex.jpg
-                                cp ../../Challenges/xor/dodo.jpg /home/$usn/Challenge/dodo.jpg
-                                cp ../../Challenges/xor/mammoth.jpg /home/$usn/Challenge/mammoth.jpg
+                                cp ../../Challenges/xor/t-rex.bmp /home/$usn/Challenge/t-rex.bmp
+                                cp ../../Challenges/xor/dodo.bmp /home/$usn/Challenge/dodo.bmp
+                                cp ../../Challenges/xor/mammoth.bmp /home/$usn/Challenge/mammoth.bmp
                                 echo "The password to CTH is: ${arr[15]}" > ../../Challenges/tempstuff/xorfile
-                                python ../../Challenges/xor/xor.py t-rex.jpg < ../../Challenges/tempstuff/xorfile > /home/$usn/Challenge/key
+                                python ../../Challenges/xor/xor.py t-rex.bmp < ../../Challenges/tempstuff/xorfile > /home/$usn/Challenge/key
                                 rm ../../Challenges/tempstuff/xorfile
                                 cp ./descriptions/Bogard /home/$usn/Challenge/README.txt
 
@@ -221,9 +233,9 @@ if [[ $(hostname) = wyly ]]; then
                                             sudo usermod -g player $usn
                                             mkdir /home/$usn/Challenge
                                             echo "The password for Hale is: ${arr[6]}" > ../../Challenges/tempstuff/steg1file
-                                            python ../../Challenges/steg/steg.py -B -s -o1024 -i8 -w../../Challenges/steg/steg1/cat1.jpg -h../../Challenges/tempstuff/steg1file > /home/$usn/Challenge/cat1.jpg
-                                            cp ../../Challenges/steg/steg1/cat2.jpg /home/$usn/Challenge/cat2.jpg
-                                            cp ../../Challenges/steg/steg1/cat3.jpg /home/$usn/Challenge/cat3.jpg
+                                            python ../../Challenges/steg/steg.py -B -s -o1024 -i8 -w../../Challenges/steg/steg1/cat1.bmp -h../../Challenges/tempstuff/steg1file > /home/$usn/Challenge/cat1.bmp
+                                            cp ../../Challenges/steg/steg1/cat2.bmp /home/$usn/Challenge/cat2.bmp
+                                            cp ../../Challenges/steg/steg1/cat3.bmp /home/$usn/Challenge/cat3.bmp
                                             rm ../../Challenges/tempstuff/steg1file
                                             cp ./descriptions/GTM /home/$usn/Challenge/README.txt
 
@@ -243,10 +255,10 @@ if [[ $(hostname) = wyly ]]; then
                                                 sudo usermod -g player $usn
                                                 mkdir /home/$usr/Challenge
                                                 echo "The password for IF is: ${arr[10]}" > ../../Challenges/tempstuff/steg3file
-                                                python ../../Challenges/steg/steg.py -b -s -o2938 -w../../Challenges/steg/steg3/dogpassword.jpg -h../../Challenges/tempstuff/steg3file > ../../Challenges/tempstuff/dogtohide
-                                                python ../../Challenges/steg/steg.py -B -s -o2005 -i6 -w../../Challenges/steg/steg3/dogcat2.jpg -h../../Challenges/tempstuff/dogtohide > /home/$usn/Challenge/dogcat2.jpg
-                                                cp ../../Challenges/steg/steg3/dogcat1.jpg /home/$usn/Challenge/dogcat1.jpg
-                                                cp ../../Challenges/steg/steg3/hiddendogcat3.jpg /home/$usn/Challenge/dogcat3.jpg
+                                                python ../../Challenges/steg/steg.py -b -s -o2938 -w../../Challenges/steg/steg3/dogpassword.bmp -h../../Challenges/tempstuff/steg3file > ../../Challenges/tempstuff/dogtohide
+                                                python ../../Challenges/steg/steg.py -B -s -o2005 -i6 -w../../Challenges/steg/steg3/dogcat2.bmp -h../../Challenges/tempstuff/dogtohide > /home/$usn/Challenge/dogcat2.bmp
+                                                cp ../../Challenges/steg/steg3/dogcat1.bmp /home/$usn/Challenge/dogcat1.bmp
+                                                cp ../../Challenges/steg/steg3/hiddendogcat3.bmp /home/$usn/Challenge/dogcat3.bmp
                                                 rm ../../Challenges/tempstuff/steg3file ../../Challenges/tempstuff/dogtohide
                                                 cp ./descriptions/SouthHall /home/$usn/Challenge/README.txt
 
