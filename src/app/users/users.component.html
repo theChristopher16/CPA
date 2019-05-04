@@ -11,7 +11,6 @@
                 <h2>Online</h2>
                 <mat-divider class="coolLine"></mat-divider>
                   <ul>
-                    <!--springGreen-->
                     <li *ngFor="let user of onlineSorted" [style.backgroundColor]="'lightgreen'" style="font-size:18px">
                       <span class="onlineText">{{user.Username}}</span><span class="points">{{user.Score}}</span>
                     </li>
@@ -21,7 +20,6 @@
                 <h2>Offline</h2>
                 <mat-divider class="coolLine"></mat-divider>
                   <ul>
-                    <!--[style.backgroundColor]="'tomato'"-->
                     <li *ngFor="let user of offlineSorted" [style.backgroundColor]="'LightCoral'" style="font-size:18px">
                       <span class="onlineText">{{user.Username}}</span> <span class="points">{{user.Score}}</span>
                     </li>
@@ -38,6 +36,17 @@
   <div class = "column">
       <h1>Achievements</h1>
       <div flex = 50 id="achievement">
+        <mat-grid-list cols="2" rowHeight="50px">
+          <mat-grid-tile *ngFor="let a of Achievements$">
+            <div class="img_wrap">
+              <img src="./assets/Achievements/{{a.Title}}/badge.png" alt="badge" width="50px" height="50px">
+              <div class="descriptionLayer">
+                <span class="description">{{a.Title }} <br /> {{a.Description}}</span>
+              </div>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <!--
         <mat-card>
         <div class="buildList" *ngFor="let a of Achievements$">
           <img src="./assets/Achievements/{{a.Title}}/badge.png" alt="badge" width="20px" height="20px">
@@ -45,6 +54,7 @@
           <mat-divider *ngIf="a.Title != 'Wyly'"></mat-divider>
         </div>
         </mat-card>
+      -->
       </div>
     </div>
   </div>

@@ -28,6 +28,7 @@ import {MatInputModule} from '@angular/material/input';
 import { PlayercardComponent } from './playercard/playercard.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 /*export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'localhost',
@@ -92,7 +93,8 @@ import {MatListModule} from '@angular/material/list';
     MatDialogModule,
     MatInputModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    MatGridListModule
   ],
   entryComponents: [
     BottomSheetMenuComponent,

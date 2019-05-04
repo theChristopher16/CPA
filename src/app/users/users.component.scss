@@ -34,8 +34,39 @@
 #search{
     text-align: center;
     position: absolute;
+    width: 50%;
     bottom: 10%;
-    left: 15%;
+}
+
+.descriptionLayer{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 255, 255, .8);
+    color: black;//#fff;
+    visibility: hidden;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .2s, visibility .2s;
+}
+
+.img_wrap:hover .descriptionLayer{
+    visibility: visible;
+    opacity: 1;
+}
+
+.description{
+    transition: .2s;
+    transform: translateY(1em);
+    text-align: center;
+}
+
+.img_wrap:hover .description{
+    transform: translateY(0);
 }
 
 h1 {
