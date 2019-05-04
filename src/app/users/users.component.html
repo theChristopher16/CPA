@@ -5,6 +5,7 @@
 <div class = "row">
   <div class = "column">
       <h1>Users</h1>
+      <mat-divider class="userLine"></mat-divider>
       <div flex = 50 id="userList" layout="column">
         <div class = "row">
             <div class = "column">
@@ -28,25 +29,28 @@
         </div>
       </div>
       <div flex = 50 id="search">
+        <mat-card class="searchCard">
           <h1>Find a Player</h1>
-          <input id="searchVal" matInput placeholder="Username" style="font-size:25px" onkeydown="if (event.keyCode == 13) document.getElementById('searchBtn').click()">
-          <button id="searchBtn" (click)="onClickMe()" style="font-size:25px" mat-button>Search</button>
+          <input id="searchVal" matInput placeholder="Username" style="font-size:25px; text-align:center;" onkeydown="if (event.keyCode == 13) document.getElementById('searchBtn').click()">
+          <button id="searchBtn" (click)="onClickMe()" style="font-size:25px" mat-stroked-button>Search</button>
+        </mat-card>
       </div>
   </div>
   <div class = "column">
-      <h1>Achievements</h1>
-      <div flex = 50 id="achievement">
-        <mat-grid-list cols="2" rowHeight="50px">
-          <mat-grid-tile *ngFor="let a of Achievements$">
-            <div class="img_wrap">
-              <img src="./assets/Achievements/{{a.Title}}/badge.png" alt="badge" width="50px" height="50px">
-              <div class="descriptionLayer">
-                <span class="description">{{a.Title }} <br /> {{a.Description}}</span>
-              </div>
+    <h1>Achievements</h1>
+    <mat-divider class="achievementLine"></mat-divider>
+    <div flex = 50 id="achievement">
+      <mat-grid-list cols="2" rowHeight="50px">
+        <mat-grid-tile *ngFor="let a of Achievements$">
+          <div class="img_wrap">
+            <img src="./assets/Achievements/{{a.Title}}/badge.png" alt="badge" width="50px" height="50px">
+            <div class="descriptionLayer">
+              <span class="description"><strong>{{a.Title }}</strong> <br /> {{a.Description}}</span>
             </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-        <!--
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+        <!--keep in case of emergency idea change
         <mat-card>
         <div class="buildList" *ngFor="let a of Achievements$">
           <img src="./assets/Achievements/{{a.Title}}/badge.png" alt="badge" width="20px" height="20px">
@@ -55,9 +59,9 @@
         </div>
         </mat-card>
       -->
-      </div>
     </div>
   </div>
+</div>
 
  
 
