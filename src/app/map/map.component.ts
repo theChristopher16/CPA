@@ -31,6 +31,7 @@ const dict = {
 };
 
 var globalPis; //global object to hold raspberry pi network info
+var raspPi;
 
 const who = {
   'Wyly': '',
@@ -272,6 +273,16 @@ export class MapComponent implements OnInit {
         this.updateWho();
       }
     ); 
+
+    setInterval(() => {
+      // runs sub service every 2 minutes
+      this.location.getLocations().subscribe(
+        location => {
+          this.Locations$ = location;
+          this.updateWho();
+          console.log("AUTO UPDATE WHO");
+        }
+      );},45000);
   }
 
   updateWho(){
@@ -335,6 +346,9 @@ export class MapComponent implements OnInit {
 
     // Transmit counter
     let t_counter = 0;
+
+    // Counter to update from services
+    let servCounter = 0;
 
     // Josh: Added to track fps
     let lastLoop = performance.now();
@@ -422,6 +436,7 @@ export class MapComponent implements OnInit {
     };
 
     p.draw = () => {
+
       // Draw background color
       // Josh: Changed background color to fluctuate between our color scheme
       const r = 242 - Math.abs(242 * p.sin(angle * Math.PI / 180));
