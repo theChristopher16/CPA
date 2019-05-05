@@ -1,8 +1,8 @@
 pil.py file:
-	1) Bronto file, Byte offset 1024 interval 8
+	1) T-rex file, Byte offset 1024 interval 8
 	
 Fragment 1:
-	1) Velociraptor file, Byte offset 128 interval 4
+	1) Spinosaurus file, Byte offset 128 interval 4
 	
 Fragment 2:
 	1) HINT --> Triceratops file, Byte offset 128 interval 128
@@ -21,7 +21,7 @@ Fragment 3:
 Fragment 4:
 	1) Stegosaurus file, Byte offset 512 interval 2
 	
-EVIDENCE:
+PASSWORD:
 	1) edit pil.py to use the 4 fragments on the key.bmp file
 		replace("fragment1.bmp", "key.bmp", 0) (offset is height of each image (105 pixels))
 		replace("fragment2.bmp", "key.bmp", 105)
