@@ -272,18 +272,28 @@ export class MapComponent implements OnInit {
         this.updateWho();
       }
     ); 
+
+    setInterval(() => {
+      // runs sub service every 2 minutes
+      this.location.getLocations().subscribe(
+        location => {
+          this.Locations$ = location;
+          this.updateWho();
+        }
+      );},45000);
   }
 
   updateWho(){
     // Clear list
     for(let u in who){
-      who[u] = ""
+      who[u] = ''
     }
     // Add users to buildings
+    
     for(let u in this.Locations$){
       for(let w in who){
         if(this.Locations$[u].LastLocation == w && this.Locations$[u].Online == '1'){
-          if(who[w] == ""){
+          if(who[w] == ''){
             who[w] = this.Locations$[u].Username;
           }
           else{
@@ -467,10 +477,11 @@ export class MapComponent implements OnInit {
         // Scale
         p.scale(b.getScale());
         // Texture
-        if (dict[b.getName()] && who[b.getName()] == '') {
+        if (dict[b.getName()] && (who[b.getName()] == '' || who[b.getName()] == undefined)) {
           p.texture(buildingOn);
-        } else if (dict[b.getName()] && who[b.getName()] != '') {
+        } else if (dict[b.getName()] && who[b.getName()] != '' && who[b.getName()] != undefined) {
           p.texture(buildingOcc);
+          
         } else {
           p.texture(buildingOff);
         }
