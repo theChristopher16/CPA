@@ -210,7 +210,6 @@ class User{
           ach = ""
         }
       }
-      this.achievements_uf.push(ach);
     }
   }
 
