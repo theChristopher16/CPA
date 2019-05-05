@@ -150,7 +150,7 @@ $router->post('/addUser',function($request){
     die(mysqli_error($conn));
   }
   
-  $sql = "INSERT INTO usersInfo ( ID, Username, Score, Online, Achievements, LastLocation)
+  $sql = "INSERT INTO userInfo ( ID, Username, Score, Online, Achievements, LastLocation)
     VALUES ( null, '$userName', $score, FALSE, null, null)";
 
   $result = mysqli_query($conn,$sql);
