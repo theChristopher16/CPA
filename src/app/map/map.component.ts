@@ -278,7 +278,7 @@ export class MapComponent implements OnInit {
     let floor: any;
     let sunshine: any;
     let bark: any;
-    let metal;
+    let metal: any;
 
     // Models
     let road;
