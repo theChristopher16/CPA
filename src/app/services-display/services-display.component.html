@@ -2,7 +2,7 @@
   <div class="services">
   <!--{{displayServices()}}-->
   <li *ngFor="let element of whoStatus | keyvalue">
-    {{element.key}}: {{element.value}}
+    <strong>{{element.key}}:</strong> {{element.value}}
   </li>
 </div>
 </ul>

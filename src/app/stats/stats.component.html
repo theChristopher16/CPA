@@ -2,23 +2,24 @@
   stats works!
 </p>
 -->
+<div class="row">
 
-<div style="text-align:center">
-  <h1>Scores</h1>
-  <canvas id="barChart"></canvas>
-  <table align="center">
-    <!--<tr>
-      <th>User</th>
-      <th>Score</th>
-    </tr>
-    <tr *ngFor="let score of scores$">
-      <td>{{ score.Name }}</td>
-      <td>{{ score.Score }}</td>
-    </tr>-->
-    
-  </table>
-</div>
-<div style="text-align:center">
-  <h1>Achievements</h1>
-  <canvas id="pieChart"></canvas>
+  <div class="column">
+    <div style="text-align:center">
+      <mat-card class="chartCard">
+        <mat-card-title>Scores</mat-card-title>
+        <canvas id="barChart"></canvas>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="column">
+    <div style="text-align:center">
+      <mat-card class="chartCard">
+        <mat-card-title>Achievements</mat-card-title>
+        <canvas id="pieChart"></canvas>
+      </mat-card>
+    </div>
+  </div>
+  
 </div>

@@ -5,6 +5,7 @@ import { TabScrollerService } from '../tabscroller.service';
 import { NavigateRoutes } from '../sidebar/sidebar.component';
 import { SpeedControllerService } from '../speedcontroller.service';
 import { BuildingNameService } from '../buildingname.service';
+import { RaspberryPiInfoService } from '../raspberry-pi-info.service';
 import { LocationService } from '../location.service';
 
 // Global? dictionary that holds port80 status for pis
@@ -28,6 +29,8 @@ const dict = {
   'Power Plant': true,
   'University Hall': true
 };
+
+var globalPis; //global object to hold raspberry pi network info
 
 const who = {
   'Wyly': '',
@@ -207,6 +210,7 @@ export class MapComponent implements OnInit {
     private tabscroller: TabScrollerService,
     private speedcontroller: SpeedControllerService,
     private buildingnamer: BuildingNameService,
+    private raspPi: RaspberryPiInfoService,
     private location: LocationService
   ) { } 
 
@@ -216,6 +220,43 @@ export class MapComponent implements OnInit {
     this.cameraspeed = this.speedcontroller.getSpeed();
     this.createCanvas();
     NavigateRoutes.getInstance().setCurrentRoute(''); // used to tell sidebar the current route
+
+    //gets initial status of raspberry pi network
+    //update the "dictionary": dict, for appropiate drawing based on status
+    this.raspPi.getRaspberryPiNetwork().subscribe(
+      raspPi=>{
+        this.raspPis$ = raspPi;
+        globalPis = raspPi;
+        let ind = 0;
+        for(var pi in globalPis){
+          if(globalPis[ind]['pingResponse']=="0"){
+            dict[globalPis[ind]['Name']] = false;
+          }else{
+            dict[globalPis[ind]['Name']] = true;
+          }
+          ind++;
+        }
+      }
+    );
+
+    //runs subscription to service every 2 minutes (120,000 ms)
+    //updates dict every time to reflect network status of raspbery pis
+    setInterval(() => {
+      this.raspPi.getRaspberryPiNetwork().subscribe(
+        raspPi => {
+          this.raspPis$ = raspPi;
+          globalPis = raspPi;
+          let ind = 0;
+          for(var pi in globalPis){
+            if(globalPis[ind]['pingResponse'] == "0"){
+              dict[globalPis[ind]['Name']] = false;
+            }else{
+              dict[globalPis[ind]['Name']] = true;            
+            }
+            ind++;
+          }
+        }
+    );},45000);
 
     setTimeout(() => {
       // autoscroll only if it is true and on this route
@@ -241,12 +282,12 @@ export class MapComponent implements OnInit {
     // Add users to buildings
     for(let u in this.Locations$){
       for(let w in who){
-        if(this.Locations$[u].LastLocation == w){
+        if(this.Locations$[u].LastLocation == w && this.Locations$[u].Online == '1'){
           if(who[w] == ""){
-            who[w] = this.Locations$[u].Name;
+            who[w] = this.Locations$[u].Username;
           }
           else{
-            who[w] = who[w] + ", " + this.Locations$[u].Name;
+            who[w] = who[w] + ", " + this.Locations$[u].Username;
           }
         }
       }
