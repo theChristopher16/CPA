@@ -263,7 +263,7 @@ $router->post('/updateBadge',function($request){
   $usertData = json_decode($jsonData,true); //creates Map to use for SQL
   
   $userName = $usertData['UserName'];
-  $score = $usertData['BadgeNum'];
+  $BadgeNum = $usertData['BadgeNum'];
   $APIKey = $usertData['Key'];
 
   //Verifies that the API key is correct
@@ -273,7 +273,7 @@ $router->post('/updateBadge',function($request){
   }
   
   //Update userInfo Set Achievements = CONCAT(Achievements,'3,') where Username = 'adamb3ard';
-  $sql = "UPDATE userInfo SET Achievements = CONCAT(Achievements,$BadgeNum) WHERE Username = '$userName'";
+  $sql = "UPDATE userInfo SET Achievements = CONCAT(Achievements,$BadgeNum,',') WHERE Username = '$userName'";
 
   $result = mysqli_query($conn,$sql);
   
