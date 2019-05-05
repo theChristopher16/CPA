@@ -245,6 +245,47 @@ $router->post('/updateLocation',function($request){
   return json_encode($request->getBody());
 });
 
+//POST method to update users' score to database
+$router->post('/updateBadge',function($request){
+
+  global $localhost, $username, $password, $dbname; //gets db creds for this scope
+
+  // create connection to mysql
+  $conn = new mysqli($localhost, $username, $password, $dbname);
+  mysqli_set_charset($conn ,'utf8');
+
+  //in case of connection errors
+  if($conn->connect_error) {
+      die("Error : " . $conn->connect_error);
+  }
+
+  $jsonData = json_encode($request->getBody());
+  $usertData = json_decode($jsonData,true); //creates Map to use for SQL
+  
+  $userName = $usertData['UserName'];
+  $score = $usertData['BadgeNum'];
+  $APIKey = $usertData['Key'];
+
+  //Verifies that the API key is correct
+  if($APIKey != "SSBsb3ZlIHRpZGRpZXM"){
+    http_response_code(403);
+    die(mysqli_error($conn));
+  }
+  
+  //Update userInfo Set Achievements = CONCAT(Achievements,'3,') where Username = 'adamb3ard';
+  $sql = "UPDATE userInfo SET Achievements = CONCAT(Achievements,'$BadgeNum,') WHERE Username = '$userName'";
+
+  $result = mysqli_query($conn,$sql);
+  
+  //if there is an issue with POSTing
+  if (!$result) {
+    http_response_code(500);
+    die(mysqli_error($conn));
+  }
+
+  return json_encode($request->getBody());
+});
+
 //Gets the raspberry PI network info from Database
 $router->get('/networkStatus', function($request){
 
