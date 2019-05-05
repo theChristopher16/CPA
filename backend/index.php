@@ -223,7 +223,7 @@ $router->post('/updateLocation',function($request){
   
   $userName = $usertData['UserName'];
   $location = $usertData['Location'];
-  $log = $userDate['Log'];
+  $log = $usertData['Log'];
   $APIKey = $usertData['Key'];
 
   //Verifies that the API key is correct
