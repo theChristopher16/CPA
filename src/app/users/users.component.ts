@@ -101,14 +101,11 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.user.getUserInfo().subscribe(
       user => {
         this.users$ = user;
-        console.log(this.users$);
 
         // Find size of user list
         let findingSize = true;
         let size = 0;
         while (findingSize) {
-
-          console.log(this.users$[size]);
           size++;
           if (this.users$[size] === undefined) {
             findingSize = false;
@@ -131,6 +128,39 @@ export class UsersComponent implements OnInit, OnDestroy {
         this.initUsers(this.onlineSorted, this.offlineSorted);
       }
     );
+
+    setInterval(() => {
+      // runs sub service every 2 minutes
+      this.user.getUserInfo().subscribe(
+        user => {
+          this.users$ = user;
+  
+          // Find size of user list
+          let findingSize = true;
+          let size = 0;
+          while (findingSize) {
+            size++;
+            if (this.users$[size] === undefined) {
+              findingSize = false;
+            }
+          }
+  
+          // Sort the users by online status
+          const onlineSort = [];
+          const offlineSort = [];
+          for (let i = 0; i < size; i++) {
+            if (this.users$[i].Online == 0) {
+              offlineSort.push(this.users$[i]);
+            } else if (this.users$[i].Online == 1) {
+              onlineSort.push(this.users$[i]);
+            }
+          }
+  
+          this.onlineSorted = onlineSort;
+          this.offlineSorted = offlineSort;
+          this.initUsers(this.onlineSorted, this.offlineSorted);
+        }
+      );},45000);
 
     // subscribe to service to get achievement info
     this.achievement.getAchievements().subscribe(
