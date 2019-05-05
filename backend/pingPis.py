@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 #NOTES: install mysql-connector
-#maybe put this on a CRON job
 
 import os, subprocess, mysql.connector
 
@@ -35,7 +34,7 @@ for pi in raspberryPis.keys():
         raspberryPis[pi]['PingResponse'] = True
     else:
         raspberryPis[pi]['PingResponse'] = False
-
+'''
 #check port 80 (webserver)
 for pi in raspberryPis.keys():
     output = subprocess.check_output('nmap -p80 '+raspberryPis[pi]['ip'],shell=True) #nmap scan on port 80
@@ -43,6 +42,7 @@ for pi in raspberryPis.keys():
         raspberryPis[pi]['port80'] = True
     else:
         raspberryPis[pi]['port80'] = False
+'''
 
 #create connectio to DB
 #ADD SECURITY TO PASSWORD
@@ -62,10 +62,12 @@ for pi in raspberryPis:
     vals = (raspberryPis[pi]['PingResponse'],pi)
     mycursor.execute(sql,vals)
 
+    '''
     sql = "UPDATE RaspberryPis SET port80 = %s where Name = %s"
     vals = (raspberryPis[pi]['port80'],pi)
     mycursor.execute(sql,vals)
-
+    '''
+    
     dbConnection.commit()
 
 dbConnection.close()
