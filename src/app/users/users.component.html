@@ -5,46 +5,63 @@
 <div class = "row">
   <div class = "column">
       <h1>Users</h1>
+      <mat-divider class="userLine"></mat-divider>
       <div flex = 50 id="userList" layout="column">
         <div class = "row">
             <div class = "column">
                 <h2>Online</h2>
+                <mat-divider class="coolLine"></mat-divider>
                   <ul>
-                    <li *ngFor="let user of onlineSorted" [style.backgroundColor]="'springgreen'" style="font-size:18px">
-                      {{user.Username + ": " + user.Score}}
+                    <li *ngFor="let user of onlineSorted" [style.backgroundColor]="'lightgreen'" style="font-size:18px">
+                      <span class="onlineText">{{user.Username}}</span><span class="points">{{user.Score}}</span>
                     </li>
                   </ul>
               </div>
               <div class = "column">
                 <h2>Offline</h2>
+                <mat-divider class="coolLine"></mat-divider>
                   <ul>
-                    <li *ngFor="let user of offlineSorted" [style.backgroundColor]="'tomato'" style="font-size:18px">
-                      {{user.Username + ": " + user.Score}}
+                    <li *ngFor="let user of offlineSorted" [style.backgroundColor]="'LightCoral'" style="font-size:18px">
+                      <span class="onlineText">{{user.Username}}</span> <span class="points">{{user.Score}}</span>
                     </li>
                   </ul>
               </div>
         </div>
       </div>
+      <div flex = 50 id="search">
+        <mat-card class="searchCard">
+          <h1>Find a Player</h1>
+          <input id="searchVal" matInput placeholder="Username" style="font-size:25px; text-align:center;" onkeydown="if (event.keyCode == 13) document.getElementById('searchBtn').click()">
+          <button id="searchBtn" (click)="onClickMe()" style="font-size:25px" mat-stroked-button>Search</button>
+        </mat-card>
+      </div>
   </div>
   <div class = "column">
-      <h1>Achievements</h1>
-      <div flex = 50 id="achievement">
-      
-        <ul>
-          <li *ngFor="let a of Achievements$" [style.backgroundColor]="'ghostwhite'" style="font-size:18px">
-            {{a.Title + ": " + a.Description}}
-            <img src="./assets/Achievements/{{a.Title}}/badge.png" alt="badge" style="float:left" width=29 height=29>
-          </li>
-        </ul>
-      </div>
-
-      <h1>Find a Player</h1>
-      <div flex = 50 id="search">
-            <input id="searchVal" matInput placeholder="Username" style="font-size:25px">
-            <button (click)="onClickMe()" style="font-size:25px"mat-button>Search</button>
-      </div>
+    <h1>Achievements</h1>
+    <mat-divider class="achievementLine"></mat-divider>
+    <div flex = 50 id="achievement">
+      <mat-grid-list cols="2" rowHeight="50px">
+        <mat-grid-tile *ngFor="let a of Achievements$">
+          <div class="img_wrap">
+            <img src="./assets/Achievements/{{a.Title}}/badge.png" alt="badge" width="50px" height="50px">
+            <div class="descriptionLayer">
+              <span class="description"><strong>{{a.Title }}</strong> <br /> {{a.Description}}</span>
+            </div>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+        <!--keep in case of emergency idea change
+        <mat-card>
+        <div class="buildList" *ngFor="let a of Achievements$">
+          <img src="./assets/Achievements/{{a.Title}}/badge.png" alt="badge" width="20px" height="20px">
+          <strong>{{a.Title + ": "}}</strong> {{a.Description}}
+          <mat-divider *ngIf="a.Title != 'Wyly'"></mat-divider>
+        </div>
+        </mat-card>
+      -->
     </div>
   </div>
+</div>
 
  
 
