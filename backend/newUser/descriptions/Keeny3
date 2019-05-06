@@ -1,4 +1,3 @@
 NAME: Another Hashed Pass
 
-DESCRIPTION: You have been given a dictionary that contains the password. You also have been given a file containing the SHA-512 hash of that password. Which of those words in the dictionary could the password be?
-
+DESCRIPTION: You have been given 3 files: password.txt, challenge.txt, and dictionary.txt. In challenge.txt is a SHA-512 encrypted keyword that unlocks password.txt. password.txt is encrypted using Ccrypt. Which of those words in the dictionary could be the key to password.txt?
