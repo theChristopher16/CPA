@@ -2,15 +2,16 @@
   "ExpandedNodes": [
     "",
     "\\e2e",
+    "\\e2e\\src",
     "\\src",
     "\\src\\app",
     "\\src\\app\\hamburger-menu",
+    "\\src\\app\\map",
     "\\src\\app\\services-display",
     "\\src\\assets",
-    "\\src\\assets\\Achievements",
-    "\\src\\assets\\Info",
-    "\\src\\assets\\Info\\Images"
+    "\\src\\assets\\Map",
+    "\\src\\assets\\Map\\Models"
   ],
-  "SelectedNode": "\\src\\assets\\Achievements\\Lighthouse_P3.png",
+  "SelectedNode": "\\src\\app\\map\\map.component.ts",
   "PreviewInSolutionExplorer": false
 }

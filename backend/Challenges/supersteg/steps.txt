@@ -1,0 +1,32 @@
+pil.py file:
+	1) T-rex file, Byte offset 1024 interval 8
+	
+Fragment 1:
+	1) Spinosaurus file, Byte offset 128 interval 4
+	
+Fragment 2:
+	1) HINT --> Triceratops file, Byte offset 128 interval 128
+		"The pterodactyl lived almost 202 million years ago."
+	2) Pterodactyl file, bit offset 202
+	
+Fragment 3:
+	1) HINT 1 --> A Velociraptor file, Byte offset 2048 interval 1
+		"Velociraptors travel in packs" (non text file, key)
+	2) HINT 2 --> A Velociraptor file, Byte offset 4096 interval 1
+		"(Velociraptors travel in packs) 2kjs0KD=2h38*#Hjh9sp0#KJHb9io0jdh093daskji#JH2o0-sa09"
+	3) HINT 3 --> XOR hint1 and hint2
+		"Velociraptor's lived from 66 - 100 million years ago." (non text file)
+	4) Velociraptor file, bit offset 81
+	
+Fragment 4:
+	1) Stegosaurus file, Byte offset 512 interval 2
+	
+PASSWORD:
+	1) edit pil.py to use the 4 fragments on the key.bmp file
+		replace("fragment1.bmp", "key.bmp", 0) (offset is height of each image (105 pixels))
+		replace("fragment2.bmp", "key.bmp", 105)
+		replace("fragment3.bmp", "key.bmp", 210)
+		replace("fragment4.bmp", "key.bmp", 315)
+	2)XOR the new key.bmp with the PASSWORD file
+		password :]
+		

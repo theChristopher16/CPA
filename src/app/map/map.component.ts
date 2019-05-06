@@ -5,6 +5,7 @@ import { TabScrollerService } from '../tabscroller.service';
 import { NavigateRoutes } from '../sidebar/sidebar.component';
 import { SpeedControllerService } from '../speedcontroller.service';
 import { BuildingNameService } from '../buildingname.service';
+import { RaspberryPiInfoService } from '../raspberry-pi-info.service';
 import { LocationService } from '../location.service';
 
 // Global? dictionary that holds port80 status for pis
@@ -28,6 +29,9 @@ const dict = {
   'Power Plant': true,
   'University Hall': true
 };
+
+var globalPis; //global object to hold raspberry pi network info
+var globalLoc;
 
 const who = {
   'Wyly': '',
@@ -207,6 +211,7 @@ export class MapComponent implements OnInit {
     private tabscroller: TabScrollerService,
     private speedcontroller: SpeedControllerService,
     private buildingnamer: BuildingNameService,
+    private raspPi: RaspberryPiInfoService,
     private location: LocationService
   ) { } 
 
@@ -216,6 +221,41 @@ export class MapComponent implements OnInit {
     this.cameraspeed = this.speedcontroller.getSpeed();
     this.createCanvas();
     NavigateRoutes.getInstance().setCurrentRoute(''); // used to tell sidebar the current route
+
+    //gets initial status of raspberry pi network
+    //update the "dictionary": dict, for appropiate drawing based on status
+    this.raspPi.getRaspberryPiNetwork().subscribe(
+      raspPi=>{
+        globalPis = raspPi;
+        let ind = 0;
+        for(var pi in globalPis){
+          if(globalPis[ind]['pingResponse']=="0"){
+            dict[globalPis[ind]['Name']] = false;
+          }else{
+            dict[globalPis[ind]['Name']] = true;
+          }
+          ind++;
+        }
+      }
+    );
+
+    //runs subscription to service every 2 minutes (120,000 ms)
+    //updates dict every time to reflect network status of raspbery pis
+    setInterval(() => {
+      this.raspPi.getRaspberryPiNetwork().subscribe(
+        raspPi => {
+          globalPis = raspPi;
+          let ind = 0;
+          for(var pi in globalPis){
+            if(globalPis[ind]['pingResponse'] == "0"){
+              dict[globalPis[ind]['Name']] = false;
+            }else{
+              dict[globalPis[ind]['Name']] = true;            
+            }
+            ind++;
+          }
+        }
+    );},45000);
 
     setTimeout(() => {
       // autoscroll only if it is true and on this route
@@ -227,26 +267,35 @@ export class MapComponent implements OnInit {
     // subscribe to service to get location info
     this.location.getLocations().subscribe(
       location => {
-        this.Locations$ = location;
+        globalLoc = location;
         this.updateWho();
       }
     ); 
+
+    setInterval(() => {
+      // runs sub service every 2 minutes
+      this.location.getLocations().subscribe(
+        location => {
+          globalLoc = location;
+          this.updateWho();
+        }
+      );},45000);
   }
 
   updateWho(){
     // Clear list
     for(let u in who){
-      who[u] = ""
+      who[u] = ''
     }
     // Add users to buildings
-    for(let u in this.Locations$){
+    for(let u in globalLoc){
       for(let w in who){
-        if(this.Locations$[u].LastLocation == w){
-          if(who[w] == ""){
-            who[w] = this.Locations$[u].Name;
+        if(globalLoc[u].LastLocation == w && globalLoc[u].Online == '1'){
+          if(who[w] == ''){
+            who[w] = globalLoc[u].Username;
           }
           else{
-            who[w] = who[w] + ", " + this.Locations$[u].Name;
+            who[w] = who[w] + ", " + globalLoc[u].Username;
           }
         }
       }
@@ -278,7 +327,7 @@ export class MapComponent implements OnInit {
     let floor: any;
     let sunshine: any;
     let bark: any;
-    let metal;
+    let metal: any;
 
     // Models
     let road;
@@ -426,10 +475,11 @@ export class MapComponent implements OnInit {
         // Scale
         p.scale(b.getScale());
         // Texture
-        if (dict[b.getName()] && who[b.getName()] == '') {
+        if (dict[b.getName()] && (who[b.getName()] == '' || who[b.getName()] == undefined)) {
           p.texture(buildingOn);
-        } else if (dict[b.getName()] && who[b.getName()] != '') {
+        } else if (dict[b.getName()] && who[b.getName()] != '' && who[b.getName()] != undefined) {
           p.texture(buildingOcc);
+          
         } else {
           p.texture(buildingOff);
         }

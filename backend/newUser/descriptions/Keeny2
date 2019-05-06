@@ -1,3 +1,3 @@
-NAME: Never Use Base64 for Encryption! 
+NAME: Never Use Base64 for Encryption!
 
 DESCRIPTION: Somebody thought it was safe to encrypt their password using Base64. Prove them wrong!

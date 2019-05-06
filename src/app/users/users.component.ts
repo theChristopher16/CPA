@@ -8,6 +8,7 @@ import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
 
 var userList:User[];
+var globalUsers;
 
 @Component({
   selector: 'app-users',
@@ -32,7 +33,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     
     if(!this.achFilled){
       // Fill user achievements here
-      console.log("asasdfasdf");
       this.fillUserAchievements();
       this.achFilled = true;
     }
@@ -69,8 +69,7 @@ export class UsersComponent implements OnInit, OnDestroy {
       for(let a of u.achievements_uf){
         let counter = 0;
         while(true){
-          console.log(this.Achievements$[counter].Id);
-          if(this.Achievements$[counter].Id == String(Number(a) + 5)){
+          if(this.Achievements$[counter].ID == String(Number(a))){
             u.fillAch(this.Achievements$[counter]);
             counter = 0;
             break;
@@ -89,12 +88,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.searchText = "";
-    /**this.tabscroller.getScrollBool().subscribe(
-      tabscroller => {
-        this.TabScroller$ = tabscroller;
-        console.log(this.TabScroller$);
-      }
-    );*/
     NavigateRoutes.getInstance().setCurrentRoute('users'); // used to tell sidebar the current route
 
     this.TabScroller$ = this.tabscroller.getScrollBool();
@@ -108,59 +101,26 @@ export class UsersComponent implements OnInit, OnDestroy {
     // Subscribe to service to get scores from database
     this.user.getUserInfo().subscribe(
       user => {
-        this.users$ = user;
-        console.log(this.users$);
+        globalUsers = user;
 
         // Find size of user list
         let findingSize = true;
         let size = 0;
         while (findingSize) {
-
-          console.log(this.users$[size]);
           size++;
-          if (this.users$[size] === undefined) {
+          if (globalUsers[size] === undefined) {
             findingSize = false;
           }
         }
 
-        // Sort the users by score
-        const sortedScore = [];
-        const alreadySorted = [];
-
-        // Find absolute smallest value
-        let smallest = this.users$[0].Score * 1;
-        for (let i = 0; i < size; i++) {
-          if (smallest > this.users$[i].Score * 1) {
-            smallest = i;
-          }
-        }
-
-        for (let h = 0; h < size; h++) {
-
-          let biggest = smallest;
-          for (let i = 0; i < size; i++) {
-            // Check if already sorted
-            let as = false;
-            for (let a = 0; a < alreadySorted.length; a++) {
-              if (alreadySorted[a] === i) {
-                as = true;
-              }
-            }
-            if (this.users$[i].Score * 1 > this.users$[biggest].Score * 1 && !as) {
-              biggest = i;
-            }
-          }
-          sortedScore.push(this.users$[biggest]);
-          alreadySorted.push(biggest);
-        }
         // Sort the users by online status
         const onlineSort = [];
         const offlineSort = [];
         for (let i = 0; i < size; i++) {
-          if (sortedScore[i].Online == 0) {
-            offlineSort.push(sortedScore[i]);
-          } else if (sortedScore[i].Online == 1) {
-            onlineSort.push(sortedScore[i]);
+          if (globalUsers[i].Online == 0) {
+            offlineSort.push(globalUsers[i]);
+          } else if (globalUsers[i].Online == 1) {
+            onlineSort.push(globalUsers[i]);
           }
         }
 
@@ -170,16 +130,43 @@ export class UsersComponent implements OnInit, OnDestroy {
       }
     );
 
+    setInterval(() => {
+      // runs sub service every 2 minutes
+      this.user.getUserInfo().subscribe(
+        user => {
+          globalUsers = user;
+  
+          // Find size of user list
+          let findingSize = true;
+          let size = 0;
+          while (findingSize) {
+            size++;
+            if (globalUsers[size] === undefined) {
+              findingSize = false;
+            }
+          }
+  
+          // Sort the users by online status
+          const onlineSort = [];
+          const offlineSort = [];
+          for (let i = 0; i < size; i++) {
+            if (globalUsers.Online == 0) {
+              offlineSort.push(globalUsers[i]);
+            } else if (globalUsers[i].Online == 1) {
+              onlineSort.push(globalUsers[i]);
+            }
+          }
+  
+          this.onlineSorted = onlineSort;
+          this.offlineSorted = offlineSort;
+          this.initUsers(this.onlineSorted, this.offlineSorted);
+        }
+      );},45000);
+
     // subscribe to service to get achievement info
     this.achievement.getAchievements().subscribe(
       achievement => {
         this.Achievements$ = achievement;
-        console.log(this.Achievements$);
-        /* Hardcode TEST remove when adam changes the db
-        for(let i = 0; i < 5; i++){
-          this.Achievements$[i].Title = "IFM1";
-          console.log(this.Achievements$[i]);
-        }*/
       }
     );
 
@@ -192,11 +179,11 @@ export class UsersComponent implements OnInit, OnDestroy {
     userList = [];
     let counter = 0;
     for(let u of on){
-      userList[counter] = new User(u.Name, u.Score, u.Achievements);
+      userList[counter] = new User(u.Username, u.Score, u.Achievements);
       counter++;
     }
     for(let u of off){
-      userList[counter] = new User(u.Name, u.Score, u.Achievements);
+      userList[counter] = new User(u.Username, u.Score, u.Achievements);
       counter++;
     }
   }
@@ -224,7 +211,6 @@ class User{
           ach = ""
         }
       }
-      this.achievements_uf.push(ach);
     }
   }
 

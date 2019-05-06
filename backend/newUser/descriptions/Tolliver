@@ -1,3 +1,3 @@
 NAME: Key Shift Ciphering
 
-DESCRIPTION: You have been provided an alphabet, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`~!@#$%^&*()-_=+[{]}|;:'",<.>/? ". This time, however, the alphabet will be modified. Given some keyword, put the unique letters of the keyword at the start of the alphabet, then remove all letters from the rest of the alphabet that were in the keyword. The keyword must be in the provided dictionary. Shift the text using the new alphabet!
+DESCRIPTION: You have been provided an alphabet, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`~!@#$%^&*()-_=+[{]}|;:'",<.>/? ". This time, however, the alphabet will be modified. Given some keyword, put the unique letters of the keyword at the start of the alphabet, then remove all letters from the rest of the alphabet that were in the keyword. The keyword must be in the provideddictionary. Shift the text using the new alphabet!
