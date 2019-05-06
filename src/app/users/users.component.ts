@@ -135,31 +135,31 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.user.getUserInfo().subscribe(
         user => {
           globalUsers = user;
-  
-          // Find size of user list
-          let findingSize = true;
-          let size = 0;
-          while (findingSize) {
-            size++;
-            if (globalUsers[size] === undefined) {
-              findingSize = false;
-            }
+
+        // Find size of user list
+        let findingSize = true;
+        let size = 0;
+        while (findingSize) {
+          size++;
+          if (globalUsers[size] === undefined) {
+            findingSize = false;
           }
-  
-          // Sort the users by online status
-          const onlineSort = [];
-          const offlineSort = [];
-          for (let i = 0; i < size; i++) {
-            if (globalUsers.Online == 0) {
-              offlineSort.push(globalUsers[i]);
-            } else if (globalUsers[i].Online == 1) {
-              onlineSort.push(globalUsers[i]);
-            }
+        }
+
+        // Sort the users by online status
+        const onlineSort = [];
+        const offlineSort = [];
+        for (let i = 0; i < size; i++) {
+          if (globalUsers[i].Online == 0) {
+            offlineSort.push(globalUsers[i]);
+          } else if (globalUsers[i].Online == 1) {
+            onlineSort.push(globalUsers[i]);
           }
-  
-          this.onlineSorted = onlineSort;
-          this.offlineSorted = offlineSort;
-          this.initUsers(this.onlineSorted, this.offlineSorted);
+        }
+
+        this.onlineSorted = onlineSort;
+        this.offlineSorted = offlineSort;
+        this.initUsers(this.onlineSorted, this.offlineSorted);
         }
       );},45000);
 
