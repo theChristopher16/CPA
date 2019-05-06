@@ -20,4 +20,5 @@ pssh -i -h .hosts.txt StrictHostKeyChecking=no rm -r __pycache__
 rm -r __pycache__
 rm user.txt
 curlCmd = "url -F 'Name='$usn'' -F 'Key=SSBsb3ZlIHRpZGRpZXM' -X POST http://ec2-34-219-116-164.us-west-2.compute.amazonaws.com/addUser"
-eval curlCMD
+eval curlCmd
+
