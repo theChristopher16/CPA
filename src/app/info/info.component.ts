@@ -18,13 +18,13 @@ export class InfoComponent implements OnInit {
   constructor(private router: Router, private tabscroller: TabScrollerService) {
   this.items = [
     { name: '../../assets/Info/Images/img1.png' },
+    { name: '../../assets/Info/Images/img2.png' },
     { name: '../../assets/Info/Images/img3.png' },
     { name: '../../assets/Info/Images/img1.png' },
+    { name: '../../assets/Info/Images/img2.png' },
     { name: '../../assets/Info/Images/img3.png' },
     { name: '../../assets/Info/Images/img1.png' },
-    { name: '../../assets/Info/Images/img3.png' },
-    { name: '../../assets/Info/Images/img1.png' },
-    { name: '../../assets/Info/Images/img3.png' }
+    { name: '../../assets/Info/Images/img2.png' }
   ];
   }
 
