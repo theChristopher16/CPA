@@ -23,8 +23,8 @@ Give this user access to the testDb with:
 
 ## Start PHP server
 From outside the CPA directory run:
-`php -S 127.0.0.1:8080 -t ./CPA/backend`
-You can verify it's working by going to 127.0.0.1:8080 in your browser.
+`nohup php -S 0.0.0.0:8080 -t ./CPA/backend &`
+You can verify it's working by going to winnet.duckdns.org:8080 in your browser.
 
 ## Connect to AWS Webserver
 SSH to aws instance with the key in the directory using:
