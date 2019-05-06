@@ -31,6 +31,7 @@ const dict = {
 };
 
 var globalPis; //global object to hold raspberry pi network info
+var globalLoc;
 
 const who = {
   'Wyly': '',
@@ -225,7 +226,6 @@ export class MapComponent implements OnInit {
     //update the "dictionary": dict, for appropiate drawing based on status
     this.raspPi.getRaspberryPiNetwork().subscribe(
       raspPi=>{
-        this.raspPis$ = raspPi;
         globalPis = raspPi;
         let ind = 0;
         for(var pi in globalPis){
@@ -244,7 +244,6 @@ export class MapComponent implements OnInit {
     setInterval(() => {
       this.raspPi.getRaspberryPiNetwork().subscribe(
         raspPi => {
-          this.raspPis$ = raspPi;
           globalPis = raspPi;
           let ind = 0;
           for(var pi in globalPis){
@@ -268,7 +267,7 @@ export class MapComponent implements OnInit {
     // subscribe to service to get location info
     this.location.getLocations().subscribe(
       location => {
-        this.Locations$ = location;
+        globalLoc = location;
         this.updateWho();
       }
     ); 
@@ -277,7 +276,7 @@ export class MapComponent implements OnInit {
       // runs sub service every 2 minutes
       this.location.getLocations().subscribe(
         location => {
-          this.Locations$ = location;
+          globalLoc = location;
           this.updateWho();
         }
       );},45000);
@@ -289,15 +288,14 @@ export class MapComponent implements OnInit {
       who[u] = ''
     }
     // Add users to buildings
-    
-    for(let u in this.Locations$){
+    for(let u in globalLoc){
       for(let w in who){
-        if(this.Locations$[u].LastLocation == w && this.Locations$[u].Online == '1'){
+        if(globalLoc[u].LastLocation == w && globalLoc[u].Online == '1'){
           if(who[w] == ''){
-            who[w] = this.Locations$[u].Username;
+            who[w] = globalLoc[u].Username;
           }
           else{
-            who[w] = who[w] + ", " + this.Locations$[u].Username;
+            who[w] = who[w] + ", " + globalLoc[u].Username;
           }
         }
       }
