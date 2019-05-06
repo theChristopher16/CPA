@@ -31,7 +31,7 @@ export class InfoComponent implements OnInit {
   // The array of images to be shown in the slide show
   imageArr = [
     '../../assets/Info/Images/img1.png',
-    '../../assets/Info/Images/img2.jpg',
+    '../../assets/Info/Images/img2.png',
     '../../assets/Info/Images/img3.png'];
 
   slideAutoPlay = true;
