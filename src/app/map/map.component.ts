@@ -475,13 +475,14 @@ export class MapComponent implements OnInit {
         // Scale
         p.scale(b.getScale());
         // Texture
-        if (dict[b.getName()] && (who[b.getName()] == '' || who[b.getName()] == undefined)) {
+        if(!dict[b.getName()]){
+          p.texture(buildingOff);
+        }
+        else if (dict[b.getName()] && (who[b.getName()] == '' || who[b.getName()] == undefined)) {
           p.texture(buildingOn);
         } else if (dict[b.getName()] && who[b.getName()] != '' && who[b.getName()] != undefined) {
           p.texture(buildingOcc);
           
-        } else {
-          p.texture(buildingOff);
         }
         // Model
         p.model(b.getModel());
