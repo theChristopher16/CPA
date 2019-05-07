@@ -117,6 +117,7 @@ pssh -i -h .hosts.txt StrictHostKeyChecking=no rm user.txt
 pssh -i -h .hosts.txt StrictHostKeyChecking=no rm userPassword.py
 pssh -i -h .hosts.txt StrictHostKeyChecking=no rm installHost.sh
 pssh -i -h .hosts.txt StrictHostKeyChecking=no rm -r descriptions
+pssh -i -h .hosts.txt StrictHostKeyChecking=no rm -r Challenges
 pssh -i -h .hosts.txt StrictHostKeyChecking=no rm -r __pycache__
 rm -r __pycache__
 rm user.txt
