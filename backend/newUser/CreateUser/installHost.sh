@@ -277,7 +277,7 @@ if [[ $(hostname) = Wyly ]]; then
                                                                     
     
 # CTH
-              						          elif [[ $(hostname) = CTH ]]; then
+              						          elif [[ $(hostname) = CarsonTaylor ]]; then
                                                                         printf  "${arr[15]}\n${arr[15]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                                                         sudo usermod -g player $usn
                                                                         
