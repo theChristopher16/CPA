@@ -92,6 +92,26 @@ scp /home/winadmin/Development/CPA/backend/newUser/CreateUser/installHost.sh win
 scp /home/winadmin/Development/CPA/backend/newUser/CreateUser/installHost.sh winadmin@10.16.17.19:/home/winadmin
 
 
+#Challenges
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.2:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.3:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.4:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.5:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.6:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.7:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.8:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.9:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.10:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.11:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.12:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.13:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.14:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.15:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.16:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.17:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.18:/home/winadmin
+scp -r /home/winadmin/Development/CPA/backend/Challenges winadmin@10.16.17.19:/home/winadmin
+
 pssh -i -h .hosts.txt StrictHostKeyChecking=no ./installHost.sh
 pssh -i -h .hosts.txt StrictHostKeyChecking=no rm user.txt
 pssh -i -h .hosts.txt StrictHostKeyChecking=no rm userPassword.py
