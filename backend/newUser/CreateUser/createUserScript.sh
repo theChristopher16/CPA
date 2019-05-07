@@ -14,6 +14,7 @@ scp /home/winadmin/Development/CPA/backend/newUser/CreateUser/userPassword.py wi
 scp /home/winadmin/Development/CPA/backend/newUser/CreateUser/userPassword.py winadmin@10.16.17.5:/home/winadmin
 scp /home/winadmin/Development/CPA/backend/newUser/CreateUser/userPassword.py winadmin@10.16.17.6:/home/winadmin
 scp /home/winadmin/Development/CPA/backend/newUser/CreateUser/userPassword.py winadmin@10.16.17.7:/home/winadmin
+scp /home/winadmin/Development/CPA/backend/newUser/CreateUser/userPassword.py winadmin@10.16.17.8:/home/winadmin
 scp /home/winadmin/Development/CPA/backend/newUser/CreateUser/userPassword.py winadmin@10.16.17.9:/home/winadmin
 scp /home/winadmin/Development/CPA/backend/newUser/CreateUser/userPassword.py winadmin@10.16.17.10:/home/winadmin
 scp /home/winadmin/Development/CPA/backend/newUser/CreateUser/userPassword.py winadmin@10.16.17.11:/home/winadmin
