@@ -100,8 +100,4 @@ pssh -i -h .hosts.txt StrictHostKeyChecking=no rm -r descriptions
 pssh -i -h .hosts.txt StrictHostKeyChecking=no rm -r __pycache__
 rm -r __pycache__
 rm user.txt
-curl -F 'Name='$usn’’ -F 'Key=SSBsb3ZlIHRpZGRpZXM' -X POST winnet.duckdns.org:8080/addUser
-
-
-
-
+curl -F 'Name=$usn’ -F 'Key=SSBsb3ZlIHRpZGRpZXM' -X POST winnet.duckdns.org:8080/addUser
