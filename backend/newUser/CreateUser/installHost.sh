@@ -11,7 +11,7 @@ do
 done
 
 # WYLY
-if [[ $(hostname) = wyly ]]; then
+if [[ $(hostname) = Wyly ]]; then
     printf  "${arr[0]}\n${arr[0]}\n\n\n\n\n\n\n" | sudo adduser $usn
     sudo usermod -g player $usn
     cp ./descriptions/Wyly /home/$usn/README.txt
@@ -163,7 +163,7 @@ if [[ $(hostname) = wyly ]]; then
 
                                     
 # NEETHKEN
-                                  elif [[ $(hostname) = nethken ]]; then
+                                  elif [[ $(hostname) = Nethken ]]; then
                                         printf  "${arr[17]}\n${arr[17]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                         sudo usermod -g player $usn
                                         cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
@@ -172,7 +172,7 @@ if [[ $(hostname) = wyly ]]; then
 
                                         
 # GTM
-                                      elif [[ $(hostname) = gtm ]]; then
+                                      elif [[ $(hostname) = GTM ]]; then
                                             printf  "${arr[5]}\n${arr[5]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                             sudo usermod -g player $usn
                                             
@@ -250,7 +250,7 @@ if [[ $(hostname) = wyly ]]; then
 
                                                             
 # BAND BUILDING
-                                                          elif [[ $(hostname) = bandBuilding ]]; then
+                                                          elif [[ $(hostname) = BandBuilding ]]; then
                                                                 printf  "${arr[8]}\n${arr[8]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                                                 sudo usermod -g player $usn
                                                                 
@@ -263,7 +263,7 @@ if [[ $(hostname) = wyly ]]; then
                                                                 
     
 # TOLLIVER
-							      elif [[ $(hostname) = tolliver ]]; then
+							      elif [[ $(hostname) = Tolliver ]]; then
 								    printf  "${arr[12]}\n${arr[12]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                                                     sudo usermod -g player $usn
                                                                     
@@ -277,7 +277,7 @@ if [[ $(hostname) = wyly ]]; then
                                                                     
     
 # CTH
-              						          elif [[ $(hostname) = cth ]]; then
+              						          elif [[ $(hostname) = CTH ]]; then
                                                                         printf  "${arr[15]}\n${arr[15]}\n\n\n\n\n\n\n" | sudo adduser $usn
                                                                         sudo usermod -g player $usn
                                                                         
