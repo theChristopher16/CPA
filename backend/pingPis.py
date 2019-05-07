@@ -7,23 +7,23 @@ import os, subprocess, mysql.connector
 #Dictionary to hold raspberry Pi details
 raspberryPis = {
     "Wyly": {'ip': "10.16.17.2",'PingResponse': False,'port80': False},
-    "Nethkin": {'ip': "10.16.17.3",'PingResponse': False,'port80': False},
+    "Nethken": {'ip': "10.16.17.3",'PingResponse': False,'port80': False},
     "Bogard": {'ip':"10.16.17.4",'PingResponse': False,'port80': False},
     "Keeny": {'ip':"10.16.17.5",'PingResponse': False,'port80': False},
-    "Carson Taylor": {'ip':"10.16.17.6",'PingResponse': False,'port80': False},
+    "CarsonTaylor": {'ip':"10.16.17.6",'PingResponse': False,'port80': False},
     "Hale": {'ip':"10.16.17.7",'PingResponse': False,'port80': False},
     "GTM": {'ip':"10.16.17.8",'PingResponse': False,'port80': False},
-    "Engineering Annex": {'ip':"10.16.17.9",'PingResponse': False,'port80': False},
+    "EngineeringAnnex": {'ip':"10.16.17.9",'PingResponse': False,'port80': False},
     "Howard": {'ip':"10.16.17.10",'PingResponse': False,'port80': False},
-    "Student Center": {'ip':"10.16.17.11",'PingResponse': False,'port80': False},
+    "StudentCenter": {'ip':"10.16.17.11",'PingResponse': False,'port80': False},
     "Tolliver": {'ip':"10.16.17.12",'PingResponse': False,'port80': False},
     "Woodard": {'ip':"10.16.17.13",'PingResponse': False,'port80': False},
     "COBB": {'ip':"10.16.17.14",'PingResponse': False,'port80': False},
-    "Band Building": {'ip':"10.16.17.15",'PingResponse': False,'port80': False},
+    "BandBuilding": {'ip':"10.16.17.15",'PingResponse': False,'port80': False},
     "IFM": {'ip':"10.16.17.16",'PingResponse': False,'port80': False},
-    "South Hall": {'ip':"10.16.17.17",'PingResponse': False,'port80': False},
-    "Power Plant": {'ip':"10.16.17.18",'PingResponse': False,'port80': False},
-    "University Hall": {'ip':"10.16.17.19",'PingResponse': False,'port80': False}
+    "SouthHall": {'ip':"10.16.17.17",'PingResponse': False,'port80': False},
+    "PowerPlant": {'ip':"10.16.17.18",'PingResponse': False,'port80': False},
+    "UniversityHall": {'ip':"10.16.17.19",'PingResponse': False,'port80': False}
 }
 
 
