@@ -56,22 +56,22 @@ if [[ $(hostname) = Wyly ]]; then
             printf  "${arr[16]}\n${arr[16]}\n\n\n\n\n\n\n" | sudo adduser $usn
             sudo usermod -g player $usn
             
-            cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
-            cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
+            cp -a /home/winadmin/bashrc_backup /home/$usn/.bashrc
+            cp -a /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
             mkdir /home/$usn/Challenge
 			echo "The password to Nethken (10.16.17.3) is: ${arr[17]}" > /home/winadmin/Challenges/tempstuff/PASSWORD
 			python /home/winadmin/Challenges/supersteg/xor.py /home/winadmin/Challenges/supersteg/fullkey.bmp < /home/winadmin/Challenges/tempstuff/PASSWORD > /home/$usn/Challenge/PASSWORD
 			rm /home/winadmin/Challenges/tempstuff/PASSWORD
-			cp /home/winadmin/Challenges/supersteg/program_1024-8.bmp /home/$usn/Challenge/t-rex.bmp
-			cp /home/winadmin/Challenges/supersteg/1_128-4.bmp /home/$usn/Challenge/spinosaurus.bmp
-			cp /home/winadmin/Challenges/supersteg/2_202.bmp /home/$usn/Challenge/pterodacyl.bmp
-			cp /home/winadmin/Challenges/supersteg/2_hint.bmp /home/$usn/Challenge/triceratops.bmp
-			cp /home/winadmin/Challenges/supersteg/3_81.bmp /home/$usn/Challenge/packleader.bmp
-			cp /home/winadmin/Challenges/supersteg/3_hint1_2048.bmp /home/$usn/Challenge/packmember1.bmp
-			cp /home/winadmin/Challenges/supersteg/3_hint2_4096.bmp /home/$usn/Challenge/packmember2.bmp
-			cp /home/winadmin/Challenges/supersteg/4_512-2.bmp /home/$usn/Challenge/stegosaurus.bmp
-			cp /home/winadmin/Challenges/supersteg/keybase.bmp /home/$usn/Challenge/key.bmp
-            cp /home/winadmin/descriptions/Annex /home/$usn/Challenge/README.txt
+			cp -a /home/winadmin/Challenges/supersteg/program_1024-8.bmp /home/$usn/Challenge/t-rex.bmp
+			cp -a /home/winadmin/Challenges/supersteg/1_128-4.bmp /home/$usn/Challenge/spinosaurus.bmp
+			cp -a /home/winadmin/Challenges/supersteg/2_202.bmp /home/$usn/Challenge/pterodacyl.bmp
+			cp -a /home/winadmin/Challenges/supersteg/2_hint.bmp /home/$usn/Challenge/triceratops.bmp
+			cp -a /home/winadmin/Challenges/supersteg/3_81.bmp /home/$usn/Challenge/packleader.bmp
+			cp -a /home/winadmin/Challenges/supersteg/3_hint1_2048.bmp /home/$usn/Challenge/packmember1.bmp
+			cp -a /home/winadmin/Challenges/supersteg/3_hint2_4096.bmp /home/$usn/Challenge/packmember2.bmp
+			cp -a /home/winadmin/Challenges/supersteg/4_512-2.bmp /home/$usn/Challenge/stegosaurus.bmp
+			cp -a /home/winadmin/Challenges/supersteg/keybase.bmp /home/$usn/Challenge/key.bmp
+            cp -a /home/winadmin/descriptions/Annex /home/$usn/Challenge/README.txt
 
             
 # WOODARD
