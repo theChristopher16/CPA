@@ -25,7 +25,6 @@ scp /home/winadmin/Development/CPA/backend/newUser/CreateUser/userPassword.py wi
 scp /home/winadmin/Development/CPA/backend/newUser/CreateUser/userPassword.py winadmin@10.16.17.17:/home/winadmin
 scp /home/winadmin/Development/CPA/backend/newUser/CreateUser/userPassword.py winadmin@10.16.17.18:/home/winadmin
 scp /home/winadmin/Development/CPA/backend/newUser/CreateUser/userPassword.py winadmin@10.16.17.19:/home/winadmin
-scp /home/winadmin/Development/CPA/backend/newUser/CreateUser/userPassword.py winadmin@10.16.17.20:/home/winadmin
 
 
 #pssh -i -h .hosts.txt StrictHostKeyChecking=no "scp winadmin@10.16.17.254:/home/winadmin/Development/CPA/backend/newUser/CreateUser/user.txt /home/winadmin"
