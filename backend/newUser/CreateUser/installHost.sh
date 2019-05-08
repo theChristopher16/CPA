@@ -13,7 +13,7 @@ done
 # WYLY
 if [[ $(hostname) = Wyly ]]; then
     printf  "${arr[0]}\n${arr[0]}\n\n\n\n\n\n\n" | sudo adduser $usn
-    sudo usermod -g player $usn
+    sudo adduser $usn player 
     sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
     sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
     sudo mkdir /home/$usn/Challenge1
@@ -37,14 +37,14 @@ if [[ $(hostname) = Wyly ]]; then
 # IFM
   elif [[ $(hostname) = IFM ]]; then
         printf  "${arr[10]}\n${arr[10]}\n\n\n\n\n\n\n" | sudo adduser $usn
-        sudo usermod -g player $usn
+        sudo adduser $usn player 
         sudo cp /home/winadmin/descriptions/IFM /home/$usn/README.txt
         sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
         sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
 # ENGINEERING ANNEX
       elif [[ $(hostname) = EngineeringAnnex ]]; then
             printf  "${arr[16]}\n${arr[16]}\n\n\n\n\n\n\n" | sudo adduser $usn
-            sudo usermod -g player $usn
+            sudo adduser $usn player 
             
             sudo cp -a /home/winadmin/bashrc_backup /home/$usn/.bashrc
             sudo cp -a /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
@@ -67,7 +67,7 @@ if [[ $(hostname) = Wyly ]]; then
 # WOODARD
           elif [[ $(hostname) = Woodard ]]; then
                 printf  "${arr[7]}\n${arr[7]}\n\n\n\n\n\n\n" | sudo adduser $usn
-                sudo usermod -g player $usn
+                sudo adduser $usn player 
                 
                 sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                 sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
@@ -83,7 +83,7 @@ if [[ $(hostname) = Wyly ]]; then
 # COBB
               elif [[ $(hostname) = COBB ]]; then
                     printf  "${arr[3]}\n${arr[3]}\n\n\n\n\n\n\n" | sudo adduser $usn
-                    sudo usermod -g player $usn
+                    sudo adduser $usn player 
                     sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                     sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
 					sudo cp /home/winadmin/Challenges/steg/steg_encode.py /home/winadmin/Challenges/tempstuff/steg.py
@@ -95,7 +95,7 @@ if [[ $(hostname) = Wyly ]]; then
 # HALE
                   elif [[ $(hostname) = Hale ]]; then
                         printf  "${arr[6]}\n${arr[6]}\n\n\n\n\n\n\n" | sudo adduser $usn
-                        sudo usermod -g player $usn
+                        sudo adduser $usn player 
                         
                         sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                         sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
@@ -107,7 +107,7 @@ if [[ $(hostname) = Wyly ]]; then
 # STUDENT CENTER
                       elif [[ $(hostname) = StudentCenter ]]; then
                             printf  "${arr[13]}\n${arr[13]}\n\n\n\n\n\n\n" | sudo adduser $usn
-                            sudo usermod -g player $usn
+                            sudo adduser $usn player 
                             
                             sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                             sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
@@ -119,7 +119,7 @@ if [[ $(hostname) = Wyly ]]; then
 # BOGARD
                           elif [[ $(hostname) = Bogard ]]; then
                                 printf  "${arr[14]}\n${arr[14]}\n\n\n\n\n\n\n" | sudo adduser $usn
-                                sudo usermod -g player $usn
+                                sudo adduser $usn player 
                                 
                                 sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                                 sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
@@ -136,7 +136,7 @@ if [[ $(hostname) = Wyly ]]; then
 # HOWARD
                               elif [[ $(hostname) = Howard ]]; then
                                     printf  "${arr[4]}\n${arr[4]}\n\n\n\n\n\n\n" | sudo adduser $usn
-                                    sudo usermod -g player $usn
+                                    sudo adduser $usn player 
                                     
                                     sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                                     sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
@@ -153,7 +153,7 @@ if [[ $(hostname) = Wyly ]]; then
 # NEETHKEN
                                   elif [[ $(hostname) = Nethken ]]; then
                                         printf  "${arr[17]}\n${arr[17]}\n\n\n\n\n\n\n" | sudo adduser $usn
-                                        sudo usermod -g player $usn
+                                        sudo adduser $usn player 
                                         sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                                         sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
 										echo "Congratulations $usn!!! You've completed all of the CPA cyber challenges!" > /home/$usn/winner.txt
@@ -162,7 +162,7 @@ if [[ $(hostname) = Wyly ]]; then
 # GTM
                                       elif [[ $(hostname) = GTM ]]; then
                                             printf  "${arr[5]}\n${arr[5]}\n\n\n\n\n\n\n" | sudo adduser $usn
-                                            sudo usermod -g player $usn
+                                            sudo adduser $usn player 
                                             
                                             sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                                             sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
@@ -178,7 +178,7 @@ if [[ $(hostname) = Wyly ]]; then
 # SOUTH HALL
                                           elif [[ $(hostname) = SouthHall ]]; then
                                                 printf  "${arr[9]}\n${arr[9]}\n\n\n\n\n\n\n" | sudo adduser $usn
-                                                sudo usermod -g player $usn
+                                                sudo adduser $usn player 
                                                 
                                                 sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                                                 sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
@@ -195,7 +195,7 @@ if [[ $(hostname) = Wyly ]]; then
 # KEENY
                                               elif [[ $(hostname) = Keeny ]]; then
                                                     printf  "${arr[1]}\n${arr[1]}\n\n\n\n\n\n\n" | sudo adduser $usn
-                                                    sudo usermod -g player $usn
+                                                    sudo adduser $usn player 
                                                     sudo cp /home/winadmin/Challenges/shortdictionary.txt /home/$usn/dictionary.txt
                                                     sudo mkdir /home/$usn/Challenge1
                                                     echo -n "The password for University Hall (10.16.17.19) is: ${arr[2]}" > /home/winadmin/Challenges/tempstuff/passwordmd5.txt | ccrypt -K "place" /home/winadmin/Challenges/tempstuff/passwordmd5.txt
@@ -215,7 +215,7 @@ if [[ $(hostname) = Wyly ]]; then
 # UNIVERSITY HALL
                                                   elif [[ $(hostname) = UniversityHall ]]; then
                                                         printf  "${arr[2]}\n${arr[2]}\n\n\n\n\n\n\n" | sudo adduser $usn
-                                                        sudo usermod -g player $usn
+                                                        sudo adduser $usn player 
                                                         sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                                                         sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
 														sudo cp /home/winadmin/Challenges/xor/xor.py /home/winadmin/Challenges/tempstuff/xor.py
@@ -227,7 +227,7 @@ if [[ $(hostname) = Wyly ]]; then
 # POWER PLANT
                                                       elif [[ $(hostname) = PowerPlant ]]; then
                                                             printf  "${arr[11]}\n${arr[11]}\n\n\n\n\n\n\n" | sudo adduser $usn
-                                                            sudo usermod -g player $usn
+                                                            sudo adduser $usn player 
                                                             
                                                             sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                                                             sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
@@ -240,7 +240,7 @@ if [[ $(hostname) = Wyly ]]; then
 # BAND BUILDING
                                                           elif [[ $(hostname) = BandBuilding ]]; then
                                                                 printf  "${arr[8]}\n${arr[8]}\n\n\n\n\n\n\n" | sudo adduser $usn
-                                                                sudo usermod -g player $usn
+                                                                sudo adduser $usn player 
                                                                 
                                                                 sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                                                                 sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
@@ -253,7 +253,7 @@ if [[ $(hostname) = Wyly ]]; then
 # TOLLIVER
 							      elif [[ $(hostname) = Tolliver ]]; then
 								    printf  "${arr[12]}\n${arr[12]}\n\n\n\n\n\n\n" | sudo adduser $usn
-                                                                    sudo usermod -g player $usn
+                                                                    sudo adduser $usn player 
                                                                     
                                                                     sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                                                                     sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
@@ -267,7 +267,7 @@ if [[ $(hostname) = Wyly ]]; then
 # CTH
               						          elif [[ $(hostname) = CarsonTaylor ]]; then
                                                                         printf  "${arr[15]}\n${arr[15]}\n\n\n\n\n\n\n" | sudo adduser $usn
-                                                                        sudo usermod -g player $usn
+                                                                        sudo adduser $usn player 
                                                                         
                                                                         sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                                                                         sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
