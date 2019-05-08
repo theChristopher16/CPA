@@ -1,3 +1,3 @@
 NAME: Vigenere Ciphering
 
-DESCRIPTION: You have been provided an alphabet, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`~!@#$%^&*()-_=+[{]}|;:'",<.>/? ". This time, the alphabet will be modified using a Vigenere key. The key must be in the dictionary. Find the key that deciphers the message!
+DESCRIPTION: You have been provided an alphabet, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`~!@#$%^&*()-_=+[{]}|;:'",<.>/? ". This time, the alphabet will be encrypted using a Vigenere cipher. The key must be in the dictionary. Find the key that deciphers the message!

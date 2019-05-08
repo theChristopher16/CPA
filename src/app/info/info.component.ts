@@ -18,23 +18,24 @@ export class InfoComponent implements OnInit {
   constructor(private router: Router, private tabscroller: TabScrollerService) {
   this.items = [
     { name: '../../assets/Info/Images/img1.png' },
+    { name: '../../assets/Info/Images/img2.png' },
     { name: '../../assets/Info/Images/img3.png' },
     { name: '../../assets/Info/Images/img1.png' },
+    { name: '../../assets/Info/Images/img2.png' },
     { name: '../../assets/Info/Images/img3.png' },
     { name: '../../assets/Info/Images/img1.png' },
-    { name: '../../assets/Info/Images/img3.png' },
-    { name: '../../assets/Info/Images/img1.png' },
-    { name: '../../assets/Info/Images/img3.png' }
+    { name: '../../assets/Info/Images/img2.png' }
   ];
   }
 
   // The array of images to be shown in the slide show
-  imageArr = ['../../assets/Info/Images/img1.png',
-    '../../assets/Info/Images/img2.jpg',
+  imageArr = [
+    '../../assets/Info/Images/img1.png',
+    '../../assets/Info/Images/img2.png',
     '../../assets/Info/Images/img3.png'];
 
   slideAutoPlay = true;
-  playInterval = 3000; // in ms
+  playInterval = 60000; // in ms
   showDots = true;
 
   ngOnInit() {

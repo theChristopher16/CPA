@@ -118,7 +118,9 @@ export class StatsComponent implements OnInit {
               }
             }
           }
-          
+          if(numAch > 0){
+            numAch--;
+          }
           this.achList.push(numAch);
         }
 

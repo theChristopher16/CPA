@@ -8,6 +8,7 @@ import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
 
 var userList:User[];
+var globalUsers;
 
 @Component({
   selector: 'app-users',
@@ -100,17 +101,14 @@ export class UsersComponent implements OnInit, OnDestroy {
     // Subscribe to service to get scores from database
     this.user.getUserInfo().subscribe(
       user => {
-        this.users$ = user;
-        console.log(this.users$);
+        globalUsers = user;
 
         // Find size of user list
         let findingSize = true;
         let size = 0;
         while (findingSize) {
-
-          console.log(this.users$[size]);
           size++;
-          if (this.users$[size] === undefined) {
+          if (globalUsers[size] === undefined) {
             findingSize = false;
           }
         }
@@ -119,10 +117,10 @@ export class UsersComponent implements OnInit, OnDestroy {
         const onlineSort = [];
         const offlineSort = [];
         for (let i = 0; i < size; i++) {
-          if (this.users$[i].Online == 0) {
-            offlineSort.push(this.users$[i]);
-          } else if (this.users$[i].Online == 1) {
-            onlineSort.push(this.users$[i]);
+          if (globalUsers[i].Online == 0) {
+            offlineSort.push(globalUsers[i]);
+          } else if (globalUsers[i].Online == 1) {
+            onlineSort.push(globalUsers[i]);
           }
         }
 
@@ -131,6 +129,39 @@ export class UsersComponent implements OnInit, OnDestroy {
         this.initUsers(this.onlineSorted, this.offlineSorted);
       }
     );
+
+    setInterval(() => {
+      // runs sub service every 2 minutes
+      this.user.getUserInfo().subscribe(
+        user => {
+          globalUsers = user;
+
+        // Find size of user list
+        let findingSize = true;
+        let size = 0;
+        while (findingSize) {
+          size++;
+          if (globalUsers[size] === undefined) {
+            findingSize = false;
+          }
+        }
+
+        // Sort the users by online status
+        const onlineSort = [];
+        const offlineSort = [];
+        for (let i = 0; i < size; i++) {
+          if (globalUsers[i].Online == 0) {
+            offlineSort.push(globalUsers[i]);
+          } else if (globalUsers[i].Online == 1) {
+            onlineSort.push(globalUsers[i]);
+          }
+        }
+
+        this.onlineSorted = onlineSort;
+        this.offlineSorted = offlineSort;
+        this.initUsers(this.onlineSorted, this.offlineSorted);
+        }
+      );},45000);
 
     // subscribe to service to get achievement info
     this.achievement.getAchievements().subscribe(
@@ -180,7 +211,6 @@ class User{
           ach = ""
         }
       }
-      this.achievements_uf.push(ach);
     }
   }
 
