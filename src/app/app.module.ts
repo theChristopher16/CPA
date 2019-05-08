@@ -8,7 +8,6 @@ import { UsersComponent, PlayerSearchMenu } from './users/users.component';
 import { UserSearchComponent } from './users/userSearch.component';
 import { StatsComponent } from './stats/stats.component';
 import { InfoComponent } from './info/info.component';
-
 import { HttpClientModule } from '@angular/common/http'; import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
@@ -104,7 +103,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     PlayerSearchMenu,
     BottomSheetMenuComponent
 ],
-  //providers: [],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

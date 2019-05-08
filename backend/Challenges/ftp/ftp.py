@@ -85,9 +85,9 @@ def sevenInstr(line):
 
         otherperm = cipher(numpart3)
 
-        subprocess.call(["touch", "{}file{}".format(LOCATION, filecount)]) #7 split will always be a file so no mkdir
+        subprocess.call(["sudo" "touch", "{}file{}".format(LOCATION, filecount)]) #7 split will always be a file so no mkdir
 
-        subprocess.call(["chmod", "{}{}{}".format(userperm, groupperm, otherperm), "{}file{}".format(LOCATION, filecount)])
+        subprocess.call(["sudo" "chmod", "{}{}{}".format(userperm, groupperm, otherperm), "{}file{}".format(LOCATION, filecount)])
 
 
     #print "# You can also make additional 'noise' files for clutter."
@@ -152,13 +152,13 @@ def tenInstr(line):
 
         if line[i][0] == "1": #Checks first bit of the perms, which is technically not a perm (-, d, or l)
 
-            subprocess.call(["mkdir", "{}file{}".format(LOCATION, filecount)])
+            subprocess.call(["sudo" "mkdir", "{}file{}".format(LOCATION, filecount)])
 
         else:
 
-            subprocess.call(["touch", "{}file{}".format(LOCATION, filecount)])
+            subprocess.call(["sudo" "touch", "{}file{}".format(LOCATION, filecount)])
 
-        subprocess.call(["chmod", "{}{}{}".format(userperm, groupperm, otherperm), "{}file{}".format(LOCATION, filecount)])
+        subprocess.call(["sudo" "chmod", "{}{}{}".format(userperm, groupperm, otherperm), "{}file{}".format(LOCATION, filecount)])
 
 
 
