@@ -17,9 +17,9 @@ if [[ $(hostname) = Wyly ]]; then
     sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
     sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
     sudo mkdir /home/$usn/Challenge1
-    python /home/winadmin/Challenges/binary/binary7.py "The password to GTM (10.16.17.8) is: " ${arr[5]} > /home/$usn/Challenge1/challenge.txt
+    sudo python /home/winadmin/Challenges/binary/binary7.py "The password to GTM (10.16.17.8) is: " ${arr[5]} > /home/$usn/Challenge1/challenge.txt
     sudo cp /home/winadmin/descriptions/Wyly /home/$usn/Challenge1/README.txt
-    mkdir /home/$usn/Challenge2
+    sudo mkdir /home/$usn/Challenge2
     echo -n "Your password to Keeny (10.16.17.5) is: ${arr[1]}" > /home/winadmin/Challenges/tempstuff/challenge.txt
     gzip /home/winadmin/Challenges/tempstuff/challenge.txt | mv /home/winadmin/Storage/Challenges/tempstuff/challenge.txt.gz /home/winadmin/Challenges/tempstuff/challenge.txt
     gzip /home/winadmin/Challenges/tempstuff/challenge.txt | mv /home/winadmin/Challenges/tempstuff/challenge.txt.gz /home/winadmin/Challenges/tempstuff/challenge.txt
@@ -50,7 +50,7 @@ if [[ $(hostname) = Wyly ]]; then
             sudo cp -a /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
             sudo mkdir /home/$usn/Challenge
 			echo "The password to Nethken (10.16.17.3) is: ${arr[17]}" > /home/winadmin/Challenges/tempstuff/PASSWORD
-			python /home/winadmin/Challenges/supersteg/xor.py /home/winadmin/Challenges/supersteg/fullkey.bmp < /home/winadmin/Challenges/tempstuff/PASSWORD > /home/$usn/Challenge/PASSWORD
+			sudo python /home/winadmin/Challenges/supersteg/xor.py /home/winadmin/Challenges/supersteg/fullkey.bmp < /home/winadmin/Challenges/tempstuff/PASSWORD > /home/$usn/Challenge/PASSWORD
 			rm /home/winadmin/Challenges/tempstuff/PASSWORD
 			sudo cp -a /home/winadmin/Challenges/supersteg/program_1024-8.bmp /home/$usn/Challenge/t-rex.bmp
 			sudo cp -a /home/winadmin/Challenges/supersteg/1_128-4.bmp /home/$usn/Challenge/spinosaurus.bmp
@@ -73,7 +73,7 @@ if [[ $(hostname) = Wyly ]]; then
                 sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
                 sudo mkdir /home/$usn/Challenge
                 echo "The password to Band Building (10.16.17.15) is: ${arr[8]}" > /home/winadmin/Challenges/tempstuff/steg2file
-                python /home/winadmin/Challenges/steg/steg.py -b -s -o729 -w/home/winadmin/Challenges/steg/steg2/dog3.bmp -h/home/winadmin/Challenges/tempstuff/steg2file > /home/$usn/Challenge/dog3.bmp
+                sudo python /home/winadmin/Challenges/steg/steg.py -b -s -o729 -w/home/winadmin/Challenges/steg/steg2/dog3.bmp -h/home/winadmin/Challenges/tempstuff/steg2file > /home/$usn/Challenge/dog3.bmp
                 sudo cp /home/winadmin/Challenges/steg/steg2/dog1.bmp /home/$usn/Challenge/dog1.bmp
                 sudo cp /home/winadmin/Challenges/steg/steg2/dog2.bmp /home/$usn/Challenge/dog2.bmp
                 rm /home/winadmin/Challenges/tempstuff/steg2file
@@ -100,7 +100,7 @@ if [[ $(hostname) = Wyly ]]; then
                         sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                         sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
                         sudo mkdir /home/$usn/Challenge
-                        python /home/winadmin/Challenges/binary/binary7.py "The password to Woodard (10.16.17.13) is: " ${arr[5]} > /home/$usn/Challenge/challenge.txt
+                        sudo python /home/winadmin/Challenges/binary/binary7.py "The password to Woodard (10.16.17.13) is: " ${arr[5]} > /home/$usn/Challenge/challenge.txt
                         sudo cp /home/winadmin/descriptions/Hale /home/$usn/Challenge/README.txt
 
                         
@@ -112,7 +112,7 @@ if [[ $(hostname) = Wyly ]]; then
                             sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                             sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
                             sudo mkdir /home/$usn/Challenge
-                            python /home/winadmin/Challenges/caesar/caesar.py "The password for Tolliver (10.16.17.12) is: " ${arr[12]} "12" > /home/$usn/Challenge/challenge.txt
+                            sudo python /home/winadmin/Challenges/caesar/caesar.py "The password for Tolliver (10.16.17.12) is: " ${arr[12]} "12" > /home/$usn/Challenge/challenge.txt
                             sudo cp /home/winadmin/descriptions/StudentCenter /home/$usn/Challenge/README.txt
 
                             
@@ -128,7 +128,7 @@ if [[ $(hostname) = Wyly ]]; then
                                 sudo cp /home/winadmin/Challenges/xor/dodo.bmp /home/$usn/Challenge/dodo.bmp
                                 sudo cp /home/winadmin/Challenges/xor/mammoth.bmp /home/$usn/Challenge/mammoth.bmp
                                 echo "The password to CTH (10.16.17.6) is: ${arr[15]}" > /home/winadmin/Challenges/tempstuff/xorfile
-                                python /home/winadmin/Challenges/xor/xor.py t-rex.bmp < /home/winadmin/Challenges/tempstuff/xorfile > /home/$usn/Challenge/key
+                                sudo python /home/winadmin/Challenges/xor/xor.py t-rex.bmp < /home/winadmin/Challenges/tempstuff/xorfile > /home/$usn/Challenge/key
                                 rm /home/winadmin/Challenges/tempstuff/xorfile
                                 sudo cp /home/winadmin/descriptions/Bogard /home/$usn/Challenge/README.txt
 
@@ -142,11 +142,11 @@ if [[ $(hostname) = Wyly ]]; then
                                     sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
                                     sudo mkdir /home/$usn/Challenge1
                                     sudo mkdir /home/$usn/Challenge1/Challenge
-                                    python /home/winadmin/Challenges/ftp/ftp.py -s "The password to Student Center (10.16.17.11) is: " ${arr[13]} "/home/$usn/Challenge1/Challenge/"
+                                    sudo python /home/winadmin/Challenges/ftp/ftp.py -s "The password to Student Center (10.16.17.11) is: " ${arr[13]} "/home/$usn/Challenge1/Challenge/"
                                     sudo cp /home/winadmin/descriptions/Howard /home/$usn/Challenge1/README.txt
                                     sudo mkdir /home/$usn/Challenge2
                                     sudo mkdir /home/$usn/Challenge2/Challenge
-                                    python /home/winadmin/Challenges/ftp/ftp -t "The password to Bogard (10.16.17.4) is: " ${arr[14]} "/home/$usn/Challenge2/Challenge/"
+                                    sudo python /home/winadmin/Challenges/ftp/ftp -t "The password to Bogard (10.16.17.4) is: " ${arr[14]} "/home/$usn/Challenge2/Challenge/"
                                     sudo cp /home/winadmin/descriptions/Howard2 /home/$usn/Challenge2/README.txt
 
                                     
@@ -168,7 +168,7 @@ if [[ $(hostname) = Wyly ]]; then
                                             sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
                                             sudo mkdir /home/$usn/Challenge
                                             echo "The password for Hale (10.16.17.7) is: ${arr[6]}" > /home/winadmin/Challenges/tempstuff/steg1file
-                                            python /home/winadmin/Challenges/steg/steg.py -B -s -o1024 -i8 -w/home/winadmin/Challenges/steg/steg1/cat1.bmp -h/home/winadmin/Challenges/tempstuff/steg1file > /home/$usn/Challenge/cat1.bmp
+                                            sudo python /home/winadmin/Challenges/steg/steg.py -B -s -o1024 -i8 -w/home/winadmin/Challenges/steg/steg1/cat1.bmp -h/home/winadmin/Challenges/tempstuff/steg1file > /home/$usn/Challenge/cat1.bmp
                                             sudo cp /home/winadmin/Challenges/steg/steg1/cat2.bmp /home/$usn/Challenge/cat2.bmp
                                             sudo cp /home/winadmin/Challenges/steg/steg1/cat3.bmp /home/$usn/Challenge/cat3.bmp
                                             rm /home/winadmin/Challenges/tempstuff/steg1file
@@ -184,8 +184,8 @@ if [[ $(hostname) = Wyly ]]; then
                                                 sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
                                                 sudo mkdir /home/$usr/Challenge
                                                 echo "The password for IFM (10.16.17.16) is: ${arr[10]}" > /home/winadmin/Challenges/tempstuff/steg3file
-                                                python /home/winadmin/Challenges/steg/steg.py -b -s -o2938 -w/home/winadmin/Challenges/steg/steg3/dogpassword.bmp -h/home/winadmin/Challenges/tempstuff/steg3file > /home/winadmin/Challenges/tempstuff/dogtohide
-                                                python /home/winadmin/Challenges/steg/steg.py -B -s -o2005 -i6 -w/home/winadmin/Challenges/steg/steg3/dogcat2.bmp -h/home/winadmin/Challenges/tempstuff/dogtohide > /home/$usn/Challenge/dogcat2.bmp
+                                                sudo python /home/winadmin/Challenges/steg/steg.py -b -s -o2938 -w/home/winadmin/Challenges/steg/steg3/dogpassword.bmp -h/home/winadmin/Challenges/tempstuff/steg3file > /home/winadmin/Challenges/tempstuff/dogtohide
+                                                sudo python /home/winadmin/Challenges/steg/steg.py -B -s -o2005 -i6 -w/home/winadmin/Challenges/steg/steg3/dogcat2.bmp -h/home/winadmin/Challenges/tempstuff/dogtohide > /home/$usn/Challenge/dogcat2.bmp
                                                 sudo cp /home/winadmin/Challenges/steg/steg3/dogcat1.bmp /home/$usn/Challenge/dogcat1.bmp
                                                 sudo cp /home/winadmin/Challenges/steg/steg3/hiddendogcat3.bmp /home/$usn/Challenge/dogcat3.bmp
                                                 rm /home/winadmin/Challenges/tempstuff/steg3file /home/winadmin/Challenges/tempstuff/dogtohide
@@ -233,7 +233,7 @@ if [[ $(hostname) = Wyly ]]; then
                                                             sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
                                                             sudo mkdir /home/$usn/Challenge
                                                             sudo cp /home/winadmin/Challenges/shortdictionary.txt /home/$usn/Challenge/dictionary.txt
-                                                            python /home/winadmin/Challenges/vigenere/vigenere_encode.py "The password for IFM (10.16.17.16) is: " ${arr[10]} "kinds" > /home/$usn/Challenge/challenge.txt
+                                                            sudo python /home/winadmin/Challenges/vigenere/vigenere_encode.py "The password for IFM (10.16.17.16) is: " ${arr[10]} "kinds" > /home/$usn/Challenge/challenge.txt
                                                             sudo cp /home/winadmin/descriptions/PowerPlant /home/$usn/Challenge/README.txt
 
                                                             
@@ -245,7 +245,7 @@ if [[ $(hostname) = Wyly ]]; then
                                                                 sudo cp /home/winadmin/bashrc_backup /home/$usn/.bashrc
                                                                 sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
                                                                 sudo mkdir /home/$usn/Challenge
-                                                                python /home/winadmin/Challenges/binary/binaryvertical.py "The password for South Hall (10.16.17.17) is: " ${arr[9]} > /home/$usn/Challenge/challenge.txt
+                                                                sudo python /home/winadmin/Challenges/binary/binaryvertical.py "The password for South Hall (10.16.17.17) is: " ${arr[9]} > /home/$usn/Challenge/challenge.txt
                                                                 sudo cp /home/winadmin/descriptions/Band /home/$usn/Challenge/README.txt
 
                                                                 
@@ -259,7 +259,7 @@ if [[ $(hostname) = Wyly ]]; then
                                                                     sudo cp /home/winadmin/bash_logoutBackup /home/$usn/.bash_logout
                                                                     sudo mkdir /home/$usn/Challenge
                                                                     sudo cp /home/winadmin/Challenges/shortdictionary.txt /home/$usn/Challenge/dictionary.txt
-                                                                    python /home/winadmin/Challenges/abraxas/abraxas.py "The password for the Power Plant (10.16.17.18) is: " ${arr[11]} "Obama" > /home/$usn/Challenge/challenge.txt
+                                                                    sudo python /home/winadmin/Challenges/abraxas/abraxas.py "The password for the Power Plant (10.16.17.18) is: " ${arr[11]} "Obama" > /home/$usn/Challenge/challenge.txt
                                                                     sudo cp /home/winadmin/descriptions/Tolliver /home/$usn/Challenge/README.txt
 
                                                                     
