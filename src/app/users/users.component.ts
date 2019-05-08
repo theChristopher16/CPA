@@ -161,7 +161,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         this.offlineSorted = offlineSort;
         this.initUsers(this.onlineSorted, this.offlineSorted);
         }
-      );},45000);
+      );},5000);
 
     // subscribe to service to get achievement info
     this.achievement.getAchievements().subscribe(

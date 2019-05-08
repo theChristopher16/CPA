@@ -255,7 +255,7 @@ export class MapComponent implements OnInit {
             ind++;
           }
         }
-    );},45000);
+    );},5000);
 
     setTimeout(() => {
       // autoscroll only if it is true and on this route
@@ -279,7 +279,7 @@ export class MapComponent implements OnInit {
           globalLoc = location;
           this.updateWho();
         }
-      );},45000);
+      );},5000);
   }
 
   updateWho(){
