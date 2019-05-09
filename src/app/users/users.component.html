@@ -13,7 +13,8 @@
                 <mat-divider class="coolLine"></mat-divider>
                   <ul>
                     <li *ngFor="let user of onlineSorted" [style.backgroundColor]="'lightgreen'" style="font-size:18px">
-                      <span class="onlineText">{{user.Username}}</span><span class="points">{{user.Score}}</span>
+                      <div class="userNames">{{user.Username}}</div>
+                      <div class="scores">{{user.Score}}</div>
                     </li>
                   </ul>
               </div>
@@ -22,7 +23,8 @@
                 <mat-divider class="coolLine"></mat-divider>
                   <ul>
                     <li *ngFor="let user of offlineSorted" [style.backgroundColor]="'LightCoral'" style="font-size:18px">
-                      <span class="onlineText">{{user.Username}}</span> <span class="points">{{user.Score}}</span>
+                      <div class="userNames">{{user.Username}}</div>
+                      <div class="scores">{{user.Score}}</div>
                     </li>
                   </ul>
               </div>
