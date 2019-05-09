@@ -24,18 +24,14 @@ export class UsersComponent implements OnInit, OnDestroy {
   onlineSorted: object;
   offlineSorted: object;
   searchText: string;
-  achFilled: boolean;
 
   constructor(private bottomSheet: MatBottomSheet, private user: UserInfoService, private achievement: AchievementsService,
   private router: Router, private tabscroller: TabScrollerService) { }
 
   onClickMe() {
     
-    if(!this.achFilled){
-      // Fill user achievements here
-      this.fillUserAchievements();
-      this.achFilled = true;
-    }
+    // Fill user achievements here
+    this.fillUserAchievements();
 
     var value = (<HTMLInputElement>document.getElementById("searchVal")).value;
 
@@ -66,16 +62,17 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   fillUserAchievements(){
     for(let u of userList){
+      u.achievements = [];
       for(let a of u.achievements_uf){
         let counter = 0;
         while(true){
-          if(this.Achievements$[counter].ID == String(Number(a))){
+          if(this.Achievements$[counter].ID == a){
             u.fillAch(this.Achievements$[counter]);
             counter = 0;
             break;
           }
           // Catch if not found
-          if(counter == 100){
+          if(counter == 50){
             counter = 0;
             break;
           }
@@ -252,6 +249,7 @@ export class PlayerSearchMenu implements OnInit {
   }
 
   ngOnInit(){
+    console.log(PlayerSearchMenu.user);
     document.getElementById("name").innerHTML = PlayerSearchMenu.user.getName();
     document.getElementById("score").innerHTML = String(PlayerSearchMenu.user.getScore());
     this.achievements$ = PlayerSearchMenu.user.getAchievements();
