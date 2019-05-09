@@ -67,38 +67,6 @@ export class StatsComponent implements OnInit {
           }
         }
 
-        // Sort the scores by score
-        const sortedScore = [];
-        const alreadySorted = [];
-
-        // Find absolute smallest value
-        let smallest = this.scores$[0].Score * 1;
-        for (let i = 0; i < size; i++) {
-          if (smallest > this.scores$[i].Score * 1) {
-            smallest = i;
-          }
-        }
-
-        for (let h = 0; h < size; h++) {
-
-          let biggest = smallest;
-          for (let i = 0; i < size; i++) {
-            // Check if already sorted
-            let as = false;
-            for (let a = 0; a < alreadySorted.length; a++) {
-              if (alreadySorted[a] === i) {
-                as = true;
-              }
-            }
-            if (this.scores$[i].Score * 1 > this.scores$[biggest].Score * 1 && !as) {
-              biggest = i;
-            }
-          }
-          sortedScore.push(this.scores$[biggest]);
-          alreadySorted.push(biggest);
-        }
-        this.scores$ = sortedScore;
-
         //iterates through scores$ object and puts names/scores into array
         //(could maybe be improved by using keys)
         for(var i in this.scores$){
@@ -123,7 +91,6 @@ export class StatsComponent implements OnInit {
           }
           this.achList.push(numAch);
         }
-
         //charts should be declared here because of async reasons...(I think)
         // Create random color scheme for each user and make pie chart and bar graph
         let bgc = this.genColors(size);
